@@ -38,7 +38,7 @@
 
 ## 下载
 
-到 [Releases](https://github.com/friddle/spireforge/releases) 下载对应平台的 zip(Windows / macOS Intel+Apple Silicon / Linux x64+ARM64),解压即用:
+到 [Releases](https://github.com/friddle/spireforge/releases) 下载对应平台的 zip(Windows x64 / macOS Intel+Apple Silicon / Linux x64;Linux ARM64 请自行编译),解压即用:
 - Linux/macOS: `chmod +x spireforge && ./spireforge`
 - 卡牌缩略图与中文字体已打包在 zip 内,解压到同目录即可
 
