@@ -31,9 +31,9 @@ func jsonUnmarshal(s string, v interface{}) error {
 	return json.Unmarshal([]byte(s), v)
 }
 
-var colIdle = &color.NRGBA{R: 247, G: 248, B: 251, A: 255}
-var colFocus = &color.NRGBA{R: 232, G: 238, B: 255, A: 255}
-var colStroke = &color.NRGBA{R: 208, G: 213, B: 224, A: 255}
+func colIdle() color.Color   { return curPal().rowIdle }
+func colFocus() color.Color  { return curPal().rowFocus }
+func colStroke() color.Color { return curPal().stroke }
 
 // ---------- 行 ----------
 
@@ -127,9 +127,9 @@ func rarityName(r string) string {
 }
 
 func newRow(left, right string) *row {
-	bg := canvas.NewRectangle(colIdle)
+	bg := canvas.NewRectangle(colIdle())
 	bg.CornerRadius = 12
-	bg.StrokeColor = colStroke
+	bg.StrokeColor = colStroke()
 	bg.StrokeWidth = 1
 	l := widget.NewLabel(left)
 	l.Wrapping = fyne.TextWrapBreak
@@ -254,12 +254,12 @@ func (u *ui) render() {
 			r.refresh()
 		}
 		if i == p.focus {
-			r.bg.FillColor = colFocus
-			r.bg.StrokeColor = colAccent
+			r.bg.FillColor = colFocus()
+			r.bg.StrokeColor = curPal().accent
 			r.bg.StrokeWidth = 2
 		} else {
-			r.bg.FillColor = colIdle
-			r.bg.StrokeColor = colStroke
+			r.bg.FillColor = colIdle()
+			r.bg.StrokeColor = colStroke()
 			r.bg.StrokeWidth = 1
 		}
 		r.bg.Refresh()
@@ -493,6 +493,17 @@ func (u *ui) pageHome() *pageView {
 				return "🌐 语言: 中文 (点按切换)"
 			}(), "", func() {
 				toggleLang()
+				u.render()
+			}),
+			toggleRow(func() string {
+				if lang == "en" {
+					return "🌓 Night mode"
+				}
+				return "🌓 夜间模式"
+			}(), func() bool { return themeMode == "dark" }, func(b bool) {
+				themeMode = map[bool]string{true: "dark", false: "light"}[b]
+				saveThemePref()
+				fyne.CurrentApp().Settings().SetTheme(spireTheme{theme.DefaultTheme()})
 				u.render()
 			}),
 			choiceRow(L("卡组编辑 (添加/删除/升级/降级)", "Deck editor (add/remove/upgrade/downgrade)"), "", func() {
@@ -1320,6 +1331,7 @@ func (u *ui) pagePickPotion(slot int) func() *pageView {
 
 func main() {
 	loadLangPref()
+	loadThemePref()
 	// 命令行模式: --import-steam 直接注册 Steam 库条目 (便于远程验证)
 	if len(os.Args) > 1 && os.Args[1] == "--import-steam" {
 		initData()
