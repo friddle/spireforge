@@ -80,7 +80,13 @@ func loadSkeleton() (map[string]interface{}, error) {
 
 func potionName(id string) string {
 	if id == "Potion Slot" {
-		return "(空槽)"
+		return L("(空槽)", "(empty slot)")
+	}
+	if lang == "en" {
+		if p, ok := potions[id]; ok && p.En != "" {
+			return p.En
+		}
+		return id
 	}
 	if p, ok := potions[id]; ok && p.Zh != "" {
 		return p.Zh
@@ -95,6 +101,7 @@ func potionName(id string) string {
 
 type charMeta struct {
 	zh       string
+	en       string
 	starters []string
 	strike   string
 	nStrike  int
@@ -107,10 +114,45 @@ type charMeta struct {
 var charOrder = []string{"IRONCLAD", "THE_SILENT", "DEFECT", "WATCHER"}
 
 var charDB = map[string]charMeta{
-	"IRONCLAD":   {"战士", []string{"Bash"}, "Strike_R", 5, "Defend_R", 4, "Burning Blood", 80},
-	"THE_SILENT": {"猎手", []string{"Survivor", "Neutralize"}, "Strike_G", 5, "Defend_G", 4, "Ring of the Snake", 70},
-	"DEFECT":     {"机器人", []string{"Zap", "Dualcast"}, "Strike_B", 4, "Defend_B", 3, "Cracked Core", 72},
-	"WATCHER":    {"观者", []string{"Eruption", "Vigilance"}, "Strike_P", 4, "Defend_P", 4, "Pure Water", 72},
+	"IRONCLAD":   {"战士", "Ironclad", []string{"Bash"}, "Strike_R", 5, "Defend_R", 4, "Burning Blood", 80},
+	"THE_SILENT": {"猎手", "The Silent", []string{"Survivor", "Neutralize"}, "Strike_G", 5, "Defend_G", 4, "Ring of the Snake", 70},
+	"DEFECT":     {"机器人", "Defect", []string{"Zap", "Dualcast"}, "Strike_B", 4, "Defend_B", 3, "Cracked Core", 72},
+	"WATCHER":    {"观者", "Watcher", []string{"Eruption", "Vigilance"}, "Strike_P", 4, "Defend_P", 4, "Pure Water", 72},
+}
+
+// ---------- 双语 ----------
+
+var lang = "zh" // zh / en
+
+func L(zh, en string) string {
+	if lang == "en" {
+		return en
+	}
+	return zh
+}
+
+func langFile() string {
+	if d, err := os.UserConfigDir(); err == nil {
+		return filepath.Join(d, "spireforge", "lang")
+	}
+	home, _ := os.UserHomeDir()
+	return filepath.Join(home, ".config/spireforge/lang")
+}
+
+func loadLangPref() {
+	if b, err := os.ReadFile(langFile()); err == nil && strings.TrimSpace(string(b)) == "en" {
+		lang = "en"
+	}
+}
+
+func toggleLang() {
+	if lang == "en" {
+		lang = "zh"
+	} else {
+		lang = "en"
+	}
+	_ = os.MkdirAll(filepath.Dir(langFile()), 0o755)
+	_ = os.WriteFile(langFile(), []byte(lang), 0o644)
 }
 
 var cardZhFallback = map[string]string{
@@ -124,7 +166,7 @@ var relicZhFallback = map[string]string{
 }
 
 // 能量遗物负面效果说明
-var energyRelicDesc = map[string]string{
+var energyRelicDescZh = map[string]string{
 	"Coffee Dripper":      "休息点无法休息回血",
 	"Ectoplasm":           "无法获得金币",
 	"Fusion Hammer":       "休息点无法升级卡牌",
@@ -133,25 +175,59 @@ var energyRelicDesc = map[string]string{
 	"Philosopher's Stone": "所有敌人+1力量",
 	"Sozu":                "无法获得药水",
 }
+var energyRelicDescEn = map[string]string{
+	"Coffee Dripper":      "Cannot rest at rest sites",
+	"Ectoplasm":           "Cannot gain gold",
+	"Fusion Hammer":       "Cannot upgrade cards at rest sites",
+	"Runic Dome":          "Cannot see enemy intents",
+	"Cursed Key":          "Lose 6 HP per chest opened",
+	"Philosopher's Stone": "All enemies gain 1 Strength",
+	"Sozu":                "Cannot gain potions",
+}
+
+func energyDesc(id string) string {
+	return L(energyRelicDescZh[id], energyRelicDescEn[id])
+}
+
+var cardEnFallback = map[string]string{
+	"Strike_R": "Strike", "Strike_G": "Strike", "Strike_B": "Strike", "Strike_P": "Strike",
+	"Defend_R": "Defend", "Defend_G": "Defend", "Defend_B": "Defend", "Defend_P": "Defend",
+}
 
 func cardName(id string) string {
-	if c, ok := cards[id]; ok && c.Zh != "" {
+	c, ok := cards[id]
+	if lang == "en" {
+		if ok && c.En != "" {
+			return c.En
+		}
+		if e, ok2 := cardEnFallback[id]; ok2 {
+			return e
+		}
+		return id
+	}
+	if ok && c.Zh != "" {
 		return c.Zh
 	}
-	if z, ok := cardZhFallback[id]; ok {
+	if z, ok2 := cardZhFallback[id]; ok2 {
 		return z
 	}
-	if c, ok := cards[id]; ok {
+	if ok {
 		return c.En
 	}
 	return id
 }
 
 func relicName(id string) string {
+	if lang == "en" {
+		if r, ok := relics[id]; ok && r.En != "" {
+			return r.En
+		}
+		return id
+	}
 	if r, ok := relics[id]; ok && r.Zh != "" {
 		return r.Zh
 	}
-	if z, ok := relicZhFallback[id]; ok {
+	if z, ok2 := relicZhFallback[id]; ok2 {
 		return z
 	}
 	if r, ok := relics[id]; ok {
@@ -285,7 +361,7 @@ type templateCfg struct {
 func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) {
 	meta, ok := charDB[cfg.char]
 	if !ok {
-		return "", fmt.Errorf("未知角色 %s", cfg.char)
+		return "", fmt.Errorf(L("未知角色 %s", "unknown character %s"), cfg.char)
 	}
 	var deck []interface{}
 	addCard := func(id string, up int) {
@@ -342,8 +418,10 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 	if cfg.hand > 0 {
 		doc["hand_size"] = float64(cfg.hand)
 	}
-	return fmt.Sprintf("%s · %d能量 · 牌组 %d 张 · 遗物 %d 件 · 血量 %d · 金币 %d",
-		meta.zh, cfg.energyCount, len(deck), len(rel), cfg.hp, cfg.gold), nil
+	return fmt.Sprintf("%s · %d%s · %s %d · %s %d · HP %d · %s %d",
+		L(meta.zh, meta.en), cfg.energyCount, L("能量", "energy"),
+		L("牌组", "deck"), len(deck), L("遗物", "relics"), len(rel),
+		cfg.hp, L("金币", "gold"), cfg.gold), nil
 }
 
 // ---------- 手柄事件 (evdev 直读, 不依赖 Steam Input 配置) ----------

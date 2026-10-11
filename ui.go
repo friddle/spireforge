@@ -107,9 +107,22 @@ func iconAt(kind, id string) string {
 	return ""
 }
 
-var zhRarity = map[string]string{
-	"COMMON": "普通", "UNCOMMON": "罕见", "RARE": "稀有",
-	"BASIC": "基础", "SPECIAL": "特殊", "CURSE": "诅咒", "": "",
+func rarityName(r string) string {
+	switch r {
+	case "COMMON":
+		return L(L("普通", "Common"), "Common")
+	case "UNCOMMON":
+		return L("罕见", "Uncommon")
+	case "RARE":
+		return L(L("稀有", "Rare"), "Rare")
+	case "BASIC":
+		return L("基础", "Basic")
+	case "SPECIAL":
+		return L(L("特殊", "Special"), "Special")
+	case "CURSE":
+		return L(L("诅咒", "Curse"), "Curse")
+	}
+	return ""
 }
 
 func newRow(left, right string) *row {
@@ -155,9 +168,9 @@ func toggleRow(label string, get func() bool, set func(bool)) *row {
 	r.activate = func() { set(!get()) }
 	r.refresh = func() {
 		if get() {
-			r.setVal("● 开", theme.ColorNameSuccess)
+			r.setVal(L("● 开", "● On"), theme.ColorNameSuccess)
 		} else {
-			r.setVal("○ 关", theme.ColorNameDisabled)
+			r.setVal(L("○ 关", "○ Off"), theme.ColorNameDisabled)
 		}
 	}
 	return r
@@ -365,9 +378,9 @@ func (u *ui) saveChar() string {
 
 func (u *ui) saveSummary() string {
 	if u.svDoc == nil {
-		return "存档: 未加载  ·  目录: " + savesDir()
+		return L("存档: 未加载  ·  目录: ", "Save: none  ·  dir: ") + savesDir()
 	}
-	charZh := "未知角色"
+	charZh := L("未知角色", "Unknown character")
 	if c, ok := charDB[u.saveChar()]; ok {
 		charZh = c.zh
 	}
@@ -378,7 +391,7 @@ func (u *ui) saveSummary() string {
 	if a, ok := u.svDoc["relics"].([]interface{}); ok {
 		nR = len(a)
 	}
-	return fmt.Sprintf("存档: %s (%s) · 血量 %d/%d · 金币 %d · 卡 %d 张 · 遗物 %d",
+	return fmt.Sprintf(L("存档: %s (%s) · 血量 %d/%d · 金币 %d · 卡 %d 张 · 遗物 %d", "Save: %s (%s) · HP %d/%d · gold %d · %d cards · %d relics"),
 		filepath.Base(u.svPath), charZh,
 		int(num(u.svDoc, "current_health")), int(num(u.svDoc, "max_health")),
 		int(num(u.svDoc, "gold")), nC, nR)
@@ -387,30 +400,30 @@ func (u *ui) saveSummary() string {
 func (u *ui) loadSave(path string) bool {
 	doc, err := decodeSave(path)
 	if err != nil {
-		u.setStatus("✗ 加载失败: " + err.Error())
+		u.setStatus(L("✗ 加载失败: ", "✗ Load failed: ") + err.Error())
 		return false
 	}
 	u.svPath, u.svDoc = path, doc
 	if ch := detectChar(path); ch != "" {
 		u.cfg.char = ch
 	}
-	u.setStatus("已加载: " + filepath.Base(path))
+	u.setStatus(L("已加载: ", "Loaded: ") + filepath.Base(path))
 	return true
 }
 
 func (u *ui) writeBack(msg string) bool {
 	out, err := encodeSave(u.svDoc)
 	if err != nil {
-		u.setStatus("✗ 编码失败: " + err.Error())
+		u.setStatus(L("✗ 编码失败: ", "✗ encode failed: ") + err.Error())
 		return false
 	}
 	bak := u.svPath + ".bak-" + time.Now().Format("0102-150405")
 	_ = os.WriteFile(bak, mustRead(u.svPath), 0o644)
 	if err := os.WriteFile(u.svPath, out, 0o644); err != nil {
-		u.setStatus("✗ 写入失败: " + err.Error())
+		u.setStatus(L("✗ 写入失败: ", "✗ Write failed: ") + err.Error())
 		return false
 	}
-	u.setStatus("✓ " + msg + " · 备份 " + filepath.Base(bak))
+	u.setStatus("✓ " + msg + L(" · 备份 ", " · backup ") + filepath.Base(bak))
 	return true
 }
 
@@ -418,7 +431,7 @@ func (u *ui) writeBack(msg string) bool {
 func (u *ui) autoLoad() {
 	files := listSaves()
 	if len(files) == 0 {
-		u.setStatus("未在 " + savesDir() + " 找到存档, 请手动选择")
+		u.setStatus(L("未在 ", "No saves in ") + savesDir() + L(" 找到存档, 请手动选择", " — select manually"))
 		return
 	}
 	if u.loadSave(files[0]) {
@@ -454,16 +467,16 @@ func (u *ui) setStatus(s string) {
 // ---------- 页面 ----------
 
 func (u *ui) pageHome() *pageView {
-	sel := "未加载"
+	sel := L("未加载", "none")
 	if u.svDoc != nil {
 		sel = filepath.Base(u.svPath)
 	}
 	return &pageView{
 		title: "尖塔工坊 SpireForge",
-		hint:  "A=确认 · B=返回 · 十字键=移动/加减 · X=+10 · Y=−10 · START=退出",
+		hint:  L("A=确认 · B=返回 · 十字键=移动/加减 · X=+10 · Y=−10 · START=退出", "A=confirm · B=back · D-pad=move/adjust · X=+10 · Y=−10 · START=quit"),
 		rows: []*row{
-			choiceRow("选择存档文件", sel, func() { u.push(u.pageSelectSave()) }),
-			choiceRow("开局模板 (新开局定制)", "", func() {
+			choiceRow(L("选择存档文件", "Select save file"), sel, func() { u.push(u.pageSelectSave()) }),
+			choiceRow(L("开局模板 (新开局定制)", "Run template (custom new run)"), "", func() {
 				if u.svDoc == nil {
 					u.pendingFlow = "template"
 					u.push(u.pageSelectSave())
@@ -471,7 +484,7 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.push(u.pageChar)
 			}),
-			choiceRow("卡组编辑 (添加/删除/升级/降级)", "", func() {
+			choiceRow(L("卡组编辑 (添加/删除/升级/降级)", "Deck editor (add/remove/upgrade/downgrade)"), "", func() {
 				if u.svDoc == nil {
 					u.pendingFlow = "deck"
 					u.push(u.pageSelectSave())
@@ -479,7 +492,7 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.push(u.pageDeckEditor)
 			}),
-			choiceRow("遗物与药水管理", "", func() {
+			choiceRow(L("遗物与药水管理", "Relics & potions"), "", func() {
 				if u.svDoc == nil {
 					u.pendingFlow = "relic"
 					u.push(u.pageSelectSave())
@@ -487,7 +500,7 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.push(u.pageRelicsEditor)
 			}),
-			choiceRow("快速数值修改", "", func() {
+			choiceRow(L("快速数值修改", "Quick stat edit"), "", func() {
 				if u.svDoc == nil {
 					u.pendingFlow = "edit"
 					u.push(u.pageSelectSave())
@@ -495,14 +508,14 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.push(u.pageEdit)
 			}),
-			choiceRow("高级 JSON 编辑", "", func() {
+			choiceRow(L("高级 JSON 编辑", "Advanced JSON editor"), "", func() {
 				if u.svDoc == nil {
-					u.setStatus("✗ 请先选择存档")
+					u.setStatus(L("✗ 请先选择存档", "✗ Select a save first"))
 					return
 				}
 				u.push(u.pageJSON)
 			}),
-			choiceRow("🎮 导入到 Steam 库", "", func() {
+			choiceRow(L("🎮 导入到 Steam 库", "🎮 Import into Steam library"), "", func() {
 				msg, err := importToSteam()
 				if err != nil {
 					u.setStatus("✗ " + err.Error())
@@ -510,17 +523,17 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.setStatus("✓ " + msg)
 			}),
-			choiceRow("退出", "", func() { u.win.Close() }),
+			choiceRow(L("退出", "Quit"), "", func() { u.win.Close() }),
 		},
 	}
 }
 
 func (u *ui) pageSelectSave() func() *pageView {
 	return func() *pageView {
-		pv := &pageView{title: "选择存档文件", hint: "A=加载 · B=返回"}
+		pv := &pageView{title: L("选择存档文件", "Select save file"), hint: L("A=加载 · B=返回", "A=load · B=back")}
 		files := listSaves()
 		if len(files) == 0 {
-			pv.rows = append(pv.rows, textRow("(存档目录里没有找到 .autosave 文件)", "", nil))
+			pv.rows = append(pv.rows, textRow(L("(存档目录里没有找到 .autosave 文件)", "(no .autosave files in the save directory)"), "", nil))
 		}
 		for _, f := range files {
 			f := f
@@ -538,7 +551,7 @@ func (u *ui) pageSelectSave() func() *pageView {
 				}
 			}))
 		}
-		pv.rows = append(pv.rows, choiceRow("浏览文件系统选择…", "", func() {
+		pv.rows = append(pv.rows, choiceRow(L("浏览文件系统选择…", "Browse filesystem…"), "", func() {
 			fd := dialog.NewFileOpen(func(rc fyne.URIReadCloser, err error) {
 				if err != nil || rc == nil {
 					return
@@ -553,7 +566,7 @@ func (u *ui) pageSelectSave() func() *pageView {
 			fd.Resize(fyne.NewSize(800, 600))
 			fd.Show()
 		}))
-		pv.rows = append(pv.rows, choiceRow("刷新列表", "", func() { u.render() }))
+		pv.rows = append(pv.rows, choiceRow(L("刷新列表", "Refresh list"), "", func() { u.render() }))
 		return pv
 	}
 }
@@ -579,8 +592,8 @@ func (u *ui) afterLoad() {
 
 func (u *ui) pageChar() *pageView {
 	pv := &pageView{
-		title: "开局模板 · ① 角色与数值",
-		hint:  "A=选中角色 · 左右=加减 (金币+200) · B=返回",
+		title: L("开局模板 · ① 角色与数值", "Run template · ① Character & stats"),
+		hint:  L("A=选中角色 · 左右=加减 (金币+200) · B=返回", "A=pick character · Left/Right=adjust (gold+200) · B=back"),
 	}
 	for _, c := range charOrder {
 		c := c
@@ -589,20 +602,20 @@ func (u *ui) pageChar() *pageView {
 		if u.cfg.char == c {
 			mark = "●"
 		}
-		pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s (%s)", mark, m.zh, c),
-			"起始遗物:"+relicName(m.relic), func() {
+		pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s (%s)", mark, L(m.zh, m.en), c),
+			L("起始遗物:", "Starter relic: ")+relicName(m.relic), func() {
 				u.cfg.char = c
 				u.cfg.nStrike, u.cfg.nDefend = m.nStrike, m.nDefend
 				u.render()
 			}))
 	}
 	pv.rows = append(pv.rows,
-		stepperRow("默认能量 (3=不挂遗物)", func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
-		stepperRow("血量", func() int { return u.cfg.hp }, func(v int) { u.cfg.hp = v }, 1, 999, 10),
-		stepperRow("初始金币 (每次+200)", func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 200),
-		stepperRow("打击数量", func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
-		stepperRow("防御数量", func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1),
-		choiceRow("下一步: 升级与流派 →", "", func() { u.push(u.pageDeck) }),
+		stepperRow(L("默认能量 (3=不挂遗物)", "Energy (3 = no relic)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
+		stepperRow(L("血量", "HP"), func() int { return u.cfg.hp }, func(v int) { u.cfg.hp = v }, 1, 999, 10),
+		stepperRow(L("初始金币 (每次+200)", "Starting gold (+200/press)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 200),
+		stepperRow(L("打击数量", "Strikes"), func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
+		stepperRow(L("防御数量", "Defends"), func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1),
+		choiceRow(L("下一步: 升级与流派 →", "Next: upgrades & archetype →"), "", func() { u.push(u.pageDeck) }),
 	)
 	return pv
 }
@@ -615,15 +628,15 @@ func (u *ui) pageDeck() *pageView {
 	}
 	sort.Strings(names)
 	pv := &pageView{
-		title: "开局模板 · ② 升级与流派 (" + charDB[ch].zh + ")",
-		hint:  "A=切换/选定流派并继续 · B=返回",
+		title: L("开局模板 · ② 升级与流派 (", "Run template · ② Upgrades & archetype (") + charDB[ch].zh + ")",
+		hint:  L("A=切换/选定流派并继续 · B=返回", "A=pick archetype & continue · B=back"),
 	}
 	pv.rows = append(pv.rows,
-		toggleRow("打击牌全部升级", func() bool { return u.cfg.upStrike }, func(b bool) { u.cfg.upStrike = b }),
-		toggleRow("防御牌全部升级", func() bool { return u.cfg.upDefend }, func(b bool) { u.cfg.upDefend = b }),
-		toggleRow("起手技能卡升级(痛击/电弧等)", func() bool { return u.cfg.upStarter }, func(b bool) { u.cfg.upStarter = b }),
-		toggleRow("核心卡全部升级", func() bool { return u.cfg.upArch }, func(b bool) { u.cfg.upArch = b }),
-		choiceRow("─ 流派核心卡 ─", "", nil))
+		toggleRow(L("打击牌全部升级", "Upgrade all Strikes"), func() bool { return u.cfg.upStrike }, func(b bool) { u.cfg.upStrike = b }),
+		toggleRow(L("防御牌全部升级", "Upgrade all Defends"), func() bool { return u.cfg.upDefend }, func(b bool) { u.cfg.upDefend = b }),
+		toggleRow(L("起手技能卡升级(痛击/电弧等)", "Upgrade starter cards (Bash/Zap etc.)"), func() bool { return u.cfg.upStarter }, func(b bool) { u.cfg.upStarter = b }),
+		toggleRow(L("核心卡全部升级", "Upgrade all archetype cards"), func() bool { return u.cfg.upArch }, func(b bool) { u.cfg.upArch = b }),
+		choiceRow(L("─ 流派核心卡 ─", "─ Archetype core cards ─"), "", nil))
 	for _, name := range names {
 		name := name
 		ids := curated.ARCH[ch][name]
@@ -631,12 +644,12 @@ func (u *ui) pageDeck() *pageView {
 		if u.cfg.arch == name {
 			mark = "●"
 		}
-		pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s", mark, name), fmt.Sprintf("%d张", len(ids)), func() {
+		pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s", mark, name), fmt.Sprintf(L("%d张", "%d cards"), len(ids)), func() {
 			u.cfg.arch = name
 			u.push(u.pageRare)
 		}))
 	}
-	pv.rows = append(pv.rows, choiceRow("○ 无 (不加核心卡)", "", func() {
+	pv.rows = append(pv.rows, choiceRow(L("○ 无 (不加核心卡)", "○ None (no archetype cards)"), "", func() {
 		u.cfg.arch = "无"
 		u.push(u.pageRare)
 	}))
@@ -645,7 +658,7 @@ func (u *ui) pageDeck() *pageView {
 
 func (u *ui) autoEnergyText() string {
 	if u.cfg.energyCount <= 3 {
-		return "无 (默认3能量)"
+		return L("无 (默认3能量)", "None (base 3 energy)")
 	}
 	need := u.cfg.energyCount - 3
 	if need > len(curated.ENERGY) {
@@ -661,26 +674,26 @@ func (u *ui) autoEnergyText() string {
 
 func (u *ui) pageRare() *pageView {
 	pv := &pageView{
-		title:    "开局模板 · ③ 遗物",
-		hint:     "A=开/关 · 十字键在两列间移动 · B=返回",
+		title:    L("开局模板 · ③ 遗物", "Run template · ③ Relics"),
+		hint:     L("A=开/关 · 十字键在两列间移动 · B=返回", "A=toggle · D-pad crosses columns · B=back"),
 		gridCols: 2,
 	}
-	pv.rows = append(pv.rows, textRow("能量遗物 (自动)", u.autoEnergyText(), nil))
-	pv.rows = append(pv.rows, toggleRow("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
+	pv.rows = append(pv.rows, textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
+	pv.rows = append(pv.rows, toggleRow(L("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", "Default 4: Shuriken/Pen Nib/Mummified Hand/Tungsten Rod"), func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
 	for _, rid := range curated.RARE_MORE {
 		rid := rid
 		pv.rows = append(pv.rows, toggleRow(relicName(rid),
 			func() bool { return u.extraSel[rid] },
 			func(b bool) { u.extraSel[rid] = b }))
 	}
-	pv.rows = append(pv.rows, choiceRow("下一步: 确认生成 →", "", func() { u.push(u.pageConfirm) }))
+	pv.rows = append(pv.rows, choiceRow(L("下一步: 确认生成 →", "Next: confirm →"), "", func() { u.push(u.pageConfirm) }))
 	return pv
 }
 
 func (u *ui) templateSummary() string {
 	m := charDB[u.cfg.char]
 	var sb strings.Builder
-	fmt.Fprintf(&sb, "%s · %d打击 + %d防御", m.zh, u.cfg.nStrike, u.cfg.nDefend)
+	fmt.Fprintf(&sb, L("%s · %d打击 + %d防御", "%s · %d Strikes + %d Defends"), L(m.zh, m.en), u.cfg.nStrike, u.cfg.nDefend)
 	up := 0
 	if u.cfg.upStrike {
 		up++
@@ -692,43 +705,43 @@ func (u *ui) templateSummary() string {
 		up++
 	}
 	if up > 0 {
-		fmt.Fprintf(&sb, "(%d类升级)", up)
+		fmt.Fprintf(&sb, L("(%d类升级)", " (%d upgraded)"), up)
 	}
 	if u.cfg.arch != "" && u.cfg.arch != "无" {
-		sb.WriteString(" · 流派[" + u.cfg.arch + "]")
+		sb.WriteString(L(" · 流派[", " · archetype [") + u.cfg.arch + "]")
 		if u.cfg.upArch {
-			sb.WriteString("升级")
+			sb.WriteString(L("升级", " upgraded"))
 		}
 	}
-	fmt.Fprintf(&sb, " · %d能量 · 血量%d · 金币%d · 手牌%d", u.cfg.energyCount, u.cfg.hp, u.cfg.gold, u.cfg.hand)
+	fmt.Fprintf(&sb, L(" · %d能量 · 血量%d · 金币%d · 手牌%d", " · %d energy · HP %d · gold %d · hand %d"), u.cfg.energyCount, u.cfg.hp, u.cfg.gold, u.cfg.hand)
 	return sb.String()
 }
 
 func (u *ui) pageConfirm() *pageView {
-	pv := &pageView{title: "开局模板 · ④ 确认", hint: "A=执行 · B=返回修改"}
+	pv := &pageView{title: L("开局模板 · ④ 确认", "Run template · ④ Confirm"), hint: L("A=执行 · B=返回修改", "A=execute · B=back to edit")}
 	target := filepath.Join(savesDir(), u.cfg.char+".autosave")
-	note := "已存在, 直接覆盖写入"
+	note := L("已存在, 直接覆盖写入", "exists — will be overwritten")
 	if _, err := os.Stat(target); err != nil {
-		note = "不存在, 将自动从同角色最近存档复制底版"
+		note = L("不存在, 将自动从同角色最近存档复制底版", "missing — a base will be copied from the latest same-character save")
 	}
 	pv.rows = append(pv.rows,
-		textRow("配置", u.templateSummary(), nil),
-		textRow("写入目标 (固定文件名)", target, nil),
-		textRow("目标状态", note, nil))
+		textRow(L("配置", "Config"), u.templateSummary(), nil),
+		textRow(L("写入目标 (固定文件名)", "Target (fixed filename)"), target, nil),
+		textRow(L("目标状态", "Target status"), note, nil))
 	if u.svDoc != nil {
 		if got := detectChar(u.svPath); got != "" && got != u.cfg.char {
-			pv.rows = append(pv.rows, textRow("⚠ 当前加载的是其他角色存档", "将自动切换到 "+filepath.Base(target), nil))
+			pv.rows = append(pv.rows, textRow(L("⚠ 当前加载的是其他角色存档", "⚠ Loaded save belongs to another character"), L("将自动切换到 ", "Will switch to ")+filepath.Base(target), nil))
 		}
 	}
 	pv.rows = append(pv.rows,
-		choiceRow("✅ 生成并写入存档", "", func() { u.doApplyTemplate() }),
-		choiceRow("← 返回修改", "", func() { u.pop() }))
+		choiceRow(L("✅ 生成并写入存档", "✅ Generate & write save"), "", func() { u.doApplyTemplate() }),
+		choiceRow(L("← 返回修改", "← Back to edit"), "", func() { u.pop() }))
 	return pv
 }
 
 func (u *ui) doApplyTemplate() {
 	if u.cfg.char == "" {
-		u.setStatus("✗ 请先在第①步选择角色")
+		u.setStatus(L("✗ 请先在第①步选择角色", "✗ Pick a character in step ① first"))
 		return
 	}
 	// 固定文件名: 模板永远写入 <角色>.autosave; 没有存档也能从零生成
@@ -738,7 +751,7 @@ func (u *ui) doApplyTemplate() {
 			if detectChar(f) == u.cfg.char {
 				if b, err := os.ReadFile(f); err == nil {
 					if err := os.WriteFile(target, b, 0o644); err == nil {
-						u.setStatus("已复制底版 → " + filepath.Base(target))
+						u.setStatus(L("已复制底版 → ", "Copied base → ") + filepath.Base(target))
 					}
 				}
 				break
@@ -749,11 +762,11 @@ func (u *ui) doApplyTemplate() {
 		if !u.loadSave(target) {
 			doc, err := loadSkeleton()
 			if err != nil {
-				u.setStatus("✗ 生成全新存档失败: " + err.Error())
+				u.setStatus(L("✗ 生成全新存档失败: ", "✗ Failed to create fresh save: ") + err.Error())
 				return
 			}
 			u.svPath, u.svDoc = target, doc
-			u.setStatus("从零生成全新开局 (从涅奥开始)")
+			u.setStatus(L("从零生成全新开局 (从涅奥开始)", "Generated a fresh run from scratch (starts at Neow)"))
 		}
 	}
 	msg, err := applyTemplate(u.svDoc, u.cfg)
@@ -776,15 +789,15 @@ func (u *ui) pageEdit() *pageView {
 		return func(v int) { doc[k] = float64(v) }
 	}
 	return &pageView{
-		title: "快速数值修改",
-		hint:  "左右=±1 X=+10 Y=−10 · A 无效 · B=返回",
+		title: L("快速数值修改", "Quick stat edit"),
+		hint:  L("左右=±1 X=+10 Y=−10 · A 无效 · B=返回", "Left/Right=±1 X=+10 Y=−10 · B=back"),
 		rows: []*row{
-			stepperRow("当前血量", get("current_health"), set("current_health"), 0, 9999, 10),
-			stepperRow("最大血量", get("max_health"), set("max_health"), 1, 9999, 10),
-			stepperRow("金币", get("gold"), set("gold"), 0, 999999, 200),
-			stepperRow("手牌上限", get("hand_size"), set("hand_size"), 0, 20, 1),
-			choiceRow("💾 写回存档", "", func() { u.writeBack("数值已保存") }),
-			choiceRow("↻ 重新读取文件", "", func() {
+			stepperRow(L("当前血量", "Current HP"), get("current_health"), set("current_health"), 0, 9999, 10),
+			stepperRow(L("最大血量", "Max HP"), get("max_health"), set("max_health"), 1, 9999, 10),
+			stepperRow(L("金币", "Gold"), get("gold"), set("gold"), 0, 999999, 200),
+			stepperRow(L("手牌上限", "Hand size"), get("hand_size"), set("hand_size"), 0, 20, 1),
+			choiceRow(L("💾 写回存档", "💾 Write back to save"), "", func() { u.writeBack(L("数值已保存", "Stats saved")) }),
+			choiceRow(L("↻ 重新读取文件", "↻ Reload file"), "", func() {
 				if u.loadSave(u.svPath) {
 					u.render()
 				}
@@ -801,21 +814,21 @@ func (u *ui) pageJSON() *pageView {
 		entry.SetText(b)
 	}
 	return &pageView{
-		title:  "高级 JSON 编辑 (键盘)",
-		hint:   "改完先「应用到内存」再「写回」· B=返回",
+		title:  L("高级 JSON 编辑 (键盘)", "Advanced JSON (keyboard)"),
+		hint:   L("改完先「应用到内存」再「写回」· B=返回", "Apply to memory, then Write back · B=back"),
 		custom: func() fyne.CanvasObject { return entry },
 		rows: []*row{
-			choiceRow("应用到内存", "", func() {
+			choiceRow(L("应用到内存", "Apply to memory"), "", func() {
 				var doc map[string]interface{}
 				if err := jsonUnmarshal(entry.Text, &doc); err != nil {
-					u.setStatus("✗ JSON 无效: " + err.Error())
+					u.setStatus(L("✗ JSON 无效: ", "✗ Invalid JSON: ") + err.Error())
 					return
 				}
 				u.svDoc = doc
-				u.setStatus("✓ JSON 已应用 (未写盘)")
+				u.setStatus(L("✓ JSON 已应用 (未写盘)", "✓ JSON applied (not written)"))
 			}),
-			choiceRow("💾 写回存档", "", func() { u.writeBack("JSON 已保存") }),
-			choiceRow("← 返回", "", func() { u.pop() }),
+			choiceRow(L("💾 写回存档", "💾 Write back to save"), "", func() { u.writeBack(L("JSON 已保存", "JSON saved")) }),
+			choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }),
 		},
 	}
 }
@@ -833,7 +846,7 @@ func (u *ui) deckCards() []interface{} {
 func cardLabel(v interface{}) string {
 	m, ok := v.(map[string]interface{})
 	if !ok {
-		return "(异常卡)"
+		return L("(异常卡)", "(bad card)")
 	}
 	id, _ := m["id"].(string)
 	up := int(num(m, "upgrades"))
@@ -856,7 +869,7 @@ func (u *ui) syncRelicCounters() {
 
 // pageDeckEditor 卡组编辑(分页)
 func (u *ui) pageDeckEditor() *pageView {
-	pv := &pageView{title: "卡组编辑", hint: "A=进入卡牌操作 · 左右=翻页 · B=返回"}
+	pv := &pageView{title: L("卡组编辑", "Deck editor"), hint: L("A=进入卡牌操作 · 左右=翻页 · B=返回", "A=card actions · Left/Right=pages · B=back")}
 	deck := u.deckCards()
 	perPage := 8
 	pages := (len(deck) + perPage - 1) / perPage
@@ -881,13 +894,13 @@ func (u *ui) pageDeckEditor() *pageView {
 	}
 	if pages > 1 {
 		pv.rows = append(pv.rows,
-			choiceRow("◀ 上一页", fmt.Sprintf("第 %d/%d 页", u.deckPage+1, pages), func() {
+			choiceRow(L("◀ 上一页", "◀ Prev page"), fmt.Sprintf(L("第 %d/%d 页", "Page %d/%d"), u.deckPage+1, pages), func() {
 				if u.deckPage > 0 {
 					u.deckPage--
 					u.render()
 				}
 			}),
-			choiceRow("▶ 下一页", "", func() {
+			choiceRow(L("▶ 下一页", "▶ Next page"), "", func() {
 				if u.deckPage < pages-1 {
 					u.deckPage++
 					u.render()
@@ -895,7 +908,7 @@ func (u *ui) pageDeckEditor() *pageView {
 			}))
 	}
 	pv.rows = append(pv.rows,
-		choiceRow("⬆ 升级所有卡牌 (+1)", "", func() {
+		choiceRow(L("⬆ 升级所有卡牌 (+1)", "⬆ Upgrade ALL cards (+1)"), "", func() {
 			for _, v := range u.deckCards() {
 				if m, ok := v.(map[string]interface{}); ok {
 					if n := num(m, "upgrades"); n < 9 {
@@ -903,20 +916,20 @@ func (u *ui) pageDeckEditor() *pageView {
 					}
 				}
 			}
-			u.setStatus("已升级全部卡牌 (未写盘)")
+			u.setStatus(L("已升级全部卡牌 (未写盘)", "All cards upgraded (not written)"))
 			u.render()
 		}),
-		choiceRow("➕ 添加卡牌", "", func() {
+		choiceRow(L("➕ 添加卡牌", "➕ Add cards"), "", func() {
 			u.addCardPage = 0
 			u.push(u.pageAddCard)
 		}),
-		choiceRow("💾 写回存档", "", func() { u.writeBack("卡组已保存") }),
-		choiceRow("↻ 重新读取", "", func() {
+		choiceRow(L("💾 写回存档", "💾 Write back to save"), "", func() { u.writeBack(L("卡组已保存", "Deck saved")) }),
+		choiceRow(L("↻ 重新读取", "↻ Reload"), "", func() {
 			if u.loadSave(u.svPath) {
 				u.render()
 			}
 		}),
-		choiceRow("← 返回", "", func() { u.pop() }),
+		choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }),
 	)
 	return pv
 }
@@ -925,31 +938,31 @@ func (u *ui) pageDeckEditor() *pageView {
 func (u *ui) pageCardEdit(idx int) func() *pageView {
 	return func() *pageView {
 		deck := u.deckCards()
-		pv := &pageView{title: fmt.Sprintf("卡牌操作 · #%d", idx+1), hint: "A=执行 · B=返回卡组"}
+		pv := &pageView{title: fmt.Sprintf(L("卡牌操作 · #%d", "Card actions · #%d"), idx+1), hint: L("A=执行 · B=返回卡组", "A=execute · B=back to deck")}
 		if idx >= len(deck) {
-			pv.rows = append(pv.rows, textRow("(卡已不存在)", "", nil))
+			pv.rows = append(pv.rows, textRow(L("(卡已不存在)", "(card no longer exists)"), "", nil))
 			return pv
 		}
 		m := deck[idx].(map[string]interface{})
-		pv.rows = append(pv.rows, textRow("当前", cardLabel(m), nil))
-		pv.rows = append(pv.rows, choiceRow("⬆ 升级 (+1)", "", func() {
+		pv.rows = append(pv.rows, textRow(L("当前", "Current"), cardLabel(m), nil))
+		pv.rows = append(pv.rows, choiceRow(L("⬆ 升级 (+1)", "⬆ Upgrade (+1)"), "", func() {
 			if n := num(m, "upgrades"); n < 9 {
 				m["upgrades"] = n + 1
 			}
 			u.render()
 		}))
-		pv.rows = append(pv.rows, choiceRow("⬇ 降级 (−1)", "", func() {
+		pv.rows = append(pv.rows, choiceRow(L("⬇ 降级 (−1)", "⬇ Downgrade (−1)"), "", func() {
 			if n := num(m, "upgrades"); n > 0 {
 				m["upgrades"] = n - 1
 			}
 			u.render()
 		}))
-		pv.rows = append(pv.rows, choiceRow("🗑 删除此卡", "", func() {
+		pv.rows = append(pv.rows, choiceRow(L("🗑 删除此卡", "🗑 Remove this card"), "", func() {
 			u.svDoc["cards"] = append(deck[:idx], deck[idx+1:]...)
-			u.setStatus("已删除 (未写盘)")
+			u.setStatus(L("已删除 (未写盘)", "Removed (not written)"))
 			u.pop()
 		}))
-		pv.rows = append(pv.rows, choiceRow("← 返回", "", func() { u.pop() }))
+		pv.rows = append(pv.rows, choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }))
 		return pv
 	}
 }
@@ -958,7 +971,7 @@ var charColor = map[string]string{"IRONCLAD": "RED", "THE_SILENT": "GREEN", "DEF
 
 // pageAddCard 添加卡牌: 类别 -> 分页选择
 func (u *ui) pageAddCard() *pageView {
-	pv := &pageView{title: "添加卡牌", hint: "A=添加(可连续加) · B=返回卡组"}
+	pv := &pageView{title: L("添加卡牌", "Add cards"), hint: L("A=添加(可连续加) · B=返回卡组", "A=add (repeatable) · B=back to deck")}
 	ch := u.cfg.char
 	if cc, ok := charColor[u.saveChar()]; ok {
 		ch = u.saveChar()
@@ -976,12 +989,12 @@ func (u *ui) pageAddCard() *pageView {
 		markCol = "●"
 	}
 	pv.rows = append(pv.rows,
-		choiceRow(fmt.Sprintf("%s 本职业 (%s)", markJob, charDB[ch].zh), "", func() {
+		choiceRow(fmt.Sprintf(L("%s 本职业 (%s)", "%s class (%s)"), markJob, L(charDB[ch].zh, charDB[ch].en)), "", func() {
 			u.addCat = "job"
 			u.addCardPage = 0
 			u.render()
 		}),
-		choiceRow(fmt.Sprintf("%s 无色卡", markCol), "", func() {
+		choiceRow(fmt.Sprintf(L("%s 无色卡", "%s colorless"), markCol), "", func() {
 			u.addCat = "colorless"
 			u.addCardPage = 0
 			u.render()
@@ -1013,37 +1026,37 @@ func (u *ui) pageAddCard() *pageView {
 	}
 	for i := start; i < end; i++ {
 		cid := pool[i]
-		r := newRowIcon(cardName(cid), zhRarity[cards[cid].Rarity], iconAt("cards", cid))
+		r := newRowIcon(cardName(cid), rarityName(cards[cid].Rarity), iconAt("cards", cid))
 		r.activate = func() {
 			arr, _ := u.svDoc["cards"].([]interface{})
 			u.svDoc["cards"] = append(arr, map[string]interface{}{"id": cid, "upgrades": float64(0)})
-			u.setStatus("已添加 " + cardName(cid) + " (未写盘)")
+			u.setStatus(L("已添加 ", "Added ") + cardName(cid) + L(" (未写盘)", " (not written)"))
 			u.render()
 		}
 		pv.rows = append(pv.rows, r)
 	}
 	if pages > 1 {
 		pv.rows = append(pv.rows,
-			choiceRow("◀ 上一页", fmt.Sprintf("第 %d/%d 页 · 共%d张", u.addCardPage+1, pages, len(pool)), func() {
+			choiceRow(L("◀ 上一页", "◀ Prev page"), fmt.Sprintf(L("第 %d/%d 页 · 共%d张", "Page %d/%d · %d cards"), u.addCardPage+1, pages, len(pool)), func() {
 				if u.addCardPage > 0 {
 					u.addCardPage--
 					u.render()
 				}
 			}),
-			choiceRow("▶ 下一页", "", func() {
+			choiceRow(L("▶ 下一页", "▶ Next page"), "", func() {
 				if u.addCardPage < pages-1 {
 					u.addCardPage++
 					u.render()
 				}
 			}))
 	}
-	pv.rows = append(pv.rows, choiceRow("← 返回卡组", "", func() { u.pop() }))
+	pv.rows = append(pv.rows, choiceRow(L("← 返回卡组", "← Back to deck"), "", func() { u.pop() }))
 	return pv
 }
 
 // pageRelicsEditor 遗物管理
 func (u *ui) pageRelicsEditor() *pageView {
-	pv := &pageView{title: "遗物管理", hint: "A=遗物操作 · B=返回"}
+	pv := &pageView{title: L("遗物管理", "Relic manager"), hint: L("A=遗物操作 · B=返回", "A=relic actions · B=back")}
 	var rel []interface{}
 	if u.svDoc != nil {
 		rel, _ = u.svDoc["relics"].([]interface{})
@@ -1056,47 +1069,47 @@ func (u *ui) pageRelicsEditor() *pageView {
 		pv.rows = append(pv.rows, row)
 	}
 	pv.rows = append(pv.rows,
-		choiceRow("➕ 添加遗物", "", func() {
+		choiceRow(L("➕ 添加遗物", "➕ Add relic"), "", func() {
 			u.relPage = 0
 			u.push(u.pageAddRelic)
 		}),
-		choiceRow("🧪 药水管理", "", func() {
+		choiceRow(L("🧪 药水管理", "🧪 Potion manager"), "", func() {
 			u.potPage = 0
 			u.push(u.pagePotions)
 		}),
-		choiceRow("💾 写回存档", "", func() { u.writeBack("遗物已保存") }),
-		choiceRow("← 返回", "", func() { u.pop() }),
+		choiceRow(L("💾 写回存档", "💾 Write back to save"), "", func() { u.writeBack(L("遗物已保存", "Relics saved")) }),
+		choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }),
 	)
 	return pv
 }
 
 func (u *ui) pageRelicEdit(idx int) func() *pageView {
 	return func() *pageView {
-		pv := &pageView{title: "遗物操作", hint: "A=执行 · B=返回"}
+		pv := &pageView{title: L("遗物操作", "Relic actions"), hint: L("A=执行 · B=返回", "A=execute · B=back")}
 		rel, _ := u.svDoc["relics"].([]interface{})
 		if idx >= len(rel) {
-			pv.rows = append(pv.rows, textRow("(遗物已不存在)", "", nil))
+			pv.rows = append(pv.rows, textRow(L("(遗物已不存在)", "(relic no longer exists)"), "", nil))
 			return pv
 		}
 		rid, _ := rel[idx].(string)
-		pv.rows = append(pv.rows, textRow("当前", relicName(rid), nil))
+		pv.rows = append(pv.rows, textRow(L("当前", "Current"), relicName(rid), nil))
 		if idx == 0 {
-			pv.rows = append(pv.rows, textRow("(起始遗物, 不建议删除)", "", nil))
+			pv.rows = append(pv.rows, textRow(L("(起始遗物, 不建议删除)", "(starter relic — do not remove)"), "", nil))
 		} else {
-			pv.rows = append(pv.rows, choiceRow("🗑 删除此遗物", "", func() {
+			pv.rows = append(pv.rows, choiceRow(L("🗑 删除此遗物", "🗑 Remove this relic"), "", func() {
 				u.svDoc["relics"] = append(rel[:idx], rel[idx+1:]...)
 				u.syncRelicCounters()
-				u.setStatus("已删除 " + relicName(rid) + " (未写盘)")
+				u.setStatus(L("已删除 ", "Removed ") + relicName(rid) + L(" (未写盘)", " (not written)"))
 				u.pop()
 			}))
 		}
-		pv.rows = append(pv.rows, choiceRow("← 返回", "", func() { u.pop() }))
+		pv.rows = append(pv.rows, choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }))
 		return pv
 	}
 }
 
 func (u *ui) pageAddRelic() *pageView {
-	pv := &pageView{title: "添加遗物", hint: "A=添加(可连续加) · B=返回"}
+	pv := &pageView{title: L("添加遗物", "Add relic"), hint: L("A=添加(可连续加) · B=返回", "A=add (repeatable) · B=back")}
 	pool := make([]string, 0, len(relics))
 	for rid := range relics {
 		pool = append(pool, rid)
@@ -1122,87 +1135,87 @@ func (u *ui) pageAddRelic() *pageView {
 			arr, _ := u.svDoc["relics"].([]interface{})
 			u.svDoc["relics"] = append(arr, rid)
 			u.syncRelicCounters()
-			u.setStatus("已添加 " + relicName(rid) + " (未写盘)")
+			u.setStatus(L("已添加 ", "Added ") + relicName(rid) + L(" (未写盘)", " (not written)"))
 			u.render()
 		}
 		pv.rows = append(pv.rows, r)
 	}
 	if pages > 1 {
 		pv.rows = append(pv.rows,
-			choiceRow("◀ 上一页", fmt.Sprintf("第 %d/%d 页 · 共%d件", u.relPage+1, pages, len(pool)), func() {
+			choiceRow(L("◀ 上一页", "◀ Prev page"), fmt.Sprintf(L("第 %d/%d 页 · 共%d件", "Page %d/%d · %d relics"), u.relPage+1, pages, len(pool)), func() {
 				if u.relPage > 0 {
 					u.relPage--
 					u.render()
 				}
 			}),
-			choiceRow("▶ 下一页", "", func() {
+			choiceRow(L("▶ 下一页", "▶ Next page"), "", func() {
 				if u.relPage < pages-1 {
 					u.relPage++
 					u.render()
 				}
 			}))
 	}
-	pv.rows = append(pv.rows, choiceRow("← 返回遗物管理", "", func() { u.pop() }))
+	pv.rows = append(pv.rows, choiceRow(L("← 返回遗物管理", "← Back to relics"), "", func() { u.pop() }))
 	return pv
 }
 
 // pagePotions 药水管理
 func (u *ui) pagePotions() *pageView {
-	pv := &pageView{title: "药水管理", hint: "A=槽位操作 · B=返回"}
+	pv := &pageView{title: L("药水管理", "Potion manager"), hint: L("A=槽位操作 · B=返回", "A=slot actions · B=back")}
 	var pots []interface{}
 	if u.svDoc != nil {
 		pots, _ = u.svDoc["potions"].([]interface{})
 	}
 	if pots == nil {
-		pv.rows = append(pv.rows, textRow("(存档没有药水槽字段, 写回时会创建)", "", nil))
+		pv.rows = append(pv.rows, textRow(L("(存档没有药水槽字段, 写回时会创建)", "(save has no potion field; created on write)"), "", nil))
 	}
 	for i, p := range pots {
 		i := i
 		pid, _ := p.(string)
 		right := ""
 		if pid != "Potion Slot" {
-			right = "有药水"
+			right = L("有药水", "filled")
 		}
-		row := newRowIcon(fmt.Sprintf("槽位%d: %s", i+1, potionName(pid)), right, iconAt("potions", "bottle"))
+		row := newRowIcon(fmt.Sprintf(L("槽位%d: %s", "Slot %d: %s"), i+1, potionName(pid)), right, iconAt("potions", "bottle"))
 		row.activate = func() { u.push(u.pagePotionEdit(i)) }
 		pv.rows = append(pv.rows, row)
 	}
 	pv.rows = append(pv.rows,
-		choiceRow("💾 写回存档", "", func() { u.writeBack("药水已保存") }),
-		choiceRow("← 返回", "", func() { u.pop() }),
+		choiceRow(L("💾 写回存档", "💾 Write back to save"), "", func() { u.writeBack(L("药水已保存", "Potions saved")) }),
+		choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }),
 	)
 	return pv
 }
 
 func (u *ui) pagePotionEdit(idx int) func() *pageView {
 	return func() *pageView {
-		pv := &pageView{title: fmt.Sprintf("药水槽位 %d", idx+1), hint: "A=执行 · B=返回"}
+		pv := &pageView{title: fmt.Sprintf(L("药水槽位 %d", "Potion slot %d"), idx+1), hint: L("A=执行 · B=返回", "A=execute · B=back")}
 		pots, _ := u.svDoc["potions"].([]interface{})
 		if idx >= len(pots) {
-			pv.rows = append(pv.rows, textRow("(槽位已不存在)", "", nil))
+			pv.rows = append(pv.rows, textRow(L("(槽位已不存在)", "(slot no longer exists)"), "", nil))
 			return pv
 		}
 		pid, _ := pots[idx].(string)
-		pv.rows = append(pv.rows, textRow("当前", potionName(pid), nil))
+		pv.rows = append(pv.rows, textRow(L("当前", "Current"), potionName(pid), nil))
 		if pid != "Potion Slot" {
-			pv.rows = append(pv.rows, choiceRow("🗑 清空 (删除药水)", "", func() {
+			pv.rows = append(pv.rows, choiceRow(L("🗑 清空 (删除药水)", "🗑 Empty (remove potion)"), "", func() {
 				pots[idx] = "Potion Slot"
-				u.setStatus("已清空 (未写盘)")
+				u.setStatus(L("已清空 (未写盘)", "Emptied (not written)"))
 				u.render()
 			}))
 		}
-		pv.rows = append(pv.rows, choiceRow("➕ 更换药水 →", "", func() {
+		pv.rows = append(pv.rows, choiceRow(L("➕ 更换药水 →", "➕ Change potion →"), "", func() {
 			u.potPage = 0
 			u.push(u.pagePickPotion(idx))
 		}))
-		pv.rows = append(pv.rows, choiceRow("← 返回", "", func() { u.pop() }))
+		pv.rows = append(pv.rows, choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }))
 		return pv
 	}
 }
 
 func (u *ui) pagePickPotion(slot int) func() *pageView {
 	return func() *pageView {
-		pv := &pageView{title: "选择药水", hint: "A=装入该槽位 · B=返回"}
+		pv := &pageView{title: L("选择药水", "Pick a potion"), hint: L("A=装入该槽位 · B=返回", "A=fill this slot · B=back")}
 		pool := make([]string, 0, len(potions))
 		for pid := range potions {
 			pool = append(pool, pid)
@@ -1227,7 +1240,7 @@ func (u *ui) pagePickPotion(slot int) func() *pageView {
 			r.activate = func() {
 				if pots, ok := u.svDoc["potions"].([]interface{}); ok && slot < len(pots) {
 					pots[slot] = pid
-					u.setStatus("已装入 " + potionName(pid) + " (未写盘)")
+					u.setStatus(L("已装入 ", "Loaded ") + potionName(pid) + L(" (未写盘)", " (not written)"))
 					u.pop()
 				}
 			}
@@ -1235,20 +1248,20 @@ func (u *ui) pagePickPotion(slot int) func() *pageView {
 		}
 		if pages > 1 {
 			pv.rows = append(pv.rows,
-				choiceRow("◀ 上一页", fmt.Sprintf("第 %d/%d 页 · 共%d种", u.potPage+1, pages, len(pool)), func() {
+				choiceRow(L("◀ 上一页", "◀ Prev page"), fmt.Sprintf(L("第 %d/%d 页 · 共%d种", "Page %d/%d · %d potions"), u.potPage+1, pages, len(pool)), func() {
 					if u.potPage > 0 {
 						u.potPage--
 						u.render()
 					}
 				}),
-				choiceRow("▶ 下一页", "", func() {
+				choiceRow(L("▶ 下一页", "▶ Next page"), "", func() {
 					if u.potPage < pages-1 {
 						u.potPage++
 						u.render()
 					}
 				}))
 		}
-		pv.rows = append(pv.rows, choiceRow("← 返回", "", func() { u.pop() }))
+		pv.rows = append(pv.rows, choiceRow(L("← 返回", "← Back"), "", func() { u.pop() }))
 		return pv
 	}
 }
@@ -1256,6 +1269,7 @@ func (u *ui) pagePickPotion(slot int) func() *pageView {
 // ---------- main ----------
 
 func main() {
+	loadLangPref()
 	// 命令行模式: --import-steam 直接注册 Steam 库条目 (便于远程验证)
 	if len(os.Args) > 1 && os.Args[1] == "--import-steam" {
 		initData()
