@@ -1,6 +1,8 @@
 # 尖塔工坊 SpireForge
 
-杀戮尖塔 (Slay the Spire) 存档编辑器 + 开局模板生成器。Go + Fyne 编写,为 Steam Deck / Bazzite 等手柄优先的 Linux 游戏环境设计,也支持桌面键鼠操作。
+**仅支持《杀戮尖塔 1》(Slay the Spire, Steam AppID 646570,初代)——不支持《杀戮尖塔 2》。**
+
+杀戮尖塔 1 存档编辑器 + 开局模板生成器。Go + Fyne 编写,为 Steam Deck / Bazzite 等手柄优先的 Linux 游戏环境设计,也支持桌面键鼠操作;Windows / macOS / Linux 全平台发布。
 
 ![平台](https://img.shields.io/badge/platform-Linux-blue) ![GUI](https://img.shields.io/badge/GUI-Fyne-purple) ![语言](https://img.shields.io/badge/UI-中文-green)
 
@@ -33,6 +35,12 @@
 杀戮尖塔存档 = `JSON → 与 "key" 循环异或 → base64`。本工具全部本地处理,存档不出机器。
 
 数据来源:游戏本体 jar 的官方本地化文件(423 卡/195 遗物/45 药水,含官方简中名)+ 卡牌职业分类(按 jar 内类文件包路径) + 原版贴图缩略图。
+
+## 下载
+
+到 [Releases](https://github.com/friddle/spireforge/releases) 下载对应平台的 zip(Windows / macOS Intel+Apple Silicon / Linux x64+ARM64),解压即用:
+- Linux/macOS: `chmod +x spireforge && ./spireforge`
+- 卡牌缩略图与中文字体已打包在 zip 内,解压到同目录即可
 
 ## 构建与运行
 
