@@ -36,10 +36,11 @@ func TestRoundTripAndTemplate(t *testing.T) {
 		t.Fatalf("gold round-trip mismatch")
 	}
 
+	// 标准构筑: 打击/防御/起手 + 能量遗物 (无流派)
 	cfg := templateCfg{
 		char: "IRONCLAD", nStrike: 5, nDefend: 4, upStrike: true, upStarter: true,
-		arch: "力量重击流", upArch: true, energyCount: 4,
-		rareDefault: true, rareExtra: []string{"Girya"}, hp: 120, gold: 99, hand: 10,
+		energyCount: 4, rareDefault: true, rareExtra: []string{"Girya"},
+		hp: 120, gold: 99, hand: 10,
 	}
 	msg, err := applyTemplate(doc2, cfg)
 	if err != nil {
@@ -50,12 +51,43 @@ func TestRoundTripAndTemplate(t *testing.T) {
 		t.Fatal("hp not applied")
 	}
 	deck := doc2["cards"].([]interface{})
-	if len(deck) != 1+5+4+8 {
-		t.Fatalf("deck = %d, want 18", len(deck))
+	if len(deck) != 1+5+4 {
+		t.Fatalf("deck = %d, want 10", len(deck))
 	}
 	relicsArr := doc2["relics"].([]interface{})
-	if len(relicsArr) != 1+1+4+1 {
+	// 起始遗物 + 1能量 + 4稀有 + 1额外 = 7, 且 Girya 去重后不重复出现
+	if len(relicsArr) != 7 {
 		t.Fatalf("relics = %d, want 7: %v", len(relicsArr), relicsArr)
+	}
+
+	// 流派构筑: 抛弃原卡组, 6张核心 + 2流派遗物
+	cfg2 := templateCfg{
+		char: "IRONCLAD", useArch: true, arch: "力量重击流", archCount: 6, upArch: true,
+		archRelics: true, energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
+	}
+	if _, err := applyTemplate(doc2, cfg2); err != nil {
+		t.Fatal(err)
+	}
+	deck = doc2["cards"].([]interface{})
+	if len(deck) != 6 {
+		t.Fatalf("archetype deck = %d, want 6", len(deck))
+	}
+	for _, v := range deck {
+		id := v.(map[string]interface{})["id"]
+		bad := true
+		for _, cid := range curated.ARCH["IRONCLAD"]["力量重击流"] {
+			if id == cid {
+				bad = false
+			}
+		}
+		if bad {
+			t.Fatalf("非核心卡混入: %v", id)
+		}
+	}
+	relicsArr = doc2["relics"].([]interface{})
+	// 起始 + 2流派遗物 + 4稀有 = 7 (无能量遗物)
+	if len(relicsArr) != 7 {
+		t.Fatalf("archetype relics = %d, want 7: %v", len(relicsArr), relicsArr)
 	}
 	if cs := doc2["relic_counters"].([]interface{}); len(cs) != len(relicsArr) {
 		t.Fatal("relic_counters misaligned")

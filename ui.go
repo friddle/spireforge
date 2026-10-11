@@ -31,8 +31,9 @@ func jsonUnmarshal(s string, v interface{}) error {
 	return json.Unmarshal([]byte(s), v)
 }
 
-var colIdle = &color.NRGBA{R: 27, G: 30, B: 44, A: 255}
-var colFocus = &color.NRGBA{R: 46, G: 52, B: 88, A: 255}
+var colIdle = &color.NRGBA{R: 247, G: 248, B: 251, A: 255}
+var colFocus = &color.NRGBA{R: 232, G: 238, B: 255, A: 255}
+var colStroke = &color.NRGBA{R: 208, G: 213, B: 224, A: 255}
 
 // ---------- 行 ----------
 
@@ -128,7 +129,8 @@ func rarityName(r string) string {
 func newRow(left, right string) *row {
 	bg := canvas.NewRectangle(colIdle)
 	bg.CornerRadius = 12
-	bg.StrokeWidth = 0
+	bg.StrokeColor = colStroke
+	bg.StrokeWidth = 1
 	l := widget.NewLabel(left)
 	l.Wrapping = fyne.TextWrapBreak
 	l.TextStyle = fyne.TextStyle{Bold: true}
@@ -257,7 +259,8 @@ func (u *ui) render() {
 			r.bg.StrokeWidth = 2
 		} else {
 			r.bg.FillColor = colIdle
-			r.bg.StrokeWidth = 0
+			r.bg.StrokeColor = colStroke
+			r.bg.StrokeWidth = 1
 		}
 		r.bg.Refresh()
 	}
@@ -483,6 +486,15 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.push(u.pageChar)
 			}),
+			choiceRow(func() string {
+				if lang == "en" {
+					return "🌐 Language: English (tap to switch)"
+				}
+				return "🌐 语言: 中文 (点按切换)"
+			}(), "", func() {
+				toggleLang()
+				u.render()
+			}),
 			choiceRow(L("卡组编辑 (添加/删除/升级/降级)", "Deck editor (add/remove/upgrade/downgrade)"), "", func() {
 				if u.svDoc == nil {
 					u.pendingFlow = "deck"
@@ -515,15 +527,6 @@ func (u *ui) pageHome() *pageView {
 				u.push(u.pageJSON)
 			}),
 			choiceRow(L("选择存档文件", "Select save file"), sel, func() { u.push(u.pageSelectSave()) }),
-			choiceRow(func() string {
-				if lang == "en" {
-					return "🌐 Language: English (tap to switch)"
-				}
-				return "🌐 语言: 中文 (点按切换)"
-			}(), "", func() {
-				toggleLang()
-				u.render()
-			}),
 			choiceRow(L("🎮 导入到 Steam 库", "🎮 Import into Steam library"), "", func() {
 				msg, err := importToSteam()
 				if err != nil {
@@ -631,37 +634,75 @@ func (u *ui) pageChar() *pageView {
 
 func (u *ui) pageDeck() *pageView {
 	ch := u.cfg.char
+	m := charDB[ch]
 	names := make([]string, 0, len(curated.ARCH[ch]))
 	for name := range curated.ARCH[ch] {
 		names = append(names, name)
 	}
 	sort.Strings(names)
+
 	pv := &pageView{
-		title: L("开局模板 · ② 升级与流派 (", "Run template · ② Upgrades & archetype (") + charDB[ch].zh + ")",
-		hint:  L("A=切换/选定流派并继续 · B=返回", "A=pick archetype & continue · B=back"),
+		title: L("开局模板 · ② 牌组与流派", "Run template · ② Deck & archetype"),
+		hint:  L("A=选定并继续 · B=返回", "A=pick & continue · B=back"),
+	}
+
+	pv.rows = append(pv.rows, choiceRow(L("─ 构筑方式 ─", "─ Build mode ─"), "", nil))
+	markA, markS := "○", "○"
+	if u.cfg.useArch {
+		markA = "●"
+	} else {
+		markS = "●"
 	}
 	pv.rows = append(pv.rows,
-		toggleRow(L("打击牌全部升级", "Upgrade all Strikes"), func() bool { return u.cfg.upStrike }, func(b bool) { u.cfg.upStrike = b }),
-		toggleRow(L("防御牌全部升级", "Upgrade all Defends"), func() bool { return u.cfg.upDefend }, func(b bool) { u.cfg.upDefend = b }),
-		toggleRow(L("起手技能卡升级(痛击/电弧等)", "Upgrade starter cards (Bash/Zap etc.)"), func() bool { return u.cfg.upStarter }, func(b bool) { u.cfg.upStarter = b }),
-		toggleRow(L("核心卡全部升级", "Upgrade all archetype cards"), func() bool { return u.cfg.upArch }, func(b bool) { u.cfg.upArch = b }),
-		choiceRow(L("─ 流派核心卡 ─", "─ Archetype core cards ─"), "", nil))
-	for _, name := range names {
-		name := name
-		ids := curated.ARCH[ch][name]
-		mark := "○"
-		if u.cfg.arch == name {
-			mark = "●"
-		}
-		pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s", mark, name), fmt.Sprintf(L("%d张", "%d cards"), len(ids)), func() {
-			u.cfg.arch = name
-			u.push(u.pageRare)
+		choiceRow(fmt.Sprintf(L("%s 流派构筑 (抛弃原卡组)", "%s Archetype build (discard base deck)"), markA), "", func() {
+			u.cfg.useArch = true
+			u.render()
+		}),
+		choiceRow(fmt.Sprintf(L("%s 标准构筑 (打击/防御+起手卡)", "%s Standard build (strikes/defends + starters)"), markS), "", func() {
+			u.cfg.useArch = false
+			u.render()
 		}))
+
+	if u.cfg.useArch {
+		var parts []string
+		for _, st := range m.starters {
+			parts = append(parts, cardName(st))
+		}
+		if u.cfg.nStrike > 0 {
+			parts = append(parts, fmt.Sprintf("%d×%s", u.cfg.nStrike, cardName(m.strike)))
+		}
+		if u.cfg.nDefend > 0 {
+			parts = append(parts, fmt.Sprintf("%d×%s", u.cfg.nDefend, cardName(m.defend)))
+		}
+		if len(parts) > 0 {
+			pv.rows = append(pv.rows, textRow(L("⚠ 将抛弃", "⚠ Will discard"), strings.Join(parts, L("、", ", ")), nil))
+		}
+		for _, name := range names {
+			name := name
+			ids := curated.ARCH[ch][name]
+			mk := "○"
+			if u.cfg.arch == name {
+				mk = "●"
+			}
+			pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s", mk, name), fmt.Sprintf(L("核心%d张", "%d core cards"), len(ids)), func() {
+				u.cfg.arch = name
+				u.render()
+			}))
+		}
+		pv.rows = append(pv.rows,
+			stepperRow(L("核心卡数量", "Core card count"), func() int { return u.cfg.archCount }, func(v int) { u.cfg.archCount = v }, 1, 10, 1),
+			toggleRow(L("核心卡全部升级", "Upgrade all core cards"), func() bool { return u.cfg.upArch }, func(b bool) { u.cfg.upArch = b }),
+			toggleRow(L("附带流派遗物 ×2", "Include 2 archetype relics"), func() bool { return u.cfg.archRelics }, func(b bool) { u.cfg.archRelics = b }),
+			choiceRow(L("下一步: 遗物 →", "Next: relics →"), "", func() { u.push(u.pageRare) }))
+	} else {
+		pv.rows = append(pv.rows,
+			stepperRow(L("打击数量", "Strikes"), func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
+			toggleRow(L("打击牌全部升级", "Upgrade all Strikes"), func() bool { return u.cfg.upStrike }, func(b bool) { u.cfg.upStrike = b }),
+			stepperRow(L("防御数量", "Defends"), func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1),
+			toggleRow(L("防御牌全部升级", "Upgrade all Defends"), func() bool { return u.cfg.upDefend }, func(b bool) { u.cfg.upDefend = b }),
+			toggleRow(L("起手技能卡升级(痛击/电弧等)", "Upgrade starter cards (Bash/Zap etc.)"), func() bool { return u.cfg.upStarter }, func(b bool) { u.cfg.upStarter = b }),
+			choiceRow(L("下一步: 遗物 →", "Next: relics →"), "", func() { u.push(u.pageRare) }))
 	}
-	pv.rows = append(pv.rows, choiceRow(L("○ 无 (不加核心卡)", "○ None (no archetype cards)"), "", func() {
-		u.cfg.arch = "无"
-		u.push(u.pageRare)
-	}))
 	return pv
 }
 
@@ -1292,6 +1333,7 @@ func main() {
 	}
 	initData()
 	a := app.NewWithID("com.spireforge.SaveForge")
+	a.Settings().SetTheme(spireTheme{theme.DefaultTheme()})
 	w := a.NewWindow("尖塔工坊 SpireForge")
 	w.Resize(fyne.NewSize(1024, 740))
 
@@ -1305,7 +1347,7 @@ func main() {
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 5, nDefend: 4, upStarter: true,
-			arch: "无", energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {

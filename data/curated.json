@@ -147,5 +147,59 @@
   "Velvet Choker",
   "Peace Pipe",
   "Gambling Chip"
- ]
+ ],
+ "ARCH_RELICS": {
+  "力量重击流": [
+   "Vajra",
+   "Girya"
+  ],
+  "格挡壁垒流": [
+   "Orichalcum",
+   "Thread and Needle"
+  ],
+  "燃魂消耗流": [
+   "Sundial",
+   "Mummified Hand"
+  ],
+  "剧毒流": [
+   "Snecko Eye",
+   "Tough Bandages"
+  ],
+  "小刀流": [
+   "WristBlade",
+   "Letter Opener"
+  ],
+  "弃牌流": [
+   "Tough Bandages",
+   "Gambling Chip"
+  ],
+  "引雷导电流": [
+   "Inserter",
+   "Lantern"
+  ],
+  "寒霜壁垒流": [
+   "FrozenCore",
+   "Runic Capacitor"
+  ],
+  "利爪叠加流": [
+   "Inserter",
+   "DataDisk"
+  ],
+  "黑暗湮灭流": [
+   "FrozenCore",
+   "Inserter"
+  ],
+  "姿态切换流": [
+   "Vajra",
+   "Happy Flower"
+  ],
+  "神格爆发流": [
+   "Happy Flower",
+   "Lantern"
+  ],
+  "留牌蓄力流": [
+   "StoneCalendar",
+   "Kunai"
+  ]
+ }
 }

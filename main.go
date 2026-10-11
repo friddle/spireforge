@@ -43,6 +43,7 @@ type relicInfo struct {
 }
 type curatedData struct {
 	ARCH         map[string]map[string][]string `json:"ARCH"`
+	ARCH_RELICS  map[string][]string            `json:"ARCH_RELICS"`
 	ENERGY       []string                       `json:"ENERGY"`
 	RARE_DEFAULT []string                       `json:"RARE_DEFAULT"`
 	RARE_MORE    []string                       `json:"RARE_MORE"`
@@ -349,6 +350,9 @@ type templateCfg struct {
 	upDefend    bool
 	upStarter   bool
 	arch        string
+	useArch     bool // 流派构筑: 抛弃原卡组, 纯核心卡
+	archCount   int
+	archRelics  bool
 	upArch      bool
 	energyCount int // 3=无能量遗物, 每+1自动挂一件
 	rareDefault bool
@@ -367,38 +371,64 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 	addCard := func(id string, up int) {
 		deck = append(deck, map[string]interface{}{"id": id, "upgrades": float64(up)})
 	}
-	for _, st := range meta.starters {
-		addCard(st, b2i(cfg.upStarter))
-	}
-	if cfg.nStrike > 0 {
-		addCard(meta.strike, b2i(cfg.upStrike))
-	}
-	for i := 1; i < cfg.nStrike; i++ {
-		addCard(meta.strike, b2i(cfg.upStrike))
-	}
-	for i := 0; i < cfg.nDefend; i++ {
-		addCard(meta.defend, b2i(cfg.upDefend))
-	}
-	if cfg.arch != "" && cfg.arch != "无" {
-		for _, id := range curated.ARCH[cfg.char][cfg.arch] {
-			addCard(id, b2i(cfg.upArch))
+	archMode := cfg.useArch && cfg.arch != "" && cfg.arch != "无"
+	if archMode {
+		// 流派构筑: 原卡组全部抛弃, 仅保留核心卡
+		ids := curated.ARCH[cfg.char][cfg.arch]
+		n := cfg.archCount
+		if n > len(ids) {
+			n = len(ids)
+		}
+		for i := 0; i < n; i++ {
+			addCard(ids[i%len(ids)], b2i(cfg.upArch))
+		}
+	} else {
+		for _, st := range meta.starters {
+			addCard(st, b2i(cfg.upStarter))
+		}
+		if cfg.nStrike > 0 {
+			addCard(meta.strike, b2i(cfg.upStrike))
+		}
+		for i := 1; i < cfg.nStrike; i++ {
+			addCard(meta.strike, b2i(cfg.upStrike))
+		}
+		for i := 0; i < cfg.nDefend; i++ {
+			addCard(meta.defend, b2i(cfg.upDefend))
 		}
 	}
 	doc["cards"] = deck
 
 	var rel []string
-	rel = append(rel, meta.relic)
+	seen := map[string]bool{}
+	addRelic := func(id string) {
+		if id != "" && !seen[id] {
+			seen[id] = true
+			rel = append(rel, id)
+		}
+	}
+	addRelic(meta.relic)
 	if cfg.energyCount > 3 {
 		need := cfg.energyCount - 3
 		if need > len(curated.ENERGY) {
 			need = len(curated.ENERGY)
 		}
-		rel = append(rel, curated.ENERGY[:need]...)
+		for _, r := range curated.ENERGY[:need] {
+			addRelic(r)
+		}
+	}
+	if archMode && cfg.archRelics {
+		for _, r := range curated.ARCH_RELICS[cfg.arch] {
+			addRelic(r)
+		}
 	}
 	if cfg.rareDefault {
-		rel = append(rel, curated.RARE_DEFAULT...)
+		for _, r := range curated.RARE_DEFAULT {
+			addRelic(r)
+		}
 	}
-	rel = append(rel, cfg.rareExtra...)
+	for _, r := range cfg.rareExtra {
+		addRelic(r)
+	}
 	relAny := make([]interface{}, len(rel))
 	for i, r := range rel {
 		relAny[i] = r

@@ -9,11 +9,11 @@ import (
 )
 
 var (
-	colAccent   color.Color = &color.NRGBA{R: 124, G: 124, B: 255, A: 255}
-	colBgDeep   color.Color = &color.NRGBA{R: 15, G: 17, B: 26, A: 255}
-	colTextSoft color.Color = &color.NRGBA{R: 150, G: 156, B: 178, A: 255}
-	colOK       color.Color = &color.NRGBA{R: 96, G: 211, B: 148, A: 255}
-	colBad      color.Color = &color.NRGBA{R: 240, G: 113, B: 120, A: 255}
+	colAccent   color.Color = &color.NRGBA{R: 79, G: 107, B: 237, A: 255}  // 现代蓝
+	colBgDeep   color.Color = &color.NRGBA{R: 255, G: 255, B: 255, A: 255} // 纯白
+	colTextSoft color.Color = &color.NRGBA{R: 138, G: 147, B: 166, A: 255} // 灰
+	colOK       color.Color = &color.NRGBA{R: 24, G: 160, B: 88, A: 255}
+	colBad      color.Color = &color.NRGBA{R: 208, G: 48, B: 80, A: 255}
 )
 
 type spireTheme struct {
@@ -25,19 +25,23 @@ func (t spireTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Colo
 	case theme.ColorNameBackground:
 		return colBgDeep
 	case theme.ColorNameForeground:
-		return &color.NRGBA{R: 232, G: 234, B: 242, A: 255}
+		return &color.NRGBA{R: 26, G: 26, B: 26, A: 255} // 黑色文字
 	case theme.ColorNamePrimary:
 		return colAccent
 	case theme.ColorNameHover:
-		return &color.NRGBA{R: 60, G: 64, B: 96, A: 255}
+		return &color.NRGBA{R: 237, G: 240, B: 247, A: 255}
 	case theme.ColorNameDisabled:
-		return &color.NRGBA{R: 110, G: 114, B: 134, A: 255}
+		return &color.NRGBA{R: 154, G: 163, B: 181, A: 255}
 	case theme.ColorNameInputBackground:
-		return &color.NRGBA{R: 22, G: 25, B: 38, A: 255}
+		return &color.NRGBA{R: 255, G: 255, B: 255, A: 255}
 	case theme.ColorNameInputBorder:
 		return colAccent
 	case theme.ColorNameSelection:
-		return &color.NRGBA{R: 60, G: 60, B: 120, A: 255}
+		return &color.NRGBA{R: 221, G: 229, B: 248, A: 255}
+	case theme.ColorNameSuccess:
+		return colOK
+	case theme.ColorNameError:
+		return colBad
 	default:
 		return t.Theme.Color(n, v)
 	}
