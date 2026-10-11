@@ -629,6 +629,9 @@ func (u *ui) pageChar() *pageView {
 			L("起始遗物:", "Starter relic: ")+relicName(m.relic), func() {
 				u.cfg.char = c
 				u.cfg.nStrike, u.cfg.nDefend = m.nStrike, m.nDefend
+				if c == "DEFECT" && u.cfg.orbSlots <= 0 {
+					u.cfg.orbSlots = 3
+				}
 				u.render()
 			}))
 	}
@@ -638,8 +641,11 @@ func (u *ui) pageChar() *pageView {
 		stepperRow(L("初始金币 (每次+200)", "Starting gold (+200/press)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 200),
 		stepperRow(L("打击数量", "Strikes"), func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
 		stepperRow(L("防御数量", "Defends"), func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1),
-		choiceRow(L("下一步: 升级与流派 →", "Next: upgrades & archetype →"), "", func() { u.push(u.pageDeck) }),
 	)
+	if u.cfg.char == "DEFECT" {
+		pv.rows = append(pv.rows, stepperRow(L("充能球槽位", "Orb slots"), func() int { return u.cfg.orbSlots }, func(v int) { u.cfg.orbSlots = v }, 1, 10, 1))
+	}
+	pv.rows = append(pv.rows, choiceRow(L("下一步: 升级与流派 →", "Next: upgrades & archetype →"), "", func() { u.push(u.pageDeck) }))
 	return pv
 }
 
@@ -1359,7 +1365,7 @@ func main() {
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 5, nDefend: 4, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, orbSlots: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {

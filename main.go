@@ -355,6 +355,7 @@ type templateCfg struct {
 	archRelics  bool
 	upArch      bool
 	energyCount int // 3=无能量遗物, 每+1自动挂一件
+	orbSlots    int // 仅机器人(DEFECT)生效
 	rareDefault bool
 	rareExtra   []string
 	hp          int
@@ -443,6 +444,12 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 	if cfg.hp > 0 {
 		doc["max_health"] = float64(cfg.hp)
 		doc["current_health"] = float64(cfg.hp)
+	}
+	// 机器人: 充能球槽位 (其他角色删除该字段)
+	if cfg.char == "DEFECT" && cfg.orbSlots > 0 {
+		doc["max_orbs"] = float64(cfg.orbSlots)
+	} else {
+		delete(doc, "max_orbs")
 	}
 	doc["gold"] = float64(cfg.gold)
 	if cfg.hand > 0 {
