@@ -1,0 +1,182 @@
+{
+ "Ancient Potion": {
+  "en": "Ancient Potion",
+  "zh": "先古药水"
+ },
+ "AttackPotion": {
+  "en": "Attack Potion",
+  "zh": "攻击药水"
+ },
+ "Block Potion": {
+  "en": "Block Potion",
+  "zh": "格挡药水"
+ },
+ "BloodPotion": {
+  "en": "Blood Potion",
+  "zh": "鲜血药水"
+ },
+ "Dexterity Potion": {
+  "en": "Dexterity Potion",
+  "zh": "敏捷药水"
+ },
+ "Elixir": {
+  "en": "Elixir",
+  "zh": "不死药"
+ },
+ "Energy Potion": {
+  "en": "Energy Potion",
+  "zh": "能量药水"
+ },
+ "EntropicBrew": {
+  "en": "Entropic Brew",
+  "zh": "混沌药水"
+ },
+ "EssenceOfSteel": {
+  "en": "Essence of Steel",
+  "zh": "钢之精华"
+ },
+ "Explosive Potion": {
+  "en": "Explosive Potion",
+  "zh": "爆炸药水"
+ },
+ "FairyPotion": {
+  "en": "Fairy in a Bottle",
+  "zh": "瓶中精灵"
+ },
+ "FearPotion": {
+  "en": "Fear Potion",
+  "zh": "恐惧药水"
+ },
+ "Fire Potion": {
+  "en": "Fire Potion",
+  "zh": "火焰药水"
+ },
+ "FocusPotion": {
+  "en": "Focus Potion",
+  "zh": "集中药水"
+ },
+ "Fruit Juice": {
+  "en": "Fruit Juice",
+  "zh": "果汁"
+ },
+ "GamblersBrew": {
+  "en": "Gambler's Brew",
+  "zh": "赌徒特酿"
+ },
+ "GhostInAJar": {
+  "en": "Ghost in a Jar",
+  "zh": "罐装幽灵"
+ },
+ "Health Potion": {
+  "en": "Health Potion",
+  "zh": "生命药水"
+ },
+ "LiquidBronze": {
+  "en": "Liquid Bronze",
+  "zh": "流动铜液"
+ },
+ "Poison Potion": {
+  "en": "Poison Potion",
+  "zh": "毒药水"
+ },
+ "Potion Slot": {
+  "en": "Potion Slot",
+  "zh": "药水栏"
+ },
+ "PowerPotion": {
+  "en": "Power Potion",
+  "zh": "能力药水"
+ },
+ "Regen Potion": {
+  "en": "Regen Potion",
+  "zh": "再生药水"
+ },
+ "SkillPotion": {
+  "en": "Skill Potion",
+  "zh": "技能药水"
+ },
+ "SmokeBomb": {
+  "en": "Smoke Bomb",
+  "zh": "烟雾弹"
+ },
+ "SneckoOil": {
+  "en": "Snecko Oil",
+  "zh": "异蛇之油"
+ },
+ "SpeedPotion": {
+  "en": "Speed Potion",
+  "zh": "速度药水"
+ },
+ "SteroidPotion": {
+  "en": "Flex Potion",
+  "zh": "类固醇药水"
+ },
+ "Strength Potion": {
+  "en": "Strength Potion",
+  "zh": "力量药水"
+ },
+ "Swift Potion": {
+  "en": "Swift Potion",
+  "zh": "迅捷药水"
+ },
+ "Weak Potion": {
+  "en": "Weak Potion",
+  "zh": "虚弱药水"
+ },
+ "StancePotion": {
+  "en": "Stance Potion",
+  "zh": "姿态药水"
+ },
+ "DuplicationPotion": {
+  "en": "Duplication Potion",
+  "zh": "复制药水"
+ },
+ "ElixirPotion": {
+  "en": "Elixir",
+  "zh": "万灵药水"
+ },
+ "HeartOfIron": {
+  "en": "Heart of Iron",
+  "zh": "铁之心"
+ },
+ "CunningPotion": {
+  "en": "Cunning Potion",
+  "zh": "狡诈药水"
+ },
+ "PotionOfCapacity": {
+  "en": "Potion Of Capacity",
+  "zh": "扩容药水"
+ },
+ "EssenceOfDarkness": {
+  "en": "Essence Of Darkness",
+  "zh": "暗之精华"
+ },
+ "BottledMiracle": {
+  "en": "Bottled Miracle",
+  "zh": "瓶装奇迹"
+ },
+ "Ambrosia": {
+  "en": "Ambrosia",
+  "zh": "仙馔密酒"
+ },
+ "DistilledChaos": {
+  "en": "Distilled Chaos",
+  "zh": "精炼混沌"
+ },
+ "LiquidMemories": {
+  "en": "Liquid Memories",
+  "zh": "液态记忆"
+ },
+ "CultistPotion": {
+  "en": "Cultist Potion",
+  "zh": "邪教徒药水"
+ },
+ "ColorlessPotion": {
+  "en": "Colorless Potion",
+  "zh": "无色药水"
+ },
+ "BlessingOfTheForge": {
+  "en": "Blessing of the Forge",
+  "zh": "熔炉的祝福"
+ }
+}

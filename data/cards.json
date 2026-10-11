@@ -1,0 +1,3418 @@
+{
+ "A Thousand Cuts": {
+  "en": "A Thousand Cuts",
+  "zh": "凌迟",
+  "cost": 2,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Accuracy": {
+  "en": "Accuracy",
+  "zh": "精准",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Acrobatics": {
+  "en": "Acrobatics",
+  "zh": "杂技",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Adrenaline": {
+  "en": "Adrenaline",
+  "zh": "肾上腺素",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "After Image": {
+  "en": "After Image",
+  "zh": "余像",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Aggregate": {
+  "en": "Aggregate",
+  "zh": "汇集",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "All For One": {
+  "en": "All for One",
+  "zh": "万物一心",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "All Out Attack": {
+  "en": "All-Out Attack",
+  "zh": "全力攻击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Allocate": {
+  "en": "Allocate",
+  "zh": "分配",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Amplify": {
+  "en": "Amplify",
+  "zh": "增幅",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Anger": {
+  "en": "Anger",
+  "zh": "愤怒",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Apotheosis": {
+  "en": "Apotheosis",
+  "zh": "神化",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Armaments": {
+  "en": "Armaments",
+  "zh": "武装",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "AscendersBane": {
+  "en": "Ascender's Bane",
+  "zh": "进阶之灾",
+  "cost": null,
+  "type": null,
+  "color": "CURSE",
+  "rarity": ""
+ },
+ "Auto Shields": {
+  "en": "Auto-Shields",
+  "zh": "自动护盾",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Axe Kick": {
+  "en": "Axe Kick",
+  "zh": "下压踢",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Backflip": {
+  "en": "Backflip",
+  "zh": "后空翻",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Backstab": {
+  "en": "Backstab",
+  "zh": "背刺",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Ball Lightning": {
+  "en": "Ball Lightning",
+  "zh": "球状闪电",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Bandage Up": {
+  "en": "Bandage Up",
+  "zh": "包扎",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Bane": {
+  "en": "Bane",
+  "zh": "灾祸",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Barrage": {
+  "en": "Barrage",
+  "zh": "弹幕齐射",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Barricade": {
+  "en": "Barricade",
+  "zh": "壁垒",
+  "cost": 3,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Bash": {
+  "en": "Bash",
+  "zh": "痛击",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "BASIC"
+ },
+ "Battle Trance": {
+  "en": "Battle Trance",
+  "zh": "战斗专注",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Beam Cell": {
+  "en": "Beam Cell",
+  "zh": "光束射线",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Berserk": {
+  "en": "Berserk",
+  "zh": "狂暴",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Biased Cognition": {
+  "en": "Biased Cognition",
+  "zh": "偏差认知",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Bite": {
+  "en": "Bite",
+  "zh": "噬咬",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "COLORLESS",
+  "rarity": "SPECIAL"
+ },
+ "Blade Dance": {
+  "en": "Blade Dance",
+  "zh": "刀刃之舞",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Blaster": {
+  "en": "Blaster",
+  "zh": "爆破射线",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Blind": {
+  "en": "Blind",
+  "zh": "致盲",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Blizzard": {
+  "en": "Blizzard",
+  "zh": "暴雪",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Blood for Blood": {
+  "en": "Blood for Blood",
+  "zh": "以血还血",
+  "cost": 4,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Bloodletting": {
+  "en": "Bloodletting",
+  "zh": "放血",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Bludgeon": {
+  "en": "Bludgeon",
+  "zh": "重锤",
+  "cost": 3,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Blur": {
+  "en": "Blur",
+  "zh": "残影",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Body Slam": {
+  "en": "Body Slam",
+  "zh": "全身撞击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "BootSequence": {
+  "en": "Boot Sequence",
+  "zh": "启动流程",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Bouncing Flask": {
+  "en": "Bouncing Flask",
+  "zh": "弹跳药瓶",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Brutality": {
+  "en": "Brutality",
+  "zh": "残暴",
+  "cost": 0,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Buffer": {
+  "en": "Buffer",
+  "zh": "缓冲",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Bullet Time": {
+  "en": "Bullet Time",
+  "zh": "子弹时间",
+  "cost": 3,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Burn": {
+  "en": "Burn",
+  "zh": "灼伤",
+  "cost": -2,
+  "type": "STATUS",
+  "color": "COLORLESS",
+  "rarity": "COMMON"
+ },
+ "Burning Pact": {
+  "en": "Burning Pact",
+  "zh": "燃烧契约",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Burst": {
+  "en": "Burst",
+  "zh": "爆发",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Calculated Gamble": {
+  "en": "Calculated Gamble",
+  "zh": "计算下注",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Caltrops": {
+  "en": "Caltrops",
+  "zh": "铁蒺藜",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Capacitor": {
+  "en": "Capacitor",
+  "zh": "扩容",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Carnage": {
+  "en": "Carnage",
+  "zh": "残杀",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Catalyst": {
+  "en": "Catalyst",
+  "zh": "催化剂",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Chaos": {
+  "en": "Chaos",
+  "zh": "混沌",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Chill": {
+  "en": "Chill",
+  "zh": "冰寒",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Choke": {
+  "en": "Choke",
+  "zh": "勒脖",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Chrysalis": {
+  "en": "Chrysalis",
+  "zh": "结茧",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Clash": {
+  "en": "Clash",
+  "zh": "交锋",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Cleave": {
+  "en": "Cleave",
+  "zh": "顺劈斩",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Cloak And Dagger": {
+  "en": "Cloak and Dagger",
+  "zh": "斗篷与匕首",
+  "cost": null,
+  "type": null,
+  "color": "GREEN",
+  "rarity": ""
+ },
+ "Clothesline": {
+  "en": "Clothesline",
+  "zh": "金刚臂",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Clumsy": {
+  "en": "Clumsy",
+  "zh": "笨拙",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Cold Snap": {
+  "en": "Cold Snap",
+  "zh": "寒流",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Combust": {
+  "en": "Combust",
+  "zh": "自燃",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Concentrate": {
+  "en": "Concentrate",
+  "zh": "全神贯注",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Conserve Battery": {
+  "en": "Charge Battery",
+  "zh": "充电",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Consume": {
+  "en": "Consume",
+  "zh": "耗尽",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Coolheaded": {
+  "en": "Coolheaded",
+  "zh": "冷静头脑",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Corpse Explosion": {
+  "en": "Corpse Explosion",
+  "zh": "尸爆术",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Corruption": {
+  "en": "Corruption",
+  "zh": "腐化",
+  "cost": 3,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Creative AI": {
+  "en": "Creative AI",
+  "zh": "创造性AI",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Crippling Poison": {
+  "en": "Crippling Cloud",
+  "zh": "致残毒云",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Dagger Spray": {
+  "en": "Dagger Spray",
+  "zh": "匕首雨",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Dagger Throw": {
+  "en": "Dagger Throw",
+  "zh": "投掷匕首",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Dark Embrace": {
+  "en": "Dark Embrace",
+  "zh": "黑暗之拥",
+  "cost": 2,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Dark Shackles": {
+  "en": "Dark Shackles",
+  "zh": "黑暗镣铐",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Darkness": {
+  "en": "Darkness",
+  "zh": "漆黑",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Dash": {
+  "en": "Dash",
+  "zh": "冲刺",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Dazed": {
+  "en": "Dazed",
+  "zh": "晕眩",
+  "cost": -2,
+  "type": "STATUS",
+  "color": "COLORLESS",
+  "rarity": "COMMON"
+ },
+ "Deadly Poison": {
+  "en": "Deadly Poison",
+  "zh": "致命毒药",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Decay": {
+  "en": "Decay",
+  "zh": "腐朽",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Deep Breath": {
+  "en": "Deep Breath",
+  "zh": "深呼吸",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Defend_B": {
+  "en": "Defend",
+  "zh": "防御",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "BLUE",
+  "rarity": "BASIC"
+ },
+ "Defend_G": {
+  "en": "Defend",
+  "zh": "防御",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "BASIC"
+ },
+ "Defend_R": {
+  "en": "Defend",
+  "zh": "防御",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "BASIC"
+ },
+ "Defend_P": {
+  "en": "Defend",
+  "zh": "防御",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Deflect": {
+  "en": "Deflect",
+  "zh": "偏折",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Defragment": {
+  "en": "Defragment",
+  "zh": "碎片整理",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Demon Form": {
+  "en": "Demon Form",
+  "zh": "恶魔形态",
+  "cost": 3,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Die Die Die": {
+  "en": "Die Die Die",
+  "zh": "死吧死吧死吧",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Disarm": {
+  "en": "Disarm",
+  "zh": "缴械",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Distraction": {
+  "en": "Distraction",
+  "zh": "声东击西",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Dodge and Roll": {
+  "en": "Dodge and Roll",
+  "zh": "闪躲翻滚",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Doom and Gloom": {
+  "en": "Doom and Gloom",
+  "zh": "愁云惨淡",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Doppelganger": {
+  "en": "Doppelganger",
+  "zh": "双重存在",
+  "cost": -1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Double Energy": {
+  "en": "Double Energy",
+  "zh": "双倍能量",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Double Tap": {
+  "en": "Double Tap",
+  "zh": "双发",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Doubt": {
+  "en": "Doubt",
+  "zh": "疑虑",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Dramatic Entrance": {
+  "en": "Dramatic Entrance",
+  "zh": "闪亮登场",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Dropkick": {
+  "en": "Dropkick",
+  "zh": "飞身踢",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Dual Wield": {
+  "en": "Dual Wield",
+  "zh": "双持",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Dualcast": {
+  "en": "Dualcast",
+  "zh": "双重释放",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Echo Form": {
+  "en": "Echo Form",
+  "zh": "回响形态",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Electrodynamics": {
+  "en": "Electrodynamics",
+  "zh": "电动力学",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Endless Agony": {
+  "en": "Endless Agony",
+  "zh": "无尽苦痛",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Energy Pulse": {
+  "en": "Energy Pulse",
+  "zh": "能量波动",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Enlightenment": {
+  "en": "Enlightenment",
+  "zh": "开悟",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Entrench": {
+  "en": "Entrench",
+  "zh": "巩固",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Envenom": {
+  "en": "Envenom",
+  "zh": "涂毒",
+  "cost": 2,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Escape Plan": {
+  "en": "Escape Plan",
+  "zh": "逃脱计划",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Eviscerate": {
+  "en": "Eviscerate",
+  "zh": "内脏切除",
+  "cost": 4,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Evolve": {
+  "en": "Evolve",
+  "zh": "进化",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Exhume": {
+  "en": "Exhume",
+  "zh": "发掘",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Expertise": {
+  "en": "Expertise",
+  "zh": "独门技术",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "FTL": {
+  "en": "FTL",
+  "zh": "超越光速",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Feed": {
+  "en": "Feed",
+  "zh": "狂宴",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Feel No Pain": {
+  "en": "Feel No Pain",
+  "zh": "无惧疼痛",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Fiend Fire": {
+  "en": "Fiend Fire",
+  "zh": "恶魔之焰",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Finesse": {
+  "en": "Finesse",
+  "zh": "妙计",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Finisher": {
+  "en": "Finisher",
+  "zh": "终结技",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Fire Breathing": {
+  "en": "Fire Breathing",
+  "zh": "火焰吐息",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Fission": {
+  "en": "Fission",
+  "zh": "裂变",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Flame Barrier": {
+  "en": "Flame Barrier",
+  "zh": "火焰屏障",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Flash of Steel": {
+  "en": "Flash of Steel",
+  "zh": "亮剑",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Flechettes": {
+  "en": "Flechettes",
+  "zh": "飞镖",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Flex": {
+  "en": "Flex",
+  "zh": "活动肌肉",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Flux Capacitor": {
+  "en": "Flux Capacitor",
+  "zh": "通量电容器",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Flying Knee": {
+  "en": "Flying Knee",
+  "zh": "飞膝",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Footwork": {
+  "en": "Footwork",
+  "zh": "灵动步法",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Force Field": {
+  "en": "Force Field",
+  "zh": "力场",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Fusion": {
+  "en": "Fusion",
+  "zh": "聚变",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Gash": {
+  "en": "Claw",
+  "zh": "爪击",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Genetic Algorithm": {
+  "en": "Genetic Algorithm",
+  "zh": "遗传算法",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Ghostly": {
+  "en": "Apparition",
+  "zh": "灵体",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Ghostly Armor": {
+  "en": "Ghostly Armor",
+  "zh": "幽灵铠甲",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Glacier": {
+  "en": "Glacier",
+  "zh": "冰川",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Glass Knife": {
+  "en": "Glass Knife",
+  "zh": "玻璃刀刃",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Go for the Eyes": {
+  "en": "Go for the Eyes",
+  "zh": "眼部攻击",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Good Instincts": {
+  "en": "Good Instincts",
+  "zh": "优秀直觉",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Grand Finale": {
+  "en": "Grand Finale",
+  "zh": "华丽收场",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Havoc": {
+  "en": "Havoc",
+  "zh": "破灭",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Headbutt": {
+  "en": "Headbutt",
+  "zh": "头槌",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Heatsinks": {
+  "en": "Heatsinks",
+  "zh": "散热片",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Heavy Blade": {
+  "en": "Heavy Blade",
+  "zh": "重刃",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Heel Hook": {
+  "en": "Heel Hook",
+  "zh": "足跟勾",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Hello World": {
+  "en": "Hello World",
+  "zh": "你好，世界",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Hemokinesis": {
+  "en": "Hemokinesis",
+  "zh": "御血术",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Hide": {
+  "en": "Hide",
+  "zh": "躲藏",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Hologram": {
+  "en": "Hologram",
+  "zh": "全息影像",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Hyperbeam": {
+  "en": "Hyperbeam",
+  "zh": "超能光束",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Immolate": {
+  "en": "Immolate",
+  "zh": "燔祭",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Impervious": {
+  "en": "Impervious",
+  "zh": "岿然不动",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Infernal Blade": {
+  "en": "Infernal Blade",
+  "zh": "地狱之刃",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Infinite Blades": {
+  "en": "Infinite Blades",
+  "zh": "无限刀刃",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Inflame": {
+  "en": "Inflame",
+  "zh": "燃烧",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Injury": {
+  "en": "Injury",
+  "zh": "受伤",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Intimidate": {
+  "en": "Intimidate",
+  "zh": "威吓",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Iron Wave": {
+  "en": "Iron Wave",
+  "zh": "铁斩波",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "J.A.X.": {
+  "en": "J.A.X.",
+  "zh": "J.A.X.",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "SPECIAL"
+ },
+ "Jack Of All Trades": {
+  "en": "Jack of All Trades",
+  "zh": "花样百出",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Juggernaut": {
+  "en": "Juggernaut",
+  "zh": "势不可当",
+  "cost": 2,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Leap": {
+  "en": "Leap",
+  "zh": "飞跃",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Leg Sweep": {
+  "en": "Leg Sweep",
+  "zh": "扫腿",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Limit Break": {
+  "en": "Limit Break",
+  "zh": "突破极限",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Lockon": {
+  "en": "Bullseye",
+  "zh": "瞄准靶心",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Loop": {
+  "en": "Loop",
+  "zh": "循环",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Machine Learning": {
+  "en": "Machine Learning",
+  "zh": "机器学习",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Study": {
+  "en": "Study",
+  "zh": "研习",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Madness": {
+  "en": "Madness",
+  "zh": "疯狂",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Magnetism": {
+  "en": "Magnetism",
+  "zh": "磁力",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Malaise": {
+  "en": "Malaise",
+  "zh": "萎靡",
+  "cost": -1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Master of Strategy": {
+  "en": "Master of Strategy",
+  "zh": "战略大师",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Masterful Stab": {
+  "en": "Masterful Stab",
+  "zh": "精巧刺击",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Mayhem": {
+  "en": "Mayhem",
+  "zh": "乱战",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Melter": {
+  "en": "Melter",
+  "zh": "熔化",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Metallicize": {
+  "en": "Metallicize",
+  "zh": "金属化",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Metamorphosis": {
+  "en": "Metamorphosis",
+  "zh": "羽化",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Meteor Strike": {
+  "en": "Meteor Strike",
+  "zh": "陨石打击",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Mind Blast": {
+  "en": "Mind Blast",
+  "zh": "心灵震慑",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Multi-Cast": {
+  "en": "Multi-Cast",
+  "zh": "多重释放",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Necronomicurse": {
+  "en": "Necronomicurse",
+  "zh": "死灵诅咒",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "SPECIAL"
+ },
+ "Neutralize": {
+  "en": "Neutralize",
+  "zh": "中和",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "BASIC"
+ },
+ "Night Terror": {
+  "en": "Nightmare",
+  "zh": "夜魇",
+  "cost": 3,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Normality": {
+  "en": "Normality",
+  "zh": "凡庸",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Noxious Fumes": {
+  "en": "Noxious Fumes",
+  "zh": "毒雾",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Offering": {
+  "en": "Offering",
+  "zh": "祭品",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Outmaneuver": {
+  "en": "Outmaneuver",
+  "zh": "抢占先机",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Pain": {
+  "en": "Pain",
+  "zh": "疼痛",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Panacea": {
+  "en": "Panacea",
+  "zh": "万能药",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Panache": {
+  "en": "Panache",
+  "zh": "神气制胜",
+  "cost": 0,
+  "type": "POWER",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Parasite": {
+  "en": "Parasite",
+  "zh": "寄生",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Perfected Strike": {
+  "en": "Perfected Strike",
+  "zh": "完美打击",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Phantasmal Killer": {
+  "en": "Phantasmal Killer",
+  "zh": "幻影杀手",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "PiercingWail": {
+  "en": "Piercing Wail",
+  "zh": "尖啸",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Poisoned Stab": {
+  "en": "Poisoned Stab",
+  "zh": "带毒刺击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Pommel Strike": {
+  "en": "Pommel Strike",
+  "zh": "剑柄打击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Power Through": {
+  "en": "Power Through",
+  "zh": "硬撑",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Predator": {
+  "en": "Predator",
+  "zh": "猎杀者",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Prepared": {
+  "en": "Prepared",
+  "zh": "早有准备",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Pummel": {
+  "en": "Pummel",
+  "zh": "连续拳",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Purity": {
+  "en": "Purity",
+  "zh": "净化",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Quick Slash": {
+  "en": "Quick Slash",
+  "zh": "快斩",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Rage": {
+  "en": "Rage",
+  "zh": "狂怒",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Rainbow": {
+  "en": "Rainbow",
+  "zh": "彩虹",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Rampage": {
+  "en": "Rampage",
+  "zh": "暴走",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Reaper": {
+  "en": "Reaper",
+  "zh": "死亡收割",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "RARE"
+ },
+ "Reboot": {
+  "en": "Reboot",
+  "zh": "重启",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Rebound": {
+  "en": "Rebound",
+  "zh": "弹回",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Reckless Charge": {
+  "en": "Reckless Charge",
+  "zh": "无谋冲锋",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Recycle": {
+  "en": "Recycle",
+  "zh": "回收",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Redo": {
+  "en": "Recursion",
+  "zh": "递归",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Reflex": {
+  "en": "Reflex",
+  "zh": "本能反应",
+  "cost": -2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Regret": {
+  "en": "Regret",
+  "zh": "悔恨",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Reinforced Body": {
+  "en": "Reinforced Body",
+  "zh": "硬化机体",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Reprogram": {
+  "en": "Reprogram",
+  "zh": "重编程",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Riddle With Holes": {
+  "en": "Riddle with Holes",
+  "zh": "千穿百刺",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Rip and Tear": {
+  "en": "Rip and Tear",
+  "zh": "狂乱撕扯",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Rupture": {
+  "en": "Rupture",
+  "zh": "撕裂",
+  "cost": 1,
+  "type": "POWER",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Sadistic Nature": {
+  "en": "Sadistic Nature",
+  "zh": "残虐天性",
+  "cost": 0,
+  "type": "POWER",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Scrape": {
+  "en": "Scrape",
+  "zh": "刮削",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Searing Blow": {
+  "en": "Searing Blow",
+  "zh": "灼热攻击",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Second Wind": {
+  "en": "Second Wind",
+  "zh": "重振精神",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Secret Technique": {
+  "en": "Secret Technique",
+  "zh": "秘密技法",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Secret Weapon": {
+  "en": "Secret Weapon",
+  "zh": "秘密武器",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Seeing Red": {
+  "en": "Seeing Red",
+  "zh": "盛怒",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Seek": {
+  "en": "Seek",
+  "zh": "搜寻",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Self Repair": {
+  "en": "Self Repair",
+  "zh": "自我修复",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Sentinel": {
+  "en": "Sentinel",
+  "zh": "哨卫",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Setup": {
+  "en": "Setup",
+  "zh": "部署",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Sever Soul": {
+  "en": "Sever Soul",
+  "zh": "断魂斩",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Shame": {
+  "en": "Shame",
+  "zh": "羞耻",
+  "cost": null,
+  "type": null,
+  "color": "CURSE",
+  "rarity": ""
+ },
+ "Shiv": {
+  "en": "Shiv",
+  "zh": "小刀",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "COLORLESS",
+  "rarity": "SPECIAL"
+ },
+ "Shockwave": {
+  "en": "Shockwave",
+  "zh": "震荡波",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Shrug It Off": {
+  "en": "Shrug It Off",
+  "zh": "耸肩无视",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Skewer": {
+  "en": "Skewer",
+  "zh": "串刺",
+  "cost": -1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Skim": {
+  "en": "Skim",
+  "zh": "快速检索",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Slice": {
+  "en": "Slice",
+  "zh": "切割",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Slimed": {
+  "en": "Slimed",
+  "zh": "黏液",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Spot Weakness": {
+  "en": "Spot Weakness",
+  "zh": "观察弱点",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Stack": {
+  "en": "Stack",
+  "zh": "堆栈",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Static Discharge": {
+  "en": "Static Discharge",
+  "zh": "静电释放",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Steam": {
+  "en": "Steam Barrier",
+  "zh": "蒸汽护壁",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Steam Power": {
+  "en": "Overclock",
+  "zh": "超频",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Storm": {
+  "en": "Storm",
+  "zh": "雷暴",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Storm of Steel": {
+  "en": "Storm of Steel",
+  "zh": "钢铁风暴",
+  "cost": 2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Streamline": {
+  "en": "Streamline",
+  "zh": "精简改良",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Strike_B": {
+  "en": "Strike",
+  "zh": "打击",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Strike_G": {
+  "en": "Strike",
+  "zh": "打击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "BASIC"
+ },
+ "Strike_R": {
+  "en": "Strike",
+  "zh": "打击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "BASIC"
+ },
+ "Strike_P": {
+  "en": "Strike",
+  "zh": "打击",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Sucker Punch": {
+  "en": "Sucker Punch",
+  "zh": "突然一拳",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Sunder": {
+  "en": "Sunder",
+  "zh": "分离",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Survivor": {
+  "en": "Survivor",
+  "zh": "生存者",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "BASIC"
+ },
+ "Sweeping Beam": {
+  "en": "Sweeping Beam",
+  "zh": "扫荡射线",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Swift Strike": {
+  "en": "Swift Strike",
+  "zh": "迅捷打击",
+  "cost": 0,
+  "type": "ATTACK",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "Sword Boomerang": {
+  "en": "Sword Boomerang",
+  "zh": "飞剑回旋镖",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Tactician": {
+  "en": "Tactician",
+  "zh": "战术大师",
+  "cost": -2,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Tempest": {
+  "en": "Tempest",
+  "zh": "暴风雨",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Terror": {
+  "en": "Terror",
+  "zh": "恐怖",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "The Bomb": {
+  "en": "The Bomb",
+  "zh": "炸弹",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Thinking Ahead": {
+  "en": "Thinking Ahead",
+  "zh": "深谋远虑",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Thunder Strike": {
+  "en": "Thunder Strike",
+  "zh": "雷霆打击",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Thunderclap": {
+  "en": "Thunderclap",
+  "zh": "闪电霹雳",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Tools of the Trade": {
+  "en": "Tools of the Trade",
+  "zh": "必备工具",
+  "cost": 1,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Transmutation": {
+  "en": "Transmutation",
+  "zh": "转化",
+  "cost": -1,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "RARE"
+ },
+ "Trip": {
+  "en": "Trip",
+  "zh": "绊倒",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "COLORLESS",
+  "rarity": "UNCOMMON"
+ },
+ "True Grit": {
+  "en": "True Grit",
+  "zh": "坚毅",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Turbo": {
+  "en": "TURBO",
+  "zh": "内核加速",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Twin Strike": {
+  "en": "Twin Strike",
+  "zh": "双重打击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Underhanded Strike": {
+  "en": "Sneaky Strike",
+  "zh": "隐秘打击",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "COMMON"
+ },
+ "Undo": {
+  "en": "Equilibrium",
+  "zh": "均衡",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Unload": {
+  "en": "Unload",
+  "zh": "乾坤一掷",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Uppercut": {
+  "en": "Uppercut",
+  "zh": "上勾拳",
+  "cost": 2,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "Venomology": {
+  "en": "Alchemize",
+  "zh": "炼制药水",
+  "cost": 1,
+  "type": "SKILL",
+  "color": "GREEN",
+  "rarity": "RARE"
+ },
+ "Void": {
+  "en": "Void",
+  "zh": "虚空",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Warcry": {
+  "en": "Warcry",
+  "zh": "战吼",
+  "cost": 0,
+  "type": "SKILL",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Well Laid Plans": {
+  "en": "Well-Laid Plans",
+  "zh": "计划妥当",
+  "cost": 0,
+  "type": "POWER",
+  "color": "GREEN",
+  "rarity": "UNCOMMON"
+ },
+ "Whirlwind": {
+  "en": "Whirlwind",
+  "zh": "旋风斩",
+  "cost": -1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "UNCOMMON"
+ },
+ "White Noise": {
+  "en": "White Noise",
+  "zh": "白噪声",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Wild Strike": {
+  "en": "Wild Strike",
+  "zh": "狂野打击",
+  "cost": 1,
+  "type": "ATTACK",
+  "color": "RED",
+  "rarity": "COMMON"
+ },
+ "Wound": {
+  "en": "Wound",
+  "zh": "伤口",
+  "cost": -2,
+  "type": "STATUS",
+  "color": "COLORLESS",
+  "rarity": "COMMON"
+ },
+ "Wraith Form v2": {
+  "en": "Wraith Form",
+  "zh": "幽魂形态",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Writhe": {
+  "en": "Writhe",
+  "zh": "苦恼",
+  "cost": -2,
+  "type": "CURSE",
+  "color": "CURSE",
+  "rarity": "CURSE"
+ },
+ "Zap": {
+  "en": "Zap",
+  "zh": "电击",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Core Surge": {
+  "en": "Core Surge",
+  "zh": "核心电涌",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "Compile Driver": {
+  "en": "Compile Driver",
+  "zh": "编译冲击",
+  "cost": null,
+  "type": null,
+  "color": "BLUE",
+  "rarity": ""
+ },
+ "RitualDagger": {
+  "en": "Ritual Dagger",
+  "zh": "仪式匕首",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Pride": {
+  "en": "Pride",
+  "zh": "傲慢",
+  "cost": null,
+  "type": null,
+  "color": "CURSE",
+  "rarity": ""
+ },
+ "PanicButton": {
+  "en": "Panic Button",
+  "zh": "应急按钮",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "HandOfGreed": {
+  "en": "Hand of Greed",
+  "zh": "贪婪之手",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Violence": {
+  "en": "Violence",
+  "zh": "暴力",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Impatience": {
+  "en": "Impatience",
+  "zh": "急躁",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Forethought": {
+  "en": "Forethought",
+  "zh": "预谋",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Discovery": {
+  "en": "Discovery",
+  "zh": "发现",
+  "cost": null,
+  "type": null,
+  "color": "COLORLESS",
+  "rarity": ""
+ },
+ "Nirvana": {
+  "en": "Nirvana",
+  "zh": "涅槃",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "EmptyFist": {
+  "en": "Empty Fist",
+  "zh": "化拳为空",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "EmptyBody": {
+  "en": "Empty Body",
+  "zh": "化体为空",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "WreathOfFlame": {
+  "en": "Wreath of Flame",
+  "zh": "火焰纹",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "FearNoEvil": {
+  "en": "Fear No Evil",
+  "zh": "不惧妖邪",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "MentalFortress": {
+  "en": "Mental Fortress",
+  "zh": "心灵堡垒",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Mastery": {
+  "en": "Mastery",
+  "zh": "精通",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Collect": {
+  "en": "Collect",
+  "zh": "收集",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "ForeignInfluence": {
+  "en": "Foreign Influence",
+  "zh": "他山之石",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "FlowState": {
+  "en": "DEPRECATED Flow State",
+  "zh": "DEPRECATED 流转",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "FlurryOfBlows": {
+  "en": "Flurry of Blows",
+  "zh": "疾风连击",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "PalmThatRestrains": {
+  "en": "DEPRECATED Restraining Palm",
+  "zh": "DEPRECATED Restraining Palm",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Wrath": {
+  "en": "Wrath",
+  "zh": "愤怒",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Calm": {
+  "en": "Calm",
+  "zh": "平静",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Polymath": {
+  "en": "DEPRECATED Polymath",
+  "zh": "DEPRECATED Polymath",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Consecrate": {
+  "en": "Consecrate",
+  "zh": "供奉",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Flicker": {
+  "en": "DEPRECATED Flicker",
+  "zh": "DEPRECATED Flicker",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Blasphemy": {
+  "en": "Blasphemy",
+  "zh": "渎神",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Ragnarok": {
+  "en": "Ragnarok",
+  "zh": "诸神之黄昏",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "FlameMastery": {
+  "en": "DEPRECATED Flame Mastery",
+  "zh": "DEPRECATED Flame Mastery",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "StepAndStrike": {
+  "en": "DEPRECATED Step and Strike",
+  "zh": "跨步打击",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Survey": {
+  "en": "DEPRECATED Survey",
+  "zh": "DEPRECATED Survey",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Swipe": {
+  "en": "DEPRECATED Swipe",
+  "zh": "DEPRECATED Swipe",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Blessed": {
+  "en": "DEPRECATED Blessed",
+  "zh": "DEPRECATED Blessed",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "LetFateDecide": {
+  "en": "DEPRECATED Let Fate Decide",
+  "zh": "DEPRECATED Let Fate Decide",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "RetreatingHand": {
+  "en": "DEPRECATED Retreating Hand",
+  "zh": "DEPRECATED Retreating Hand",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Flare": {
+  "en": "DEPRECATED Flare",
+  "zh": "DEPRECATED Flare",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "PerfectedForm": {
+  "en": "DEPRECATED Perfected Form",
+  "zh": "DEPRECATED Perfected Form",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "AwakenedStrike": {
+  "en": "DEPRECATED Awakened Strike",
+  "zh": "DEPRECATED Awakened Strike",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "EmptyMind": {
+  "en": "Empty Mind",
+  "zh": "化智为空",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Experienced": {
+  "en": "DEPRECATED Experienced",
+  "zh": "DEPRECATED Experienced",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Judgement": {
+  "en": "Judgment",
+  "zh": "审判",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Pray": {
+  "en": "Pray",
+  "zh": "祈祷",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Conclude": {
+  "en": "Conclude",
+  "zh": "结末",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "LessonLearned": {
+  "en": "Lesson Learned",
+  "zh": "勤学精进",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "CutThroughFate": {
+  "en": "Cut Through Fate",
+  "zh": "斩破命运",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "ThirdEye": {
+  "en": "Third Eye",
+  "zh": "天眼",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "SublimeSlice": {
+  "en": "DEPRECATED Sublime Slice",
+  "zh": "DEPRECATED Sublime Slice",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "SignatureMove": {
+  "en": "Signature Move",
+  "zh": "招牌技",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Prediction": {
+  "en": "DEPRECATED Prediction",
+  "zh": "DEPRECATED Prediction",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Worship": {
+  "en": "Worship",
+  "zh": "敬拜",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Fasting": {
+  "en": "DEPRECATED",
+  "zh": "DEPRECATED",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Fasting2": {
+  "en": "Fasting",
+  "zh": "斋戒",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "DevaForm": {
+  "en": "Deva Form",
+  "zh": "天人形态",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Wireheading": {
+  "en": "Foresight",
+  "zh": "先见之明",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "ReachHeaven": {
+  "en": "Reach Heaven",
+  "zh": "立地升天",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "ThroughViolence": {
+  "en": "Through Violence",
+  "zh": "以暴易暴",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Clarity": {
+  "en": "Clarity",
+  "zh": "明晰",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Thwack": {
+  "en": "DEPRECATED Thwack",
+  "zh": "DEPRECATED Thwack",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Meditate": {
+  "en": "Meditate",
+  "zh": "冥想",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Miracle": {
+  "en": "Miracle",
+  "zh": "奇迹",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Vault": {
+  "en": "Vault",
+  "zh": "腾跃",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Flow": {
+  "en": "DEPRECATED Flow",
+  "zh": "DEPRECATED Flow",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "CarveReality": {
+  "en": "Carve Reality",
+  "zh": "改造现实",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Smite": {
+  "en": "Smite",
+  "zh": "惩恶",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Truth": {
+  "en": "Truth",
+  "zh": "真知",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Insight": {
+  "en": "Insight",
+  "zh": "洞见",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "DeceiveReality": {
+  "en": "Deceive Reality",
+  "zh": "欺瞒现实",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Safety": {
+  "en": "Safety",
+  "zh": "平安",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Wisdom": {
+  "en": "Wisdom",
+  "zh": "睿智",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Peace": {
+  "en": "Peace",
+  "zh": "和睦",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "WindmillStrike": {
+  "en": "Windmill Strike",
+  "zh": "旋转打击",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Establishment": {
+  "en": "Establishment",
+  "zh": "确立基础",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "WardAura": {
+  "en": "DEPRECATED Ward Aura",
+  "zh": "DEPRECATED Ward Aura",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Metaphysics": {
+  "en": "DEPRECATED",
+  "zh": "DEPRECATED",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Evaluate": {
+  "en": "Evaluate",
+  "zh": "评估",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Devotion": {
+  "en": "Devotion",
+  "zh": "虔信",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "SoothingAura": {
+  "en": "DEPRECATED Soothing Aura",
+  "zh": "DEPRECATED Soothing Aura",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "BrillianceAura": {
+  "en": "DEPRECATED Brilliance Aura",
+  "zh": "DEPRECATED Brilliance Aura",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "FuryAura": {
+  "en": "DEPRECATED Fury Aura",
+  "zh": "DEPRECATED Fury Aura",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "DeusExMachina": {
+  "en": "Deus Ex Machina",
+  "zh": "机械降神",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "CleanseEvil": {
+  "en": "Cleanse Evil",
+  "zh": "扫除邪恶",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Torrent": {
+  "en": "DEPRECATED Torrent",
+  "zh": "DEPRECATED Torrent",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Windup": {
+  "en": "DEPRECATED Windup",
+  "zh": "DEPRECATED Windup",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Shield": {
+  "en": "DEPRECATED Shield",
+  "zh": "DEPRECATED Shield",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "CrescentKick": {
+  "en": "DEPRECATED Crescent Kick",
+  "zh": "DEPRECATED Crescent Kick",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "TalkToTheHand": {
+  "en": "Talk to the Hand",
+  "zh": "以手拒之",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "BattleHymn": {
+  "en": "Battle Hymn",
+  "zh": "战歌",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Prostrate": {
+  "en": "Prostrate",
+  "zh": "五体投地",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Punishment": {
+  "en": "DEPRECATED Punishment",
+  "zh": "DEPRECATED Punishment",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Eruption": {
+  "en": "Eruption",
+  "zh": "暴怒",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "ClearTheMind": {
+  "en": "Tranquility",
+  "zh": "安宁",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "WaveOfTheHand": {
+  "en": "Wave of the Hand",
+  "zh": "摆手",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "SpiritShield": {
+  "en": "Spirit Shield",
+  "zh": "精神护盾",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Vigilance": {
+  "en": "Vigilance",
+  "zh": "警惕",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Serenity": {
+  "en": "DEPRECATED Serenity",
+  "zh": "DEPRECATED 宁静",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Crescendo": {
+  "en": "Crescendo",
+  "zh": "渐强",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Transcendence": {
+  "en": "Transcendence",
+  "zh": "超凡脱俗",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "FollowUp": {
+  "en": "Follow-Up",
+  "zh": "追击",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Perseverance": {
+  "en": "Perseverance",
+  "zh": "坚韧",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "CrushJoints": {
+  "en": "Crush Joints",
+  "zh": "粉碎关节",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "SashWhip": {
+  "en": "Sash Whip",
+  "zh": "腰带抽打",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Sanctity": {
+  "en": "Sanctity",
+  "zh": "圣洁",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Omniscience": {
+  "en": "Omniscience",
+  "zh": "通晓万物",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Scrawl": {
+  "en": "Scrawl",
+  "zh": "潦草急就",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Swivel": {
+  "en": "Swivel",
+  "zh": "旋身",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Protect": {
+  "en": "Protect",
+  "zh": "护身",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "FlyingSleeves": {
+  "en": "Flying Sleeves",
+  "zh": "流云飞袖",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "MasterReality": {
+  "en": "Master Reality",
+  "zh": "操控现实",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "BowlingBash": {
+  "en": "Bowling Bash",
+  "zh": "碰撞连击",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Unraveling": {
+  "en": "Unraveling",
+  "zh": "彻悟",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "BigBrain": {
+  "en": "DEPRECATED Big Brain",
+  "zh": "DEPRECATED Big Brain",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "SandsOfTime": {
+  "en": "Sands of Time",
+  "zh": "时之沙",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Brilliance": {
+  "en": "Brilliance",
+  "zh": "光辉",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Retribution": {
+  "en": "DEPRECATED Retribution",
+  "zh": "DEPRECATED Retribution",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "JustLucky": {
+  "en": "Just Lucky",
+  "zh": "幸运一击",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Weave": {
+  "en": "Weave",
+  "zh": "迂回",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Adaptation": {
+  "en": "Rushdown",
+  "zh": "猛虎下山",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Causality": {
+  "en": "Causality",
+  "zh": "因果始终",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Wish": {
+  "en": "Wish",
+  "zh": "许愿",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "CurseOfTheBell": {
+  "en": "Curse of the Bell",
+  "zh": "铃铛的诅咒",
+  "cost": null,
+  "type": null,
+  "color": "CURSE",
+  "rarity": ""
+ },
+ "InnerPeace": {
+  "en": "Inner Peace",
+  "zh": "内心宁静",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Tantrum": {
+  "en": "Tantrum",
+  "zh": "发泄",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Alpha": {
+  "en": "Alpha",
+  "zh": "阿尔法",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Beta": {
+  "en": "Beta",
+  "zh": "贝塔",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Omega": {
+  "en": "Omega",
+  "zh": "欧米伽",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Vengeance": {
+  "en": "Simmering Fury",
+  "zh": "怒火中烧",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "PathToVictory": {
+  "en": "Pressure Points",
+  "zh": "点穴",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Wallop": {
+  "en": "Wallop",
+  "zh": "当头棒喝",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Halt": {
+  "en": "Halt",
+  "zh": "停顿",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "WheelKick": {
+  "en": "Wheel Kick",
+  "zh": "回环踢",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Indignation": {
+  "en": "Indignation",
+  "zh": "义愤填膺",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "BecomeAlmighty": {
+  "en": "Become Almighty",
+  "zh": "力大无穷",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "LiveForever": {
+  "en": "Live Forever",
+  "zh": "永生不死",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "FameAndFortune": {
+  "en": "Fame and Fortune",
+  "zh": "名利双收",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "ConjureBlade": {
+  "en": "Conjure Blade",
+  "zh": "聚能成刃",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Expunger": {
+  "en": "Expunger",
+  "zh": "灭除之刃",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "WaveOfTheHand2": {
+  "en": "DEPRECATED",
+  "zh": "DEPRECATED",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "Discipline": {
+  "en": "DEPRECATED Discipline",
+  "zh": "DEPRECATED 戒律",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Flick": {
+  "en": "DEPRECATED Flick",
+  "zh": "DEPRECATED 轻弹",
+  "cost": null,
+  "type": null,
+  "color": "",
+  "rarity": ""
+ },
+ "LikeWater": {
+  "en": "Like Water",
+  "zh": "如水",
+  "cost": null,
+  "type": null,
+  "color": "PURPLE",
+  "rarity": ""
+ },
+ "Claw": {
+  "en": "Claw",
+  "zh": "利爪",
+  "color": "BLUE",
+  "rarity": "UNCOMMON",
+  "cost": 1,
+  "type": "ATTACK"
+ },
+ "Recursion": {
+  "en": "Recursion",
+  "zh": "递归",
+  "color": "BLUE",
+  "rarity": "UNCOMMON",
+  "cost": 1,
+  "type": "SKILL"
+ },
+ "Overclock": {
+  "en": "Overclock",
+  "zh": "超频",
+  "color": "BLUE",
+  "rarity": "UNCOMMON",
+  "cost": 0,
+  "type": "SKILL"
+ },
+ "FtL": {
+  "en": "FTL",
+  "zh": "超光速",
+  "color": "BLUE",
+  "rarity": "UNCOMMON",
+  "cost": 0,
+  "type": "SKILL"
+ }
+}

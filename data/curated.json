@@ -1,0 +1,151 @@
+{
+ "ARCH": {
+  "IRONCLAD": {
+   "力量重击流": [
+    "Inflame",
+    "Flex",
+    "Heavy Blade",
+    "Twin Strike",
+    "Rupture",
+    "Demon Form",
+    "Reaper",
+    "Feed"
+   ],
+   "格挡壁垒流": [
+    "Shrug It Off",
+    "Metallicize",
+    "Barricade",
+    "Body Slam",
+    "Impervious",
+    "Entrench"
+   ],
+   "燃魂消耗流": [
+    "Feel No Pain",
+    "Sentinel",
+    "Second Wind",
+    "Dark Embrace",
+    "Corruption",
+    "Reaper"
+   ]
+  },
+  "THE_SILENT": {
+   "剧毒流": [
+    "Deadly Poison",
+    "Noxious Fumes",
+    "Poisoned Stab",
+    "Bane",
+    "Catalyst",
+    "Corpse Explosion"
+   ],
+   "小刀流": [
+    "Accuracy",
+    "Cloak And Dagger",
+    "Storm of Steel",
+    "After Image",
+    "Adrenaline",
+    "Die Die Die"
+   ],
+   "弃牌流": [
+    "Prepared",
+    "Concentrate",
+    "Calculated Gamble",
+    "Reflex",
+    "Tools of the Trade",
+    "Acrobatics"
+   ]
+  },
+  "DEFECT": {
+   "引雷导电流": [
+    "Ball Lightning",
+    "Storm",
+    "Electrodynamics",
+    "Tempest",
+    "Fission"
+   ],
+   "寒霜壁垒流": [
+    "Coolheaded",
+    "Glacier",
+    "Reinforced Body",
+    "Loop",
+    "Fusion"
+   ],
+   "利爪叠加流": [
+    "Claw",
+    "Recursion",
+    "Overclock",
+    "FtL",
+    "All For One",
+    "Hologram",
+    "Reform"
+   ],
+   "黑暗湮灭流": [
+    "Multi-Cast",
+    "Hyperbeam",
+    "Machine Learning",
+    "Rebound",
+    "Reprogram"
+   ]
+  },
+  "WATCHER": {
+   "姿态切换流": [
+    "MentalFortress",
+    "Tantrum",
+    "LikeWater",
+    "Meditate",
+    "CarveReality",
+    "Conclude"
+   ],
+   "神格爆发流": [
+    "Worship",
+    "Devotion",
+    "Blasphemy",
+    "Prostrate",
+    "WreathOfFlame"
+   ],
+   "留牌蓄力流": [
+    "TalkToTheHand",
+    "Wallop",
+    "Protect",
+    "Evaluate",
+    "SandsOfTime",
+    "ReachHeaven",
+    "WindmillStrike"
+   ]
+  }
+ },
+ "ENERGY": [
+  "Coffee Dripper",
+  "Ectoplasm",
+  "Fusion Hammer",
+  "Runic Dome",
+  "Cursed Key",
+  "Philosopher's Stone",
+  "Sozu"
+ ],
+ "RARE_DEFAULT": [
+  "Shuriken",
+  "Pen Nib",
+  "Mummified Hand",
+  "TungstenRod"
+ ],
+ "RARE_MORE": [
+  "Girya",
+  "Thread and Needle",
+  "Orichalcum",
+  "Bird Faced Urn",
+  "StoneCalendar",
+  "FrozenCore",
+  "HolyWater",
+  "Vajra",
+  "Lantern",
+  "Bag of Marbles",
+  "Potion Belt",
+  "Happy Flower",
+  "Calling Bell",
+  "Black Star",
+  "Inserter",
+  "Velvet Choker",
+  "Peace Pipe",
+  "Gambling Chip"
+ ]
+}

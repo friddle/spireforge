@@ -1,0 +1,782 @@
+{
+ "Anchor": {
+  "en": "Anchor",
+  "zh": "锚"
+ },
+ "Ancient Tea Set": {
+  "en": "Ancient Tea Set",
+  "zh": "古茶具套装"
+ },
+ "Art of War": {
+  "en": "Art of War",
+  "zh": "孙子兵法"
+ },
+ "Astrolabe": {
+  "en": "Astrolabe",
+  "zh": "星盘"
+ },
+ "Bag of Marbles": {
+  "en": "Bag of Marbles",
+  "zh": "弹珠袋"
+ },
+ "Bag of Preparation": {
+  "en": "Bag of Preparation",
+  "zh": "准备背包"
+ },
+ "Bird Faced Urn": {
+  "en": "Bird-Faced Urn",
+  "zh": "鸟面瓮"
+ },
+ "Black Blood": {
+  "en": "Black Blood",
+  "zh": "黑暗之血"
+ },
+ "Black Star": {
+  "en": "Black Star",
+  "zh": "黑星"
+ },
+ "Blood Vial": {
+  "en": "Blood Vial",
+  "zh": "小血瓶"
+ },
+ "Bloody Idol": {
+  "en": "Bloody Idol",
+  "zh": "鲜血神像"
+ },
+ "Blue Candle": {
+  "en": "Blue Candle",
+  "zh": "蓝蜡烛"
+ },
+ "Bottled Flame": {
+  "en": "Bottled Flame",
+  "zh": "瓶装火焰"
+ },
+ "Bottled Lightning": {
+  "en": "Bottled Lightning",
+  "zh": "瓶装闪电"
+ },
+ "Bottled Tornado": {
+  "en": "Bottled Tornado",
+  "zh": "瓶装旋风"
+ },
+ "Bronze Scales": {
+  "en": "Bronze Scales",
+  "zh": "铜制鳞片"
+ },
+ "Burning Blood": {
+  "en": "Burning Blood",
+  "zh": "燃烧之血"
+ },
+ "Cables": {
+  "en": "Gold-Plated Cables",
+  "zh": "镀金缆线"
+ },
+ "Calipers": {
+  "en": "Calipers",
+  "zh": "外卡钳"
+ },
+ "Calling Bell": {
+  "en": "Calling Bell",
+  "zh": "召唤铃铛"
+ },
+ "Cauldron": {
+  "en": "Cauldron",
+  "zh": "大锅"
+ },
+ "Centennial Puzzle": {
+  "en": "Centennial Puzzle",
+  "zh": "百年积木"
+ },
+ "Chameleon Ring": {
+  "en": "Chameleon Ring",
+  "zh": "变色龙戒指"
+ },
+ "Champion Belt": {
+  "en": "Champion Belt",
+  "zh": "冠军腰带"
+ },
+ "Charon's Ashes": {
+  "en": "Charon's Ashes",
+  "zh": "卡戎之灰"
+ },
+ "Chemical X": {
+  "en": "Chemical X",
+  "zh": "化学物X"
+ },
+ "Circlet": {
+  "en": "Circlet",
+  "zh": "头环"
+ },
+ "Cracked Core": {
+  "en": "Cracked Core",
+  "zh": "破损核心"
+ },
+ "FrozenCore": {
+  "en": "Frozen Core",
+  "zh": "冻结核心"
+ },
+ "Cursed Key": {
+  "en": "Cursed Key",
+  "zh": "诅咒钥匙"
+ },
+ "Darkstone Periapt": {
+  "en": "Darkstone Periapt",
+  "zh": "黑石护符"
+ },
+ "DataDisk": {
+  "en": "Data Disk",
+  "zh": "数据磁盘"
+ },
+ "Dead Branch": {
+  "en": "Dead Branch",
+  "zh": "枯木树枝"
+ },
+ "Derp Rock": {
+  "en": "Derp Rock",
+  "zh": "Derp Rock"
+ },
+ "Discerning Monocle": {
+  "en": "Discerning Monocle",
+  "zh": "鉴识单片眼镜"
+ },
+ "Dodecahedron": {
+  "en": "DEPRECATED Runic Dodecahedron",
+  "zh": "DEPRECATED符文十二面体"
+ },
+ "Dream Catcher": {
+  "en": "Dream Catcher",
+  "zh": "捕梦网"
+ },
+ "Du-Vu Doll": {
+  "en": "Du-Vu Doll",
+  "zh": "毒巫娃娃"
+ },
+ "Ectoplasm": {
+  "en": "Ectoplasm",
+  "zh": "灵体外质"
+ },
+ "Emotion Chip": {
+  "en": "Emotion Chip",
+  "zh": "情感芯片"
+ },
+ "Enchiridion": {
+  "en": "Enchiridion",
+  "zh": "英雄宝典"
+ },
+ "Eternal Feather": {
+  "en": "Eternal Feather",
+  "zh": "永恒羽毛"
+ },
+ "Frozen Egg 2": {
+  "en": "Frozen Egg",
+  "zh": "冻结之蛋"
+ },
+ "Frozen Eye": {
+  "en": "Frozen Eye",
+  "zh": "冻结之眼"
+ },
+ "Gambling Chip": {
+  "en": "Gambling Chip",
+  "zh": "赌博筹码"
+ },
+ "Ginger": {
+  "en": "Ginger",
+  "zh": "生姜"
+ },
+ "Girya": {
+  "en": "Girya",
+  "zh": "壶铃"
+ },
+ "Golden Idol": {
+  "en": "Golden Idol",
+  "zh": "金神像"
+ },
+ "Gremlin Horn": {
+  "en": "Gremlin Horn",
+  "zh": "地精之角"
+ },
+ "Happy Flower": {
+  "en": "Happy Flower",
+  "zh": "开心小花"
+ },
+ "Ice Cream": {
+  "en": "Ice Cream",
+  "zh": "冰淇淋"
+ },
+ "Inserter": {
+  "en": "Inserter",
+  "zh": "机械臂"
+ },
+ "Juzu Bracelet": {
+  "en": "Juzu Bracelet",
+  "zh": "佛珠手链"
+ },
+ "Kunai": {
+  "en": "Kunai",
+  "zh": "苦无"
+ },
+ "Lantern": {
+  "en": "Lantern",
+  "zh": "灯笼"
+ },
+ "Lee's Waffle": {
+  "en": "Lee's Waffle",
+  "zh": "李家华夫饼"
+ },
+ "Letter Opener": {
+  "en": "Letter Opener",
+  "zh": "开信刀"
+ },
+ "Living Blade": {
+  "en": "Living Blade",
+  "zh": "活刀刃"
+ },
+ "Lizard Tail": {
+  "en": "Lizard Tail",
+  "zh": "蜥蜴尾巴"
+ },
+ "Magic Flower": {
+  "en": "Magic Flower",
+  "zh": "魔法花"
+ },
+ "Mango": {
+  "en": "Mango",
+  "zh": "芒果"
+ },
+ "Mark of Pain": {
+  "en": "Mark of Pain",
+  "zh": "痛楚印记"
+ },
+ "Matryoshka": {
+  "en": "Matryoshka",
+  "zh": "套娃"
+ },
+ "Meat on the Bone": {
+  "en": "Meat on the Bone",
+  "zh": "带骨肉"
+ },
+ "Medical Kit": {
+  "en": "Medical Kit",
+  "zh": "医药箱"
+ },
+ "Membership Card": {
+  "en": "Membership Card",
+  "zh": "会员卡"
+ },
+ "Mercury Hourglass": {
+  "en": "Mercury Hourglass",
+  "zh": "水银沙漏"
+ },
+ "Molten Egg 2": {
+  "en": "Molten Egg",
+  "zh": "熔火之蛋"
+ },
+ "Mummified Hand": {
+  "en": "Mummified Hand",
+  "zh": "干瘪之手"
+ },
+ "Necronomicon": {
+  "en": "Necronomicon",
+  "zh": "死灵之书"
+ },
+ "NeowsBlessing": {
+  "en": "Neow's Lament",
+  "zh": "涅奥的悲恸"
+ },
+ "Nilry's Codex": {
+  "en": "Nilry's Codex",
+  "zh": "尼利的宝典"
+ },
+ "Ninja Scroll": {
+  "en": "Ninja Scroll",
+  "zh": "忍术卷轴"
+ },
+ "Nloth's Gift": {
+  "en": "N'loth's Gift",
+  "zh": "恩洛斯的礼物"
+ },
+ "Nuclear Battery": {
+  "en": "Nuclear Battery",
+  "zh": "核能电池"
+ },
+ "Nullstone Periapt": {
+  "en": "Nullstone Periapt",
+  "zh": "Nullstone Periapt"
+ },
+ "Odd Mushroom": {
+  "en": "Odd Mushroom",
+  "zh": "奇怪蘑菇"
+ },
+ "Oddly Smooth Stone": {
+  "en": "Oddly Smooth Stone",
+  "zh": "意外光滑的石头"
+ },
+ "Old Coin": {
+  "en": "Old Coin",
+  "zh": "古钱币"
+ },
+ "Omamori": {
+  "en": "Omamori",
+  "zh": "御守"
+ },
+ "Orichalcum": {
+  "en": "Orichalcum",
+  "zh": "奥利哈钢"
+ },
+ "Ornamental Fan": {
+  "en": "Ornamental Fan",
+  "zh": "精致折扇"
+ },
+ "Orrery": {
+  "en": "Orrery",
+  "zh": "星系仪"
+ },
+ "Pandora's Box": {
+  "en": "Pandora's Box",
+  "zh": "潘多拉的魔盒"
+ },
+ "Pantograph": {
+  "en": "Pantograph",
+  "zh": "缩放仪"
+ },
+ "Paper Crane": {
+  "en": "Paper Krane",
+  "zh": "纸鹤"
+ },
+ "Paper Frog": {
+  "en": "Paper Phrog",
+  "zh": "纸蛙"
+ },
+ "Peace Pipe": {
+  "en": "Peace Pipe",
+  "zh": "宁静烟斗"
+ },
+ "Pear": {
+  "en": "Pear",
+  "zh": "梨子"
+ },
+ "Pen Nib": {
+  "en": "Pen Nib",
+  "zh": "钢笔尖"
+ },
+ "Philosopher's Stone": {
+  "en": "Philosopher's Stone",
+  "zh": "贤者之石"
+ },
+ "Potion Belt": {
+  "en": "Potion Belt",
+  "zh": "药水腰带"
+ },
+ "Prayer Wheel": {
+  "en": "Prayer Wheel",
+  "zh": "转经轮"
+ },
+ "Question Card": {
+  "en": "Question Card",
+  "zh": "问号牌"
+ },
+ "Red Circlet": {
+  "en": "Red Circlet",
+  "zh": "红头环"
+ },
+ "Red Mask": {
+  "en": "Red Mask",
+  "zh": "红面具"
+ },
+ "Red Skull": {
+  "en": "Red Skull",
+  "zh": "红头骨"
+ },
+ "Regal Pillow": {
+  "en": "Regal Pillow",
+  "zh": "皇家枕头"
+ },
+ "Ring of the Serpent": {
+  "en": "Ring of the Serpent",
+  "zh": "长蛇戒指"
+ },
+ "Ring of the Snake": {
+  "en": "Ring of the Snake",
+  "zh": "蛇之戒指"
+ },
+ "Runic Capacitor": {
+  "en": "Runic Capacitor",
+  "zh": "符文电容器"
+ },
+ "Runic Cube": {
+  "en": "Runic Cube",
+  "zh": "符文立方体"
+ },
+ "Runic Dome": {
+  "en": "Runic Dome",
+  "zh": "符文圆顶"
+ },
+ "Runic Pyramid": {
+  "en": "Runic Pyramid",
+  "zh": "符文金字塔"
+ },
+ "Self Forming Clay": {
+  "en": "Self-Forming Clay",
+  "zh": "自成型黏土"
+ },
+ "Shovel": {
+  "en": "Shovel",
+  "zh": "铲子"
+ },
+ "Shuriken": {
+  "en": "Shuriken",
+  "zh": "手里剑"
+ },
+ "Singing Bowl": {
+  "en": "Singing Bowl",
+  "zh": "颂钵"
+ },
+ "Smiling Mask": {
+  "en": "Smiling Mask",
+  "zh": "微笑面具"
+ },
+ "Snake Skull": {
+  "en": "Snecko Skull",
+  "zh": "异蛇头骨"
+ },
+ "Snecko Eye": {
+  "en": "Snecko Eye",
+  "zh": "异蛇之眼"
+ },
+ "Sozu": {
+  "en": "Sozu",
+  "zh": "添水"
+ },
+ "Spirit Poop": {
+  "en": "Spirit Poop",
+  "zh": "精灵便便"
+ },
+ "Strange Spoon": {
+  "en": "Strange Spoon",
+  "zh": "奇怪的勺子"
+ },
+ "Strawberry": {
+  "en": "Strawberry",
+  "zh": "草莓"
+ },
+ "Sundial": {
+  "en": "Sundial",
+  "zh": "日晷"
+ },
+ "Symbiotic Virus": {
+  "en": "Symbiotic Virus",
+  "zh": "共生病毒"
+ },
+ "Test 1": {
+  "en": "",
+  "zh": "测试遗物 1"
+ },
+ "Test 2": {
+  "en": "",
+  "zh": "测试遗物 2"
+ },
+ "Test 3": {
+  "en": "",
+  "zh": "测试遗物 3"
+ },
+ "Test 4": {
+  "en": "",
+  "zh": "测试遗物 4"
+ },
+ "Test 5": {
+  "en": "",
+  "zh": "测试遗物 5"
+ },
+ "Test 6": {
+  "en": "",
+  "zh": "测试遗物 6"
+ },
+ "Test 7": {
+  "en": "",
+  "zh": "测试遗物 7"
+ },
+ "Test 8": {
+  "en": "",
+  "zh": "测试遗物 8"
+ },
+ "The Courier": {
+  "en": "The Courier",
+  "zh": "送货员"
+ },
+ "The Specimen": {
+  "en": "The Specimen",
+  "zh": "生物样本"
+ },
+ "Thread and Needle": {
+  "en": "Thread and Needle",
+  "zh": "针线"
+ },
+ "Tingsha": {
+  "en": "Tingsha",
+  "zh": "铜钹"
+ },
+ "Tiny Chest": {
+  "en": "Tiny Chest",
+  "zh": "小宝箱"
+ },
+ "Tiny House": {
+  "en": "Tiny House",
+  "zh": "小屋子"
+ },
+ "Toolbox": {
+  "en": "Toolbox",
+  "zh": "工具箱"
+ },
+ "Torii": {
+  "en": "Torii",
+  "zh": "鸟居"
+ },
+ "Tough Bandages": {
+  "en": "Tough Bandages",
+  "zh": "结实绷带"
+ },
+ "Toxic Egg 2": {
+  "en": "Toxic Egg",
+  "zh": "毒素之蛋"
+ },
+ "Toy Ornithopter": {
+  "en": "Toy Ornithopter",
+  "zh": "玩具扑翼飞机"
+ },
+ "Turnip": {
+  "en": "Turnip",
+  "zh": "萝卜"
+ },
+ "Unceasing Top": {
+  "en": "Unceasing Top",
+  "zh": "不休陀螺"
+ },
+ "Vajra": {
+  "en": "Vajra",
+  "zh": "金刚杵"
+ },
+ "Velvet Choker": {
+  "en": "Velvet Choker",
+  "zh": "天鹅绒颈圈"
+ },
+ "War Paint": {
+  "en": "War Paint",
+  "zh": "战纹涂料"
+ },
+ "Whetstone": {
+  "en": "Whetstone",
+  "zh": "磨刀石"
+ },
+ "White Beast Statue": {
+  "en": "White Beast Statue",
+  "zh": "白兽雕像"
+ },
+ "Boot": {
+  "en": "The Boot",
+  "zh": "发条靴"
+ },
+ "Mark of the Bloom": {
+  "en": "Mark of the Bloom",
+  "zh": "绽放印记"
+ },
+ "Busted Crown": {
+  "en": "Busted Crown",
+  "zh": "破碎金冠"
+ },
+ "Incense Burner": {
+  "en": "Incense Burner",
+  "zh": "香炉"
+ },
+ "Empty Cage": {
+  "en": "Empty Cage",
+  "zh": "空鸟笼"
+ },
+ "Fusion Hammer": {
+  "en": "Fusion Hammer",
+  "zh": "融合之锤"
+ },
+ "Coffee Dripper": {
+  "en": "Coffee Dripper",
+  "zh": "咖啡滤杯"
+ },
+ "SsserpentHead": {
+  "en": "Ssserpent Head",
+  "zh": "蛇的头"
+ },
+ "MutagenicStrength": {
+  "en": "Mutagenic Strength",
+  "zh": "突变之力"
+ },
+ "FaceOfCleric": {
+  "en": "Face Of Cleric",
+  "zh": "牧师的脸"
+ },
+ "NlothsMask": {
+  "en": "N'loth's Hungry Face",
+  "zh": "恩洛斯的饥饿的脸"
+ },
+ "GremlinMask": {
+  "en": "Gremlin Visage",
+  "zh": "地精容貌"
+ },
+ "CultistMask": {
+  "en": "Cultist Headpiece",
+  "zh": "邪教徒头套"
+ },
+ "TheAbacus": {
+  "en": "The Abacus",
+  "zh": "算盘"
+ },
+ "DollysMirror": {
+  "en": "Dolly's Mirror",
+  "zh": "多利之镜"
+ },
+ "ClockworkSouvenir": {
+  "en": "Clockwork Souvenir",
+  "zh": "齿轮工艺品"
+ },
+ "MealTicket": {
+  "en": "Meal Ticket",
+  "zh": "餐券"
+ },
+ "TwistedFunnel": {
+  "en": "Twisted Funnel",
+  "zh": "扭曲漏斗"
+ },
+ "HandDrill": {
+  "en": "Hand Drill",
+  "zh": "手钻"
+ },
+ "HoveringKite": {
+  "en": "Hovering Kite",
+  "zh": "悬浮风筝"
+ },
+ "Sling": {
+  "en": "Sling of Courage",
+  "zh": "勇气投石索"
+ },
+ "OrangePellets": {
+  "en": "Orange Pellets",
+  "zh": "橙色药丸"
+ },
+ "WristBlade": {
+  "en": "Wrist Blade",
+  "zh": "袖剑"
+ },
+ "StoneCalendar": {
+  "en": "Stone Calendar",
+  "zh": "历石"
+ },
+ "Nunchaku": {
+  "en": "Nunchaku",
+  "zh": "双节棍"
+ },
+ "Brimstone": {
+  "en": "Brimstone",
+  "zh": "硫磺"
+ },
+ "PreservedInsect": {
+  "en": "Preserved Insect",
+  "zh": "昆虫标本"
+ },
+ "Pocketwatch": {
+  "en": "Pocketwatch",
+  "zh": "怀表"
+ },
+ "FossilizedHelix": {
+  "en": "Fossilized Helix",
+  "zh": "螺类化石"
+ },
+ "PrismaticShard": {
+  "en": "Prismatic Shard",
+  "zh": "棱镜碎片"
+ },
+ "WarpedTongs": {
+  "en": "Warped Tongs",
+  "zh": "弯曲铁钳"
+ },
+ "WingedGreaves": {
+  "en": "Wing Boots",
+  "zh": "羽翼之靴"
+ },
+ "MawBank": {
+  "en": "Maw Bank",
+  "zh": "巨口储蓄罐"
+ },
+ "Melange": {
+  "en": "Melange",
+  "zh": "美琅脂"
+ },
+ "PureWater": {
+  "en": "Pure Water",
+  "zh": "至纯之水"
+ },
+ "HolyWater": {
+  "en": "Holy Water",
+  "zh": "圣水"
+ },
+ "SacredBark": {
+  "en": "Sacred Bark",
+  "zh": "神圣树皮"
+ },
+ "InkBottle": {
+  "en": "Ink Bottle",
+  "zh": "墨水瓶"
+ },
+ "Yin": {
+  "en": "DEPRECATED Yin",
+  "zh": "阴"
+ },
+ "Yang": {
+  "en": "Duality",
+  "zh": "两仪"
+ },
+ "Akabeko": {
+  "en": "Akabeko",
+  "zh": "赤牛"
+ },
+ "VioletLotus": {
+  "en": "Violet Lotus",
+  "zh": "紫色莲花"
+ },
+ "TeardropLocket": {
+  "en": "Teardrop Locket",
+  "zh": "泪滴吊坠盒"
+ },
+ "CeramicFish": {
+  "en": "Ceramic Fish",
+  "zh": "陶瓷小鱼"
+ },
+ "SlaversCollar": {
+  "en": "Slaver's Collar",
+  "zh": "奴隶贩子颈环"
+ },
+ "StrikeDummy": {
+  "en": "Strike Dummy",
+  "zh": "打击木偶"
+ },
+ "CloakClasp": {
+  "en": "Cloak Clasp",
+  "zh": "斗篷扣"
+ },
+ "TungstenRod": {
+  "en": "Tungsten Rod",
+  "zh": "钨合金棍"
+ },
+ "HornCleat": {
+  "en": "Horn Cleat",
+  "zh": "船夹板"
+ },
+ "CaptainsWheel": {
+  "en": "Captain's Wheel",
+  "zh": "舵盘"
+ },
+ "GoldenEye": {
+  "en": "Golden Eye",
+  "zh": "黄金眼"
+ },
+ "Damaru": {
+  "en": "Damaru",
+  "zh": "手摇鼓"
+ }
+}
