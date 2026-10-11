@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, target: linux-amd64 }
+          - { os: ubuntu-latest, target: linux-arm64, goarch: arm64, cc: aarch64-linux-gnu-gcc, pkgs: gcc-aarch64-linux-gnu }
+          - { os: windows-latest, target: windows-amd64, goos: windows, goarch: amd64, cc: gcc }
+          - { os: macos-13, target: darwin-amd64, goos: darwin, goarch: amd64 }
+          - { os: macos-14, target: darwin-arm64, goos: darwin, goarch: arm64 }
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Install Linux deps
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev xorg-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxxf86vm-dev ${{ matrix.pkgs }}
+
+      - name: Build
+        shell: bash
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CC: ${{ matrix.cc }}
+        run: |
+          set -e
+          DIR="SpireForge-${{ matrix.target }}"
+          mkdir -p "out/$DIR/img"
+          NAME=spireforge
+          if [ "${{ runner.os }}" = "Windows" ]; then NAME=spireforge.exe; fi
+          CGO_ENABLED=1 go build -trimpath -ldflags "-s -w" -o "out/$DIR/$NAME" .
+          cp NotoSansSC.ttf icon.png README.md "out/$DIR/"
+          cp -r thumbs "out/$DIR/img"
+          ( cd out && python3 -m zipfile -c "$DIR.zip" "$DIR" )
+          ls -la out/
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/*.zip
+          generate_release_notes: true

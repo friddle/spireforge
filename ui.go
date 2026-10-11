@@ -77,7 +77,7 @@ func imgBase() string {
 		return d
 	}
 	home, _ := os.UserHomeDir()
-	for _, c := range []string{home + "/Games/SpireForge/img", "img", "/app/share/spireforge/img"} {
+	for _, c := range []string{home + "/Games/SpireForge/img", "img", "thumbs", "/app/share/spireforge/img"} {
 		if fi, err := os.Stat(c); err == nil && fi.IsDir() {
 			return c
 		}
@@ -475,7 +475,6 @@ func (u *ui) pageHome() *pageView {
 		title: "尖塔工坊 SpireForge",
 		hint:  L("A=确认 · B=返回 · 十字键=移动/加减 · X=+10 · Y=−10 · START=退出", "A=confirm · B=back · D-pad=move/adjust · X=+10 · Y=−10 · START=quit"),
 		rows: []*row{
-			choiceRow(L("选择存档文件", "Select save file"), sel, func() { u.push(u.pageSelectSave()) }),
 			choiceRow(L("开局模板 (新开局定制)", "Run template (custom new run)"), "", func() {
 				if u.svDoc == nil {
 					u.pendingFlow = "template"
@@ -514,6 +513,16 @@ func (u *ui) pageHome() *pageView {
 					return
 				}
 				u.push(u.pageJSON)
+			}),
+			choiceRow(L("选择存档文件", "Select save file"), sel, func() { u.push(u.pageSelectSave()) }),
+			choiceRow(func() string {
+				if lang == "en" {
+					return "🌐 Language: English (tap to switch)"
+				}
+				return "🌐 语言: 中文 (点按切换)"
+			}(), "", func() {
+				toggleLang()
+				u.render()
 			}),
 			choiceRow(L("🎮 导入到 Steam 库", "🎮 Import into Steam library"), "", func() {
 				msg, err := importToSteam()
