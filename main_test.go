@@ -63,7 +63,7 @@ func TestRoundTripAndTemplate(t *testing.T) {
 	// 流派构筑: 抛弃原卡组, 6张核心 + 2流派遗物
 	cfg2 := templateCfg{
 		char: "IRONCLAD", useArch: true, arch: "力量重击流", archCount: 6, upArch: true,
-		archRelics: true, energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
+		archRelics: true, energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10, threeKeys: true,
 	}
 	if _, err := applyTemplate(doc2, cfg2); err != nil {
 		t.Fatal(err)
@@ -88,6 +88,11 @@ func TestRoundTripAndTemplate(t *testing.T) {
 	// 起始 + 2流派遗物 + 4稀有 = 7 (无能量遗物)
 	if len(relicsArr) != 7 {
 		t.Fatalf("archetype relics = %d, want 7: %v", len(relicsArr), relicsArr)
+	}
+	for _, k := range []string{"has_ruby_key", "has_sapphire_key", "has_emerald_key"} {
+		if doc2[k] != true {
+			t.Fatalf("%s 应为 true", k)
+		}
 	}
 	if cs := doc2["relic_counters"].([]interface{}); len(cs) != len(relicsArr) {
 		t.Fatal("relic_counters misaligned")

@@ -354,8 +354,9 @@ type templateCfg struct {
 	archCount   int
 	archRelics  bool
 	upArch      bool
-	energyCount int // 3=无能量遗物, 每+1自动挂一件
-	orbSlots    int // 仅机器人(DEFECT)生效
+	energyCount int  // 3=无能量遗物, 每+1自动挂一件
+	orbSlots    int  // 仅机器人(DEFECT)生效
+	threeKeys   bool // 三把钥匙: 开启终幕(心脏)
 	rareDefault bool
 	rareExtra   []string
 	hp          int
@@ -451,6 +452,10 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 	} else {
 		delete(doc, "max_orbs")
 	}
+	// 三把钥匙: 打败三幕Boss后可进终幕(心脏)
+	doc["has_ruby_key"] = cfg.threeKeys
+	doc["has_sapphire_key"] = cfg.threeKeys
+	doc["has_emerald_key"] = cfg.threeKeys
 	doc["gold"] = float64(cfg.gold)
 	if cfg.hand > 0 {
 		doc["hand_size"] = float64(cfg.hand)

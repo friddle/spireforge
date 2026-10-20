@@ -745,7 +745,9 @@ func (u *ui) pageRare() *pageView {
 		hint:     L("A=开/关 · 十字键在两列间移动 · B=返回", "A=toggle · D-pad crosses columns · B=back"),
 		gridCols: 2,
 	}
-	pv.rows = append(pv.rows, textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
+	pv.rows = append(pv.rows,
+		toggleRow(L("🔑 三把钥匙 (集齐可进终幕·心脏)", "🔑 Three keys (unlock Act 4 · the Heart)"), func() bool { return u.cfg.threeKeys }, func(b bool) { u.cfg.threeKeys = b }),
+		textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
 	pv.rows = append(pv.rows, toggleRow(L("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", "Default 4: Shuriken/Pen Nib/Mummified Hand/Tungsten Rod"), func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
 	for _, rid := range curated.RARE_MORE {
 		rid := rid
@@ -1365,7 +1367,7 @@ func main() {
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 5, nDefend: 4, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, orbSlots: 3, rareDefault: true, hp: 120, gold: 200, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, orbSlots: 3, threeKeys: true, rareDefault: true, hp: 120, gold: 200, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {
