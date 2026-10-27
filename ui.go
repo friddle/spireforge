@@ -279,6 +279,7 @@ type ui struct {
 	cfg         templateCfg
 	extraSel    map[string]bool
 	pendingFlow string
+	adjustMode  bool
 	deckPage    int
 	addCat      string // job / colorless
 	addCardPage int
@@ -333,7 +334,11 @@ func (u *ui) render() {
 		r.bg.Refresh()
 	}
 	u.setHeader(u.saveSummary())
-	u.setHint(pv.hint)
+	if u.adjustMode {
+		u.setHint(L("◀ 左右=加减 · A/B=完成", "◀ Left/Right=adjust · A/B=done"))
+	} else {
+		u.setHint(pv.hint)
+	}
 
 	var content fyne.CanvasObject
 	if pv.custom != nil {
@@ -378,8 +383,7 @@ func (u *ui) render() {
 func (u *ui) cur() *pg { return u.stack[len(u.stack)-1] }
 
 func (u *ui) handle(ev string) {
-	// 注: Fyne 窗口无焦点查询 API。用完请按 B/START 退出应用,
-	// 否则后台状态下手柄按键仍会操作本工具。
+	// 注: 用完请按 B/START 退出应用, 后台时手柄仍会操作本工具
 	p := u.cur()
 	pv := u.curView
 	if pv == nil || len(pv.rows) == 0 {
@@ -387,64 +391,95 @@ func (u *ui) handle(ev string) {
 	}
 	spans := pv.spans()
 	g, o := locateSpan(spans, p.focus)
-	gc := spans[g]
-	moveTo := func(n int) {
-		if n < 0 {
-			n = 0
-		}
-		if n > len(pv.rows)-1 {
-			n = len(pv.rows) - 1
-		}
-		if n != p.focus {
+	lineStart := p.focus - o
+	lineCells := spans[g]
+	r := pv.rows[p.focus]
+
+	moveFlat := func(n int) {
+		if n >= 0 && n < len(pv.rows) && n != p.focus {
 			p.focus = n
 			u.render()
 		}
 	}
+
+	// 调整模式 (并排步进器): 左右=加减, A/B=退出
+	if u.adjustMode {
+		switch ev {
+		case "left":
+			if r.adjust != nil {
+				r.adjust(-1)
+				r.refresh()
+			}
+		case "right":
+			if r.adjust != nil {
+				r.adjust(1)
+				r.refresh()
+			}
+		case "a", "b":
+			u.adjustMode = false
+			u.render()
+		}
+		return
+	}
+
 	switch ev {
 	case "up":
 		if g > 0 {
-			prevStart := 0
-			for i := 0; i < g-1; i++ {
-				prevStart += spans[i]
+			no := o
+			if no > spans[g-1]-1 {
+				no = spans[g-1] - 1
 			}
-			moveTo(prevStart + min(o, spans[g-1]-1))
+			moveFlat(lineStart - spans[g-1] + no)
 		}
 	case "down":
 		if g < len(spans)-1 {
-			nextStart := 0
-			for i := 0; i <= g; i++ {
-				nextStart += spans[i]
+			no := o
+			if no > spans[g+1]-1 {
+				no = spans[g+1] - 1
 			}
-			moveTo(nextStart + min(o, spans[g+1]-1))
+			moveFlat(lineStart + lineCells + no)
 		}
 	case "left":
-		if gc > 1 {
+		if lineCells > 1 {
 			if o > 0 {
-				moveTo(p.focus - 1)
+				moveFlat(p.focus - 1)
 			}
-		} else {
-			u.adjustCur(-1)
+		} else if r.adjust != nil {
+			r.adjust(-1)
+			r.refresh()
 		}
 	case "right":
-		if gc > 1 {
-			if o < gc-1 && p.focus+1 < len(pv.rows) {
-				moveTo(p.focus + 1)
+		if lineCells > 1 {
+			if o < lineCells-1 {
+				moveFlat(p.focus + 1)
 			}
-		} else {
-			u.adjustCur(1)
+		} else if r.adjust != nil {
+			r.adjust(1)
+			r.refresh()
 		}
 	case "a":
-		r := pv.rows[p.focus]
 		if r.activate != nil {
 			r.activate()
 			u.render()
+			return
+		}
+		if r.adjust != nil && lineCells > 1 {
+			u.adjustMode = true
+			u.render()
+			return
 		}
 	case "b":
 		u.pop()
 	case "x":
-		u.adjustCur(10)
+		if r.adjust != nil {
+			r.adjust(10)
+			r.refresh()
+		}
 	case "y":
-		u.adjustCur(-10)
+		if r.adjust != nil {
+			r.adjust(-10)
+			r.refresh()
+		}
 	case "start":
 		u.win.Close()
 	}
@@ -719,7 +754,7 @@ func (u *ui) afterLoad() {
 func (u *ui) pageChar() *pageView {
 	pv := &pageView{
 		title: L("开局模板 · ① 角色与数值", "Run template · ① Character & stats"),
-		hint:  L("左右=选英雄/加减 · 上=上一排 · A=确认 · 金币+800", "Left/Right=pick/adjust · Up=prev row · A=confirm · gold+800"),
+		hint:  L("上下=换行 · 左右=加减/选英雄 · A=确认(打击/防御先按A) · B=返回", "Up/Down=row · Left/Right=adjust/pick · A=confirm (press A on Strike/Defend to edit) · B=back"),
 	}
 	// 第一组: 英雄一排 (4格)
 	pv.colSpans = append(pv.colSpans, 4)
