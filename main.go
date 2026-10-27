@@ -367,6 +367,23 @@ var act3Events = []string{
 }
 var act3Bosses = []string{"Awakened One", "Time Eater", "Donu and Deca"}
 
+// 第一幕标准池 (涅奥开局重置用)
+var act1Monsters = []string{
+	"Cultist", "Jaw Worm", "Exordium Wildlife", "Gremlin Gang", "Large Slime",
+	"3 Louse", "Blue Slaver", "Exordium Wildlife", "Lots of Slimes", "Large Slime",
+	"Looter", "Exordium Wildlife", "Large Slime", "Exordium Thugs", "Lots of Slimes",
+}
+var act1Elites = []string{"3 Sentries", "Lagavulin", "Gremlin Nob", "Lagavulin", "3 Sentries"}
+var act1Events = []string{
+	"Big Fish", "The Cleric", "Dead Adventurer", "Golden Idol", "Golden Wing",
+	"World of Goop", "Liars Game", "Living Wall", "Mushrooms", "Scrap Ooze", "Shining Light",
+}
+var act1Bosses = []string{"Slime Boss", "Hexaghost", "The Guardian"}
+var act1OneTimeEvents = []string{
+	"Accursed Blacksmith", "Bonfire Elementals", "Fountain of Cleansing", "Duplicator",
+	"Knowing Skull", "Lab", "N'loth", "The Joust", "The Woman in Blue",
+}
+
 func randomSeed() int64 {
 	v, err := rand.Int(rand.Reader, big.NewInt(9223372036854775807))
 	if err != nil {
@@ -444,6 +461,28 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 	seed := randomSeed()
 	doc["seed"] = float64(seed)
 	doc["metric_seed_played"] = float64(seed)
+
+	if !cfg.startAct3 {
+		// 涅奥开局: 重置全部进度字段, 保证从第一层开始
+		doc["act_num"] = float64(1)
+		doc["level_name"] = "Exordium"
+		doc["floor_num"] = float64(0)
+		doc["current_room"] = "com.megacrit.cardcrawl.rooms.NeowRoom"
+		doc["chose_neow_reward"] = false
+		doc["monster_list"] = toIface(act1Monsters)
+		doc["elite_monster_list"] = toIface(act1Elites)
+		doc["event_list"] = toIface(act1Events)
+		doc["one_time_event_list"] = toIface(act1OneTimeEvents)
+		doc["boss_list"] = toIface(act1Bosses)
+		doc["boss"] = act1Bosses[seed%int64(len(act1Bosses))]
+		doc["event_chances"] = []interface{}{0.0, 0.1, 0.03, 0.02}
+		doc["potion_chance"] = float64(10)
+		doc["combat_rewards"] = []interface{}{}
+		doc["path_x"] = []interface{}{float64(0)}
+		doc["path_y"] = []interface{}{float64(0)}
+		doc["room_x"] = float64(0)
+		doc["room_y"] = float64(0)
+	}
 
 	// 第三幕开局(三钥匙局面): 钥匙不直接给, 进第三幕自己收集
 	if cfg.startAct3 {

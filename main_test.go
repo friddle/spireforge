@@ -59,6 +59,13 @@ func TestRoundTripAndTemplate(t *testing.T) {
 	if len(relicsArr) != 7 {
 		t.Fatalf("relics = %d, want 7: %v", len(relicsArr), relicsArr)
 	}
+	// 涅奥模式: 进度字段全部重置到第一层
+	if doc2["current_room"] != "com.megacrit.cardcrawl.rooms.NeowRoom" || int(num(doc2, "floor_num")) != 0 || int(num(doc2, "act_num")) != 1 {
+		t.Fatal("涅奥开局进度未重置:", doc2["current_room"], doc2["floor_num"])
+	}
+	if doc2["chose_neow_reward"] != false {
+		t.Fatal("chose_neow_reward 未重置")
+	}
 
 	// 流派构筑: 抛弃原卡组, 6张核心 + 2流派遗物
 	cfg2 := templateCfg{

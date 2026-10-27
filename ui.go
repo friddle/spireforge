@@ -470,10 +470,6 @@ func (u *ui) setStatus(s string) {
 // ---------- 页面 ----------
 
 func (u *ui) pageHome() *pageView {
-	sel := L("未加载", "none")
-	if u.svDoc != nil {
-		sel = filepath.Base(u.svPath)
-	}
 	return &pageView{
 		title: "尖塔工坊 SpireForge",
 		hint:  L("A=确认 · B=返回 · 十字键=移动/加减 · X=+10 · Y=−10 · START=退出", "A=confirm · B=back · D-pad=move/adjust · X=+10 · Y=−10 · START=quit"),
@@ -485,26 +481,6 @@ func (u *ui) pageHome() *pageView {
 					return
 				}
 				u.push(u.pageChar)
-			}),
-			choiceRow(func() string {
-				if lang == "en" {
-					return "🌐 Language: English (tap to switch)"
-				}
-				return "🌐 语言: 中文 (点按切换)"
-			}(), "", func() {
-				toggleLang()
-				u.render()
-			}),
-			toggleRow(func() string {
-				if lang == "en" {
-					return "🌓 Night mode"
-				}
-				return "🌓 夜间模式"
-			}(), func() bool { return themeMode == "dark" }, func(b bool) {
-				themeMode = map[bool]string{true: "dark", false: "light"}[b]
-				saveThemePref()
-				fyne.CurrentApp().Settings().SetTheme(spireTheme{theme.DefaultTheme()})
-				u.render()
 			}),
 			choiceRow(L("卡组编辑 (添加/删除/升级/降级)", "Deck editor (add/remove/upgrade/downgrade)"), "", func() {
 				if u.svDoc == nil {
@@ -537,7 +513,43 @@ func (u *ui) pageHome() *pageView {
 				}
 				u.push(u.pageJSON)
 			}),
+			choiceRow(L("⚙ 更多 (存档/语言/主题/Steam) →", "⚙ More (save/lang/theme/Steam) →"), "", func() {
+				u.push(u.pageHome2)
+			}),
+		},
+	}
+}
+
+func (u *ui) pageHome2() *pageView {
+	sel := L("未加载", "none")
+	if u.svDoc != nil {
+		sel = filepath.Base(u.svPath)
+	}
+	return &pageView{
+		title: L("更多设置", "More settings"),
+		hint:  L("A=确认 · B=返回", "A=confirm · B=back"),
+		rows: []*row{
 			choiceRow(L("选择存档文件", "Select save file"), sel, func() { u.push(u.pageSelectSave()) }),
+			choiceRow(func() string {
+				if lang == "en" {
+					return "🌐 Language: English (tap to switch)"
+				}
+				return "🌐 语言: 中文 (点按切换)"
+			}(), "", func() {
+				toggleLang()
+				u.render()
+			}),
+			toggleRow(func() string {
+				if lang == "en" {
+					return "🌓 Night mode"
+				}
+				return "🌓 夜间模式"
+			}(), func() bool { return themeMode == "dark" }, func(b bool) {
+				themeMode = map[bool]string{true: "dark", false: "light"}[b]
+				saveThemePref()
+				fyne.CurrentApp().Settings().SetTheme(spireTheme{theme.DefaultTheme()})
+				u.render()
+			}),
 			choiceRow(L("🎮 导入到 Steam 库", "🎮 Import into Steam library"), "", func() {
 				msg, err := importToSteam()
 				if err != nil {
@@ -654,7 +666,7 @@ func (u *ui) pageChar() *pageView {
 			}),
 		stepperRow(L("默认能量 (3=不挂遗物)", "Energy (3 = no relic)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
 		stepperRow(L("血量", "HP"), func() int { return u.cfg.hp }, func(v int) { u.cfg.hp = v }, 1, 999, 10),
-		stepperRow(L("初始金币 (每次+200)", "Starting gold (+200/press)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 200),
+		stepperRow(L("初始金币 (每次+800)", "Starting gold (+800/press)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 800),
 		stepperRow(L("打击数量", "Strikes"), func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
 		stepperRow(L("防御数量", "Defends"), func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1),
 	)
@@ -886,7 +898,7 @@ func (u *ui) pageEdit() *pageView {
 		rows: []*row{
 			stepperRow(L("当前血量", "Current HP"), get("current_health"), set("current_health"), 0, 9999, 10),
 			stepperRow(L("最大血量", "Max HP"), get("max_health"), set("max_health"), 1, 9999, 10),
-			stepperRow(L("金币", "Gold"), get("gold"), set("gold"), 0, 999999, 200),
+			stepperRow(L("金币", "Gold"), get("gold"), set("gold"), 0, 999999, 800),
 			stepperRow(L("手牌上限", "Hand size"), get("hand_size"), set("hand_size"), 0, 20, 1),
 			choiceRow(L("💾 写回存档", "💾 Write back to save"), "", func() { u.writeBack(L("数值已保存", "Stats saved")) }),
 			choiceRow(L("↻ 重新读取文件", "↻ Reload file"), "", func() {
