@@ -126,6 +126,14 @@ func rarityName(r string) string {
 	return ""
 }
 
+func ones(n int) []int {
+	out := make([]int, n)
+	for i := range out {
+		out[i] = 1
+	}
+	return out
+}
+
 func newRow(left, right string) *row {
 	bg := canvas.NewRectangle(colIdle())
 	bg.CornerRadius = 12
@@ -190,8 +198,33 @@ type pageView struct {
 	title    string
 	hint     string
 	rows     []*row
-	gridCols int
+	gridCols int   // 整页统一列数 (无 colSpans 时)
+	colSpans []int // 每组列数, 依次分组 (英雄一排/两列并排等混合布局)
 	custom   func() fyne.CanvasObject
+}
+
+// spans 返回每行的分组列数
+func (pv *pageView) spans() []int {
+	if len(pv.colSpans) > 0 {
+		return pv.colSpans
+	}
+	n := 1
+	if pv.gridCols > 1 {
+		n = pv.gridCols
+	}
+	return []int{n}
+}
+
+// locate 由扁平焦点下标定位 (组, 组内偏移)
+func locateSpan(spans []int, f int) (g, o int) {
+	s := 0
+	for i, c := range spans {
+		if f < s+c {
+			return i, f - s
+		}
+		s += c
+	}
+	return len(spans) - 1, 0
 }
 
 type pg struct {
@@ -292,8 +325,12 @@ func (u *ui) render() {
 	title := widget.NewLabelWithStyle("◆ "+pv.title, fyne.TextAlignLeading, fyne.TextStyle{Bold: true})
 	title.Importance = widget.HighImportance
 	u.win.SetContent(container.NewBorder(
-		container.NewVBox(container.NewPadded(title), container.NewPadded(u.header)),
-		container.NewVBox(container.NewPadded(u.hint), container.NewPadded(u.status)),
+		container.NewVBox(
+			container.NewPadded(title),
+			container.NewPadded(u.hint),
+			container.NewPadded(u.header),
+		),
+		container.NewVBox(container.NewPadded(u.status)),
 		nil, nil, content,
 	))
 }
@@ -308,12 +345,10 @@ func (u *ui) handle(ev string) {
 	if pv == nil || len(pv.rows) == 0 {
 		return
 	}
-	gc := pv.gridCols
-	if gc == 0 {
-		gc = 1
-	}
-	move := func(d int) {
-		n := p.focus + d
+	spans := pv.spans()
+	g, o := locateSpan(spans, p.focus)
+	gc := spans[g]
+	moveTo := func(n int) {
 		if n < 0 {
 			n = 0
 		}
@@ -327,18 +362,34 @@ func (u *ui) handle(ev string) {
 	}
 	switch ev {
 	case "up":
-		move(-gc)
+		if g > 0 {
+			prevStart := 0
+			for i := 0; i < g-1; i++ {
+				prevStart += spans[i]
+			}
+			moveTo(prevStart + min(o, spans[g-1]-1))
+		}
 	case "down":
-		move(gc)
+		if g < len(spans)-1 {
+			nextStart := 0
+			for i := 0; i <= g; i++ {
+				nextStart += spans[i]
+			}
+			moveTo(nextStart + min(o, spans[g+1]-1))
+		}
 	case "left":
 		if gc > 1 {
-			move(-1)
+			if o > 0 {
+				moveTo(p.focus - 1)
+			}
 		} else {
 			u.adjustCur(-1)
 		}
 	case "right":
 		if gc > 1 {
-			move(1)
+			if o < gc-1 && p.focus+1 < len(pv.rows) {
+				moveTo(p.focus + 1)
+			}
 		} else {
 			u.adjustCur(1)
 		}
@@ -628,8 +679,10 @@ func (u *ui) afterLoad() {
 func (u *ui) pageChar() *pageView {
 	pv := &pageView{
 		title: L("开局模板 · ① 角色与数值", "Run template · ① Character & stats"),
-		hint:  L("A=选中角色 · 左右=加减 (金币+200) · B=返回", "A=pick character · Left/Right=adjust (gold+200) · B=back"),
+		hint:  L("左右=选英雄/加减 · 上=上一排 · A=确认 · 金币+800", "Left/Right=pick/adjust · Up=prev row · A=confirm · gold+800"),
 	}
+	// 第一组: 英雄一排 (4格)
+	pv.colSpans = append(pv.colSpans, 4)
 	for _, c := range charOrder {
 		c := c
 		m := charDB[c]
@@ -637,16 +690,19 @@ func (u *ui) pageChar() *pageView {
 		if u.cfg.char == c {
 			mark = "●"
 		}
-		pv.rows = append(pv.rows, choiceRow(fmt.Sprintf("%s %s (%s)", mark, L(m.zh, m.en), c),
-			L("起始遗物:", "Starter relic: ")+relicName(m.relic), func() {
-				u.cfg.char = c
-				u.cfg.nStrike, u.cfg.nDefend = m.nStrike, m.nDefend
-				if c == "DEFECT" && u.cfg.orbSlots <= 0 {
-					u.cfg.orbSlots = 3
-				}
-				u.render()
-			}))
+		r := choiceRow(mark+m.zh, "", func() {
+			u.cfg.char = c
+			u.cfg.nStrike, u.cfg.nDefend = 1, 1
+			u.cfg.hp = m.hp * 2
+			if c == "DEFECT" && u.cfg.orbSlots <= 0 {
+				u.cfg.orbSlots = 3
+			}
+			u.render()
+		})
+		pv.rows = append(pv.rows, r)
 	}
+	// 第二组: 开局局面 (2格)
+	pv.colSpans = append(pv.colSpans, 2)
 	markN, markA3 := "○", "○"
 	if u.cfg.startAct3 {
 		markA3 = "●"
@@ -654,25 +710,30 @@ func (u *ui) pageChar() *pageView {
 		markN = "●"
 	}
 	pv.rows = append(pv.rows,
-		choiceRow(L("─ 开局局面 ─", "─ Start point ─"), "", nil),
-		choiceRow(fmt.Sprintf(L("%s 涅奥开局 (第一幕正常开始)", "%s Neow start (Act 1 normally)"), markN), "", func() {
+		choiceRow(markN+L("涅奥开局", "Neow start"), "", func() {
 			u.cfg.startAct3 = false
 			u.render()
 		}),
-		choiceRow(fmt.Sprintf(L("%s 第三幕开局 · 三钥匙局面 (自取钥匙, 击败三幕Boss后进终幕)", "%s Act 3 start · collect the keys yourself, then Act 4"), markA3),
-			L("实验性", "experimental"), func() {
-				u.cfg.startAct3 = true
-				u.render()
-			}),
-		stepperRow(L("默认能量 (3=不挂遗物)", "Energy (3 = no relic)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
+		choiceRow(markA3+L("第三幕", "Act 3"), L("三钥匙局面", "key hunt"), func() {
+			u.cfg.startAct3 = true
+			u.render()
+		}))
+	// 第三组起: 单列数值
+	pv.colSpans = append(pv.colSpans, 1)
+	pv.rows = append(pv.rows,
+		stepperRow(L("默认能量 (3=无)", "Energy (3=none)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
 		stepperRow(L("血量", "HP"), func() int { return u.cfg.hp }, func(v int) { u.cfg.hp = v }, 1, 999, 10),
-		stepperRow(L("初始金币 (每次+800)", "Starting gold (+800/press)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 800),
-		stepperRow(L("打击数量", "Strikes"), func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
-		stepperRow(L("防御数量", "Defends"), func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1),
-	)
+		stepperRow(L("金币 (+800)", "Gold (+800)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 800))
+	// 打击/防御并排 (2格)
+	pv.colSpans = append(pv.colSpans, 2)
+	pv.rows = append(pv.rows,
+		stepperRow(L("打击", "Strike"), func() int { return u.cfg.nStrike }, func(v int) { u.cfg.nStrike = v }, 0, 20, 1),
+		stepperRow(L("防御", "Defend"), func() int { return u.cfg.nDefend }, func(v int) { u.cfg.nDefend = v }, 0, 20, 1))
 	if u.cfg.char == "DEFECT" {
+		pv.colSpans = append(pv.colSpans, 1)
 		pv.rows = append(pv.rows, stepperRow(L("充能球槽位", "Orb slots"), func() int { return u.cfg.orbSlots }, func(v int) { u.cfg.orbSlots = v }, 1, 10, 1))
 	}
+	pv.colSpans = append(pv.colSpans, 1)
 	pv.rows = append(pv.rows, choiceRow(L("下一步: 升级与流派 →", "Next: upgrades & archetype →"), "", func() { u.push(u.pageDeck) }))
 	return pv
 }
@@ -691,7 +752,6 @@ func (u *ui) pageDeck() *pageView {
 		hint:  L("A=选定并继续 · B=返回", "A=pick & continue · B=back"),
 	}
 
-	pv.rows = append(pv.rows, choiceRow(L("─ 构筑方式 ─", "─ Build mode ─"), "", nil))
 	markA, markS := "○", "○"
 	if u.cfg.useArch {
 		markA = "●"
@@ -699,14 +759,15 @@ func (u *ui) pageDeck() *pageView {
 		markS = "●"
 	}
 	pv.rows = append(pv.rows,
-		choiceRow(fmt.Sprintf(L("%s 流派构筑 (抛弃原卡组)", "%s Archetype build (discard base deck)"), markA), "", func() {
+		choiceRow(markA+L("流派构筑", "Archetype"), "", func() {
 			u.cfg.useArch = true
 			u.render()
 		}),
-		choiceRow(fmt.Sprintf(L("%s 标准构筑 (打击/防御+起手卡)", "%s Standard build (strikes/defends + starters)"), markS), "", func() {
+		choiceRow(markS+L("标准构筑", "Standard"), "", func() {
 			u.cfg.useArch = false
 			u.render()
 		}))
+	pv.colSpans = append([]int{2}, ones(len(pv.rows)-2)...)
 
 	if u.cfg.useArch {
 		var parts []string
