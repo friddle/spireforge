@@ -117,10 +117,10 @@ type charMeta struct {
 var charOrder = []string{"IRONCLAD", "THE_SILENT", "DEFECT", "WATCHER"}
 
 var charDB = map[string]charMeta{
-	"IRONCLAD":   {"战士", "Ironclad", []string{"Bash"}, "Strike_R", 5, "Defend_R", 4, "Burning Blood", 80},
-	"THE_SILENT": {"猎手", "The Silent", []string{"Survivor", "Neutralize"}, "Strike_G", 5, "Defend_G", 4, "Ring of the Snake", 70},
-	"DEFECT":     {"机器人", "Defect", []string{"Zap", "Dualcast"}, "Strike_B", 4, "Defend_B", 3, "Cracked Core", 72},
-	"WATCHER":    {"观者", "Watcher", []string{"Eruption", "Vigilance"}, "Strike_P", 4, "Defend_P", 4, "Pure Water", 72},
+	"IRONCLAD":   {"战士", "Ironclad", []string{"Bash"}, "Strike_R", 1, "Defend_R", 1, "Burning Blood", 80},
+	"THE_SILENT": {"猎手", "The Silent", []string{"Survivor", "Neutralize"}, "Strike_G", 1, "Defend_G", 1, "Ring of the Snake", 70},
+	"DEFECT":     {"机器人", "Defect", []string{"Zap", "Dualcast"}, "Strike_B", 1, "Defend_B", 1, "Cracked Core", 72},
+	"WATCHER":    {"观者", "Watcher", []string{"Eruption", "Vigilance"}, "Strike_P", 1, "Defend_P", 1, "Pure Water", 72},
 }
 
 // ---------- 双语 ----------

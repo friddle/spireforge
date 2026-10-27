@@ -1401,8 +1401,8 @@ func main() {
 		events:   make(chan string, 64),
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
-			char: "IRONCLAD", nStrike: 5, nDefend: 4, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, orbSlots: 3, threeKeys: true, startAct3: false, rareDefault: true, hp: 120, gold: 200, hand: 10,
+			char: "IRONCLAD", nStrike: 1, nDefend: 1, upStrike: true, upDefend: true, upStarter: true,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: true, startAct3: false, rareDefault: true, hp: 160, gold: 5000, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {
