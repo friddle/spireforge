@@ -18,6 +18,7 @@ import (
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -134,6 +135,40 @@ func ones(n int) []int {
 	return out
 }
 
+// denseVBox 密集纵向排列 (行间距 4px)
+func denseVBox(objs ...fyne.CanvasObject) fyne.CanvasObject {
+	return container.New(vGapLayout{gap: 4}, objs...)
+}
+
+type vGapLayout struct{ gap float32 }
+
+func (v vGapLayout) Layout(objs []fyne.CanvasObject, size fyne.Size) {
+	y := float32(0)
+	for _, o := range objs {
+		h := o.MinSize().Height
+		o.Resize(fyne.NewSize(size.Width, h))
+		o.Move(fyne.NewPos(0, y))
+		y += h + v.gap
+	}
+}
+
+func (v vGapLayout) MinSize(objs []fyne.CanvasObject) fyne.Size {
+	w, h := float32(0), -v.gap
+	for _, o := range objs {
+		m := o.MinSize()
+		if m.Width > w {
+			w = m.Width
+		}
+		h += m.Height + v.gap
+	}
+	return fyne.NewSize(w, h)
+}
+
+// padWrap 小内边距包装 (默认 Padded 是 8px, 太松)
+func padWrap(w fyne.CanvasObject) fyne.CanvasObject {
+	return container.New(layout.NewCustomPaddedLayout(10, 4, 10, 4), w)
+}
+
 func newRow(left, right string) *row {
 	bg := canvas.NewRectangle(colIdle())
 	bg.CornerRadius = 12
@@ -143,7 +178,7 @@ func newRow(left, right string) *row {
 	l.Wrapping = fyne.TextWrapBreak
 	l.TextStyle = fyne.TextStyle{Bold: true}
 	v := widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{Inline: true}})
-	padded := container.NewPadded(container.NewStack(bg, container.NewBorder(nil, nil, nil, v, l)))
+	padded := container.New(layout.NewCustomPaddedLayout(6, 6, 2, 2), container.NewStack(bg, container.NewBorder(nil, nil, nil, v, l)))
 	r := &row{w: padded, bg: bg, label: l, value: v}
 	if right != "" {
 		r.setVal(right, theme.ColorNameForeground)
@@ -307,30 +342,35 @@ func (u *ui) render() {
 		for _, r := range pv.rows {
 			objs = append(objs, r.w)
 		}
-		content = container.NewVScroll(container.NewVBox(objs...))
+		content = container.NewVScroll(denseVBox(objs...))
 	} else {
-		objs := make([]fyne.CanvasObject, 0, len(pv.rows))
-		for _, r := range pv.rows {
-			objs = append(objs, r.w)
+		// 按 colSpans 分组渲染: 多列组用 Grid, 单列组直接排列
+		spans := pv.spans()
+		var groups []fyne.CanvasObject
+		i := 0
+		for _, c := range spans {
+			var cells []fyne.CanvasObject
+			for k := 0; k < c && i < len(pv.rows); k++ {
+				cells = append(cells, pv.rows[i].w)
+				i++
+			}
+			if c > 1 {
+				groups = append(groups, container.NewGridWithColumns(c, cells...))
+			} else if len(cells) > 0 {
+				groups = append(groups, cells[0])
+			}
 		}
-		var list fyne.CanvasObject
-		if pv.gridCols > 1 {
-			list = container.NewGridWithColumns(pv.gridCols, objs...)
-		} else {
-			list = container.NewVBox(objs...)
+		for ; i < len(pv.rows); i++ {
+			groups = append(groups, pv.rows[i].w)
 		}
-		content = container.NewVScroll(list)
+		content = container.NewVScroll(container.NewVBox(groups...))
 	}
 
 	title := widget.NewLabelWithStyle("◆ "+pv.title, fyne.TextAlignLeading, fyne.TextStyle{Bold: true})
 	title.Importance = widget.HighImportance
 	u.win.SetContent(container.NewBorder(
-		container.NewVBox(
-			container.NewPadded(title),
-			container.NewPadded(u.hint),
-			container.NewPadded(u.header),
-		),
-		container.NewVBox(container.NewPadded(u.status)),
+		denseVBox(padWrap(title), padWrap(u.hint), padWrap(u.header)),
+		container.NewVBox(padWrap(u.status)),
 		nil, nil, content,
 	))
 }
@@ -1473,6 +1513,15 @@ func main() {
 	u.stack = []*pg{{build: u.pageHome}}
 	u.autoLoad()
 	u.render()
+	// 调试: SPIREFORCE_PAGE=char/deck 直接从该页面启动
+	if p := os.Getenv("SPIREFORCE_PAGE"); p != "" {
+		switch p {
+		case "char":
+			u.push(u.pageChar)
+		case "deck":
+			u.push(u.pageDeck)
+		}
+	}
 
 	// 键盘支持 (桌面): 方向键=移动/加减 回车=确认 Esc=返回
 	w.Canvas().SetOnTypedKey(func(k *fyne.KeyEvent) {

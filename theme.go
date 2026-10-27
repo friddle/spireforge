@@ -110,7 +110,7 @@ func (t spireTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Colo
 
 func (t spireTheme) Size(n fyne.ThemeSizeName) float32 {
 	if n == theme.SizeNameText {
-		return 15
+		return 14
 	}
 	return t.Theme.Size(n)
 }
