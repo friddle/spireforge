@@ -2,11 +2,13 @@
 package main
 
 import (
+	"crypto/rand"
 	_ "embed"
 	"encoding/base64"
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+	"math/big"
 	"os"
 	"path/filepath"
 	"sort"
@@ -289,6 +291,14 @@ func num(doc map[string]interface{}, key string) float64 {
 	return 0
 }
 
+func toIface(ss []string) []interface{} {
+	out := make([]interface{}, len(ss))
+	for i, s := range ss {
+		out[i] = s
+	}
+	return out
+}
+
 func b2i(b bool) int {
 	if b {
 		return 1
@@ -340,6 +350,35 @@ func fileModTime(p string) time.Time {
 	return fi.ModTime()
 }
 
+// ---------- 第三幕(三钥匙局面)数据池 (取自真实第三幕存档) ----------
+
+var act3Monsters = []string{
+	"Transient", "Writhing Mass", "Sphere and 2 Shapes", "Spire Growth",
+	"4 Shapes", "3 Darklings", "Cultist", "Snecko", "Byrds", "Centurion and Mystic",
+}
+var act3Elites = []string{
+	"Nemesis", "Reptomancer", "Giant Head",
+	"Nemesis", "Reptomancer", "Giant Head",
+	"Nemesis", "Giant Head", "Reptomancer",
+}
+var act3Events = []string{
+	"Falling", "MindBloom", "The Moai Head", "Mysterious Sphere", "SensoryStone",
+	"Tomb of Lord Red Mask", "Winding Halls", "The Library", "Ssserpent", "Secret Portal",
+}
+var act3Bosses = []string{"Awakened One", "Time Eater", "Donu and Deca"}
+
+func randomSeed() int64 {
+	v, err := rand.Int(rand.Reader, big.NewInt(9223372036854775807))
+	if err != nil {
+		return time.Now().UnixNano()
+	}
+	n := v.Int64()
+	if n > 4503599627370496 { // 游戏种子UI支持范围内取正数段
+		n = n % 4503599627370496
+	}
+	return n
+}
+
 // ---------- 模板应用 ----------
 
 type templateCfg struct {
@@ -357,6 +396,7 @@ type templateCfg struct {
 	energyCount int  // 3=无能量遗物, 每+1自动挂一件
 	orbSlots    int  // 仅机器人(DEFECT)生效
 	threeKeys   bool // 三把钥匙: 开启终幕(心脏)
+	startAct3   bool // 第三幕开局(三钥匙局面, 钥匙需自取)
 	rareDefault bool
 	rareExtra   []string
 	hp          int
@@ -399,6 +439,31 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 		}
 	}
 	doc["cards"] = deck
+
+	// 种子: 每次生成都随机, 保证地图/事件/奖励不复读
+	seed := randomSeed()
+	doc["seed"] = float64(seed)
+	doc["metric_seed_played"] = float64(seed)
+
+	// 第三幕开局(三钥匙局面): 钥匙不直接给, 进第三幕自己收集
+	if cfg.startAct3 {
+		doc["act_num"] = float64(3)
+		doc["level_name"] = "TheBeyond"
+		doc["floor_num"] = float64(33)
+		doc["current_room"] = "com.megacrit.cardcrawl.rooms.MonsterRoom"
+		doc["monster_list"] = toIface(act3Monsters)
+		doc["elite_monster_list"] = toIface(act3Elites)
+		doc["event_list"] = toIface(act3Events)
+		doc["boss_list"] = toIface(act3Bosses)
+		doc["boss"] = act3Bosses[seed%int64(len(act3Bosses))]
+		doc["event_chances"] = []interface{}{0.3, 0.4, 0.06, 0.08}
+		doc["potion_chance"] = float64(-30)
+		doc["is_final_act_on"] = false
+		// 钥匙局面: 关闭直接获得, 第三幕内自行收集
+		doc["has_ruby_key"] = false
+		doc["has_sapphire_key"] = false
+		doc["has_emerald_key"] = false
+	}
 
 	var rel []string
 	seen := map[string]bool{}

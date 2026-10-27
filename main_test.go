@@ -126,3 +126,33 @@ func TestVdfHandcrafted(t *testing.T) {
 		t.Fatalf("mismatch: %v", e)
 	}
 }
+
+func TestAct3StartAndSeedRandom(t *testing.T) {
+	initData()
+	doc := map[string]interface{}{"seed": float64(12345), "metric_seed_played": float64(12345)}
+	cfg := templateCfg{
+		char: "IRONCLAD", nStrike: 5, nDefend: 4, startAct3: true,
+		energyCount: 3, rareDefault: false, hp: 99, gold: 200, hand: 10,
+	}
+	if _, err := applyTemplate(doc, cfg); err != nil {
+		t.Fatal(err)
+	}
+	if int(num(doc, "act_num")) != 3 {
+		t.Fatal("act_num != 3")
+	}
+	if doc["level_name"] != "TheBeyond" {
+		t.Fatal("level_name != TheBeyond")
+	}
+	if int(num(doc, "floor_num")) != 33 {
+		t.Fatal("floor_num != 33")
+	}
+	if doc["has_ruby_key"] != false || doc["has_sapphire_key"] != false || doc["has_emerald_key"] != false {
+		t.Fatal("act3 模式钥匙应为 false (自取)")
+	}
+	if doc["seed"].(float64) == 12345 {
+		t.Fatal("seed 未随机化")
+	}
+	if _, ok := doc["max_orbs"]; ok {
+		t.Fatal("非机器人不应有 max_orbs")
+	}
+}

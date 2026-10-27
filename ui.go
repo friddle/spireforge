@@ -635,7 +635,23 @@ func (u *ui) pageChar() *pageView {
 				u.render()
 			}))
 	}
+	markN, markA3 := "○", "○"
+	if u.cfg.startAct3 {
+		markA3 = "●"
+	} else {
+		markN = "●"
+	}
 	pv.rows = append(pv.rows,
+		choiceRow(L("─ 开局局面 ─", "─ Start point ─"), "", nil),
+		choiceRow(fmt.Sprintf(L("%s 涅奥开局 (第一幕正常开始)", "%s Neow start (Act 1 normally)"), markN), "", func() {
+			u.cfg.startAct3 = false
+			u.render()
+		}),
+		choiceRow(fmt.Sprintf(L("%s 第三幕开局 · 三钥匙局面 (自取钥匙, 击败三幕Boss后进终幕)", "%s Act 3 start · collect the keys yourself, then Act 4"), markA3),
+			L("实验性", "experimental"), func() {
+				u.cfg.startAct3 = true
+				u.render()
+			}),
 		stepperRow(L("默认能量 (3=不挂遗物)", "Energy (3 = no relic)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
 		stepperRow(L("血量", "HP"), func() int { return u.cfg.hp }, func(v int) { u.cfg.hp = v }, 1, 999, 10),
 		stepperRow(L("初始金币 (每次+200)", "Starting gold (+200/press)"), func() int { return u.cfg.gold }, func(v int) { u.cfg.gold = v }, 0, 9999, 200),
@@ -745,9 +761,12 @@ func (u *ui) pageRare() *pageView {
 		hint:     L("A=开/关 · 十字键在两列间移动 · B=返回", "A=toggle · D-pad crosses columns · B=back"),
 		gridCols: 2,
 	}
-	pv.rows = append(pv.rows,
-		toggleRow(L("🔑 三把钥匙 (集齐可进终幕·心脏)", "🔑 Three keys (unlock Act 4 · the Heart)"), func() bool { return u.cfg.threeKeys }, func(b bool) { u.cfg.threeKeys = b }),
-		textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
+	if u.cfg.startAct3 {
+		pv.rows = append(pv.rows, textRow(L("🔑 钥匙", "🔑 Keys"), L("第三幕局面: 关闭直接获得, 第三幕内自行收集", "Act 3 start: keys off — collect them in Act 3"), nil))
+	} else {
+		pv.rows = append(pv.rows, toggleRow(L("🔑 三把钥匙 (集齐可进终幕·心脏)", "🔑 Three keys (unlock Act 4 · the Heart)"), func() bool { return u.cfg.threeKeys }, func(b bool) { u.cfg.threeKeys = b }))
+	}
+	pv.rows = append(pv.rows, textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
 	pv.rows = append(pv.rows, toggleRow(L("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", "Default 4: Shuriken/Pen Nib/Mummified Hand/Tungsten Rod"), func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
 	for _, rid := range curated.RARE_MORE {
 		rid := rid
@@ -835,7 +854,11 @@ func (u *ui) doApplyTemplate() {
 				return
 			}
 			u.svPath, u.svDoc = target, doc
-			u.setStatus(L("从零生成全新开局 (从涅奥开始)", "Generated a fresh run from scratch (starts at Neow)"))
+			if u.cfg.startAct3 {
+				u.setStatus(L("从零生成第三幕开局存档 (三钥匙局面)", "Generated an Act 3 start (collect the keys yourself)"))
+			} else {
+				u.setStatus(L("从零生成全新开局 (从涅奥开始)", "Generated a fresh run from scratch (starts at Neow)"))
+			}
 		}
 	}
 	msg, err := applyTemplate(u.svDoc, u.cfg)
@@ -1367,7 +1390,7 @@ func main() {
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 5, nDefend: 4, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, orbSlots: 3, threeKeys: true, rareDefault: true, hp: 120, gold: 200, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, energyCount: 3, orbSlots: 3, threeKeys: true, startAct3: false, rareDefault: true, hp: 120, gold: 200, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {
