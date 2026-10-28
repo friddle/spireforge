@@ -46,6 +46,7 @@ type row struct {
 	adjust   func(dir int) // 左=−1 右=+1
 	activate func()        // A 键
 	refresh  func()        // 从状态同步显示
+	selected func() bool   // 磁贴选中态 (非聚焦时的底色)
 }
 
 func (r *row) setVal(text string, cn fyne.ThemeColorName) {
@@ -205,6 +206,11 @@ func newRow(left, right string) *row {
 	return r
 }
 
+// tileRow 磁贴行: 图标+名字 (4列网格用, 组合与已验证的行渲染一致)
+func tileRow(iconPath, label string) *row {
+	return newRowIcon(label, "", iconPath)
+}
+
 func textRow(left, right string, activate func()) *row {
 	r := newRow(left, right)
 	r.activate = activate
@@ -358,6 +364,10 @@ func (u *ui) render() {
 			r.bg.FillColor = colFocus()
 			r.bg.StrokeColor = curPal().accent
 			r.bg.StrokeWidth = 2
+		} else if r.selected != nil && r.selected() {
+			r.bg.FillColor = curPal().selection
+			r.bg.StrokeColor = curPal().accent
+			r.bg.StrokeWidth = 1
 		} else {
 			r.bg.FillColor = colIdle()
 			r.bg.StrokeColor = colStroke()
@@ -942,9 +952,8 @@ func (u *ui) autoEnergyText() string {
 
 func (u *ui) pageRare() *pageView {
 	pv := &pageView{
-		title:    L("开局模板 · ③ 遗物", "Run template · ③ Relics"),
-		hint:     L("A=开/关 · 十字键在两列间移动 · B=返回", "A=toggle · D-pad crosses columns · B=back"),
-		gridCols: 2,
+		title: L("开局模板 · ③ 遗物", "Run template · ③ Relics"),
+		hint:  L("A=开/关 · 十字键移动 · B=返回", "A=toggle · D-pad to move · B=back"),
 	}
 	if u.cfg.startAct3 {
 		pv.rows = append(pv.rows, textRow(L("🔑 钥匙", "🔑 Keys"), L("第三幕局面: 关闭直接获得, 第三幕内自行收集", "Act 3 start: keys off — collect them in Act 3"), nil))
@@ -953,20 +962,29 @@ func (u *ui) pageRare() *pageView {
 	}
 	pv.rows = append(pv.rows, textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
 	pv.rows = append(pv.rows, toggleRow(L("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", "Default 4: Shuriken/Pen Nib/Mummified Hand/Tungsten Rod"), func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
+
+	// 自选遗物磁贴: 一排4个
+	pv.colSpans = append(pv.colSpans, 1, 1, 1)
 	for _, rid := range curated.RARE_MORE {
 		rid := rid
-		r := newRowIcon(relicName(rid), "", iconAt("relics", rid))
+		r := tileRow(iconAt("relics", rid), relicName(rid))
+		r.selected = func() bool { return u.extraSel[rid] }
 		r.activate = func() { u.extraSel[rid] = !u.extraSel[rid] }
 		r.refresh = func() {
 			if u.extraSel[rid] {
-				r.setVal("● 开", theme.ColorNameSuccess)
+				r.setVal("✓", theme.ColorNameSuccess)
 			} else {
 				r.setVal("", theme.ColorNameDisabled)
 			}
 		}
 		pv.rows = append(pv.rows, r)
 	}
+	lines := (len(curated.RARE_MORE) + 3) / 4
+	for i := 0; i < lines; i++ {
+		pv.colSpans = append(pv.colSpans, 4)
+	}
 	pv.rows = append(pv.rows, choiceRow(L("下一步: 确认生成 →", "Next: confirm →"), "", func() { u.push(u.pageConfirm) }))
+	pv.colSpans = append(pv.colSpans, 1)
 	return pv
 }
 
