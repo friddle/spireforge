@@ -238,16 +238,29 @@ type pageView struct {
 	custom   func() fyne.CanvasObject
 }
 
-// spans 返回每行的分组列数
+// spans 返回每一行的格子数 (每行=一组)
 func (pv *pageView) spans() []int {
 	if len(pv.colSpans) > 0 {
 		return pv.colSpans
 	}
-	n := 1
 	if pv.gridCols > 1 {
-		n = pv.gridCols
+		n := len(pv.rows)
+		lines := (n + pv.gridCols - 1) / pv.gridCols
+		out := make([]int, lines)
+		for i := range out {
+			if (i+1)*pv.gridCols <= n {
+				out[i] = pv.gridCols
+			} else {
+				out[i] = n - i*pv.gridCols
+			}
+		}
+		return out
 	}
-	return []int{n}
+	out := make([]int, len(pv.rows))
+	for i := range out {
+		out[i] = 1
+	}
+	return out
 }
 
 // locate 由扁平焦点下标定位 (组, 组内偏移)
@@ -391,6 +404,9 @@ func (u *ui) handle(ev string) {
 	}
 	spans := pv.spans()
 	g, o := locateSpan(spans, p.focus)
+	if o > spans[g]-1 {
+		o = spans[g] - 1
+	}
 	lineStart := p.focus - o
 	lineCells := spans[g]
 	r := pv.rows[p.focus]
@@ -794,7 +810,7 @@ func (u *ui) pageChar() *pageView {
 			u.render()
 		}))
 	// 第三组起: 单列数值
-	pv.colSpans = append(pv.colSpans, 1)
+	pv.colSpans = append(pv.colSpans, 1, 1, 1)
 	pv.rows = append(pv.rows,
 		stepperRow(L("默认能量 (3=无)", "Energy (3=none)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
 		stepperRow(L("血量", "HP"), func() int { return u.cfg.hp }, func(v int) { u.cfg.hp = v }, 1, 999, 10),
@@ -884,6 +900,8 @@ func (u *ui) pageDeck() *pageView {
 			toggleRow(L("起手技能卡升级(痛击/电弧等)", "Upgrade starter cards (Bash/Zap etc.)"), func() bool { return u.cfg.upStarter }, func(b bool) { u.cfg.upStarter = b }),
 			choiceRow(L("下一步: 遗物 →", "Next: relics →"), "", func() { u.push(u.pageRare) }))
 	}
+	// 列声明必须在所有行追加完之后: 第1组2格(构筑方式), 其余每行1格
+	pv.colSpans = append([]int{2}, ones(len(pv.rows)-2)...)
 	return pv
 }
 
