@@ -316,6 +316,7 @@ type ui struct {
 	svDoc       map[string]interface{}
 	cfg         templateCfg
 	extraSel    map[string]bool
+	defaultSel  map[string]bool
 	pendingFlow string
 	adjustMode  bool
 	deckPage    int
@@ -961,10 +962,22 @@ func (u *ui) pageRare() *pageView {
 		pv.rows = append(pv.rows, toggleRow(L("🔑 三把钥匙 (集齐可进终幕·心脏)", "🔑 Three keys (unlock Act 4 · the Heart)"), func() bool { return u.cfg.threeKeys }, func(b bool) { u.cfg.threeKeys = b }))
 	}
 	pv.rows = append(pv.rows, textRow(L("能量遗物 (自动)", "Energy relics (auto)"), u.autoEnergyText(), nil))
-	pv.rows = append(pv.rows, toggleRow(L("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", "Default 4: Shuriken/Pen Nib/Mummified Hand/Tungsten Rod"), func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
-
+	// 默认4件磁贴 (各自可选)
+	for _, rid := range curated.RARE_DEFAULT {
+		rid := rid
+		r := tileRow(iconAt("relics", rid), relicName(rid))
+		r.selected = func() bool { return u.defaultSel[rid] }
+		r.activate = func() { u.defaultSel[rid] = !u.defaultSel[rid] }
+		r.refresh = func() {
+			if u.defaultSel[rid] {
+				r.setVal("✓", theme.ColorNameSuccess)
+			} else {
+				r.setVal("", theme.ColorNameDisabled)
+			}
+		}
+		pv.rows = append(pv.rows, r)
+	}
 	// 自选遗物磁贴: 一排4个
-	pv.colSpans = append(pv.colSpans, 1, 1, 1)
 	for _, rid := range curated.RARE_MORE {
 		rid := rid
 		r := tileRow(iconAt("relics", rid), relicName(rid))
@@ -979,11 +992,13 @@ func (u *ui) pageRare() *pageView {
 		}
 		pv.rows = append(pv.rows, r)
 	}
-	lines := (len(curated.RARE_MORE) + 3) / 4
-	for i := 0; i < lines; i++ {
+	pv.rows = append(pv.rows, choiceRow(L("下一步: 确认生成 →", "Next: confirm →"), "", func() { u.push(u.pageConfirm) }))
+	// 列布局: [钥匙+能量] 2格 | 默认4件 4格 | 自选遗物 4列 | 下一步 1格
+	extraLines := (len(curated.RARE_MORE) + 3) / 4
+	pv.colSpans = []int{2, 4}
+	for i := 0; i < extraLines; i++ {
 		pv.colSpans = append(pv.colSpans, 4)
 	}
-	pv.rows = append(pv.rows, choiceRow(L("下一步: 确认生成 →", "Next: confirm →"), "", func() { u.push(u.pageConfirm) }))
 	pv.colSpans = append(pv.colSpans, 1)
 	return pv
 }
@@ -1069,6 +1084,12 @@ func (u *ui) doApplyTemplate() {
 			} else {
 				u.setStatus(L("从零生成全新开局 (从涅奥开始)", "Generated a fresh run from scratch (starts at Neow)"))
 			}
+		}
+	}
+	u.cfg.rareDefaultSel = nil
+	for rid := range u.defaultSel {
+		if u.defaultSel[rid] {
+			u.cfg.rareDefaultSel = append(u.cfg.rareDefaultSel, rid)
 		}
 	}
 	msg, err := applyTemplate(u.svDoc, u.cfg)
@@ -1591,16 +1612,17 @@ func main() {
 	w.Resize(fyne.NewSize(1024, 740))
 
 	u := &ui{
-		win:      w,
-		header:   widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{ColorName: theme.ColorNameDisabled, Inline: true}}),
-		hint:     widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{ColorName: theme.ColorNameDisabled, Inline: true}}),
-		status:   widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{ColorName: theme.ColorNameForeground, Inline: true}}),
-		extraSel: map[string]bool{},
-		events:   make(chan string, 64),
-		quitCh:   make(chan struct{}),
+		win:        w,
+		header:     widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{ColorName: theme.ColorNameDisabled, Inline: true}}),
+		hint:       widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{ColorName: theme.ColorNameDisabled, Inline: true}}),
+		status:     widget.NewRichText(&widget.TextSegment{Style: widget.RichTextStyle{ColorName: theme.ColorNameForeground, Inline: true}}),
+		extraSel:   map[string]bool{},
+		defaultSel: map[string]bool{},
+		events:     make(chan string, 64),
+		quitCh:     make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 1, nDefend: 1, upStrike: true, upDefend: true, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: false, startAct3: false, rareDefault: false, hp: 160, gold: 5000, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: false, startAct3: false, hp: 160, gold: 5000, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {

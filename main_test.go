@@ -39,7 +39,7 @@ func TestRoundTripAndTemplate(t *testing.T) {
 	// 标准构筑: 打击/防御/起手 + 能量遗物 (无流派)
 	cfg := templateCfg{
 		char: "IRONCLAD", nStrike: 5, nDefend: 4, upStrike: true, upStarter: true,
-		energyCount: 4, rareDefault: true, rareExtra: []string{"Girya"},
+		energyCount: 4, rareDefaultSel: []string{"Shuriken", "Pen Nib", "Mummified Hand", "TungstenRod"}, rareExtra: []string{"Girya"},
 		hp: 120, gold: 99, hand: 10,
 	}
 	msg, err := applyTemplate(doc2, cfg)
@@ -70,7 +70,7 @@ func TestRoundTripAndTemplate(t *testing.T) {
 	// 流派构筑: 抛弃原卡组, 6张核心 + 2流派遗物
 	cfg2 := templateCfg{
 		char: "IRONCLAD", useArch: true, arch: "力量重击流", archCount: 6, upArch: true,
-		archRelics: true, energyCount: 3, rareDefault: true, hp: 120, gold: 200, hand: 10, threeKeys: true,
+		archRelics: true, energyCount: 3, rareDefaultSel: []string{"Shuriken", "Pen Nib", "Mummified Hand", "TungstenRod"}, hp: 120, gold: 200, hand: 10, threeKeys: true,
 	}
 	if _, err := applyTemplate(doc2, cfg2); err != nil {
 		t.Fatal(err)
@@ -139,7 +139,7 @@ func TestAct3StartAndSeedRandom(t *testing.T) {
 	doc := map[string]interface{}{"seed": float64(12345), "metric_seed_played": float64(12345)}
 	cfg := templateCfg{
 		char: "IRONCLAD", nStrike: 5, nDefend: 4, startAct3: true,
-		energyCount: 3, rareDefault: false, hp: 99, gold: 200, hand: 10,
+		energyCount: 3, hp: 99, gold: 200, hand: 10,
 	}
 	if _, err := applyTemplate(doc, cfg); err != nil {
 		t.Fatal(err)

@@ -399,26 +399,26 @@ func randomSeed() int64 {
 // ---------- 模板应用 ----------
 
 type templateCfg struct {
-	char        string
-	nStrike     int
-	nDefend     int
-	upStrike    bool
-	upDefend    bool
-	upStarter   bool
-	arch        string
-	useArch     bool // 流派构筑: 抛弃原卡组, 纯核心卡
-	archCount   int
-	archRelics  bool
-	upArch      bool
-	energyCount int  // 3=无能量遗物, 每+1自动挂一件
-	orbSlots    int  // 仅机器人(DEFECT)生效
-	threeKeys   bool // 三把钥匙: 开启终幕(心脏)
-	startAct3   bool // 第三幕开局(三钥匙局面, 钥匙需自取)
-	rareDefault bool
-	rareExtra   []string
-	hp          int
-	gold        int
-	hand        int
+	char           string
+	nStrike        int
+	nDefend        int
+	upStrike       bool
+	upDefend       bool
+	upStarter      bool
+	arch           string
+	useArch        bool // 流派构筑: 抛弃原卡组, 纯核心卡
+	archCount      int
+	archRelics     bool
+	upArch         bool
+	energyCount    int      // 3=无能量遗物, 每+1自动挂一件
+	orbSlots       int      // 仅机器人(DEFECT)生效
+	threeKeys      bool     // 三把钥匙: 开启终幕(心脏)
+	startAct3      bool     // 第三幕开局(三钥匙局面, 钥匙需自取)
+	rareDefaultSel []string // 勾选的默认稀有遗物
+	rareExtra      []string
+	hp             int
+	gold           int
+	hand           int
 }
 
 func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) {
@@ -527,10 +527,8 @@ func applyTemplate(doc map[string]interface{}, cfg templateCfg) (string, error) 
 			addRelic(r)
 		}
 	}
-	if cfg.rareDefault {
-		for _, r := range curated.RARE_DEFAULT {
-			addRelic(r)
-		}
+	for _, r := range cfg.rareDefaultSel {
+		addRelic(r)
 	}
 	for _, r := range cfg.rareExtra {
 		addRelic(r)
