@@ -1556,7 +1556,7 @@ func main() {
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 1, nDefend: 1, upStrike: true, upDefend: true, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: true, startAct3: false, rareDefault: true, hp: 160, gold: 5000, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: true, startAct3: false, rareDefault: false, hp: 160, gold: 5000, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {
