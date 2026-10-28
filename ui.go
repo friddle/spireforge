@@ -598,6 +598,8 @@ func (u *ui) writeBack(msg string) bool {
 		u.setStatus(L("✗ 写入失败: ", "✗ Write failed: ") + err.Error())
 		return false
 	}
+	// 游戏自己的备份文件同步覆盖: 防止游戏崩溃后从 backUp 恢复旧进度
+	_ = os.WriteFile(u.svPath+".backUp", out, 0o644)
 	u.setStatus("✓ " + msg + L(" · 备份 ", " · backup ") + filepath.Base(bak))
 	return true
 }
@@ -1038,6 +1040,7 @@ func (u *ui) pageConfirm() *pageView {
 		note = L("不存在, 将自动从同角色最近存档复制底版", "missing — a base will be copied from the latest same-character save")
 	}
 	pv.rows = append(pv.rows,
+		textRow(L("⚠ 写入前", "⚠ Before writing"), L("请先完全关闭游戏(进程退出)。游戏开着时写入, 游戏退出时会把修改覆盖掉。", "Fully QUIT the game first. If the game is running, it will overwrite your changes on exit."), nil),
 		textRow(L("配置", "Config"), u.templateSummary(), nil),
 		textRow(L("写入目标 (固定文件名)", "Target (fixed filename)"), target, nil),
 		textRow(L("目标状态", "Target status"), note, nil))
