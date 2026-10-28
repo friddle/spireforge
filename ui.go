@@ -97,14 +97,33 @@ func normID(s string) string {
 	return b.String()
 }
 
+// 遗物图片文件名与遗物 ID 不同名的映射 (游戏内美术资源命名)
+var relicIconAlias = map[string]string{
+	"birdfacedurn":  "birdurn",
+	"stonecalendar": "calendar",
+	"frozencore":    "frozenorb",
+	"happyflower":   "sunflower",
+	"callingbell":   "bell",
+	"velvetchoker":  "redchoker",
+	"girya":         "kettlebell",
+	"bagofmarbles":  "marbles",
+	"tungstenrod":   "tungsten",
+}
+
 func iconAt(kind, id string) string {
 	base := imgBase()
 	if base == "" {
 		return ""
 	}
-	p := filepath.Join(base, kind, normID(id)+".png")
-	if _, err := os.Stat(p); err == nil {
-		return p
+	try := []string{normID(id)}
+	if alt, ok := relicIconAlias[normID(id)]; ok {
+		try = append(try, alt)
+	}
+	for _, n := range try {
+		p := filepath.Join(base, kind, n+".png")
+		if _, err := os.Stat(p); err == nil {
+			return p
+		}
 	}
 	return ""
 }
@@ -936,9 +955,16 @@ func (u *ui) pageRare() *pageView {
 	pv.rows = append(pv.rows, toggleRow(L("默认4件: 手里剑/钢笔尖/干枯之手/钨棒", "Default 4: Shuriken/Pen Nib/Mummified Hand/Tungsten Rod"), func() bool { return u.cfg.rareDefault }, func(b bool) { u.cfg.rareDefault = b }))
 	for _, rid := range curated.RARE_MORE {
 		rid := rid
-		pv.rows = append(pv.rows, toggleRow(relicName(rid),
-			func() bool { return u.extraSel[rid] },
-			func(b bool) { u.extraSel[rid] = b }))
+		r := newRowIcon(relicName(rid), "", iconAt("relics", rid))
+		r.activate = func() { u.extraSel[rid] = !u.extraSel[rid] }
+		r.refresh = func() {
+			if u.extraSel[rid] {
+				r.setVal("● 开", theme.ColorNameSuccess)
+			} else {
+				r.setVal("", theme.ColorNameDisabled)
+			}
+		}
+		pv.rows = append(pv.rows, r)
 	}
 	pv.rows = append(pv.rows, choiceRow(L("下一步: 确认生成 →", "Next: confirm →"), "", func() { u.push(u.pageConfirm) }))
 	return pv
@@ -1556,7 +1582,7 @@ func main() {
 		quitCh:   make(chan struct{}),
 		cfg: templateCfg{
 			char: "IRONCLAD", nStrike: 1, nDefend: 1, upStrike: true, upDefend: true, upStarter: true,
-			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: true, startAct3: false, rareDefault: false, hp: 160, gold: 5000, hand: 10,
+			arch: "无", useArch: false, archCount: 6, archRelics: true, upArch: true, energyCount: 3, orbSlots: 3, threeKeys: false, startAct3: false, rareDefault: false, hp: 160, gold: 5000, hand: 10,
 		},
 	}
 	for _, rt := range []*widget.RichText{u.header, u.hint, u.status} {
@@ -1573,6 +1599,9 @@ func main() {
 			u.push(u.pageChar)
 		case "deck":
 			u.push(u.pageDeck)
+		case "rare":
+			u.cfg.char = "IRONCLAD"
+			u.push(u.pageRare)
 		}
 	}
 
