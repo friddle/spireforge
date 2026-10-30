@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"image/color"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strconv"
@@ -587,6 +588,13 @@ func (u *ui) loadSave(path string) bool {
 }
 
 func (u *ui) writeBack(msg string) bool {
+	// 游戏开着时写入会被游戏退出时覆盖 — 直接拒绝
+	if out, err := exec.Command("pgrep", "-f", "javaw.exe").Output(); err == nil && len(strings.TrimSpace(string(out))) > 0 {
+		u.setStatus(L("✗ 游戏正在运行! 请先完全退出游戏, 再回来写入", "✗ Game is running! Quit it fully before writing"))
+		cmsg := L("游戏正在运行! 先完全退出游戏(进程退出), 再回来写入存档。否则游戏退出时会用内存状态覆盖你的修改。", "The game is running. Quit it fully first, then come back and write.")
+		dialog.NewError(fmt.Errorf("%s", cmsg), u.win).Show()
+		return false
+	}
 	out, err := encodeSave(u.svDoc)
 	if err != nil {
 		u.setStatus(L("✗ 编码失败: ", "✗ encode failed: ") + err.Error())
