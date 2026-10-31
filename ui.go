@@ -832,24 +832,7 @@ func (u *ui) pageChar() *pageView {
 		})
 		pv.rows = append(pv.rows, r)
 	}
-	// 第二组: 开局局面 (2格)
-	pv.colSpans = append(pv.colSpans, 2)
-	markN, markA3 := "○", "○"
-	if u.cfg.startAct3 {
-		markA3 = "●"
-	} else {
-		markN = "●"
-	}
-	pv.rows = append(pv.rows,
-		choiceRow(markN+L("涅奥开局", "Neow start"), "", func() {
-			u.cfg.startAct3 = false
-			u.render()
-		}),
-		choiceRow(markA3+L("第三幕", "Act 3"), L("三钥匙局面", "key hunt"), func() {
-			u.cfg.startAct3 = true
-			u.render()
-		}))
-	// 第三组起: 单列数值
+	// 单列数值组
 	pv.colSpans = append(pv.colSpans, 1, 1, 1)
 	pv.rows = append(pv.rows,
 		stepperRow(L("默认能量 (3=无)", "Energy (3=none)"), func() int { return u.cfg.energyCount }, func(v int) { u.cfg.energyCount = v }, 3, 6, 1),
